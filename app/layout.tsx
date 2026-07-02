@@ -47,7 +47,7 @@ const helvetica = localFont({
 const BetterVCR = localFont({
 	src: [
 		{
-			path: './fonts/BetterVCR.woff2',
+			path: './fonts/BetterVCR.ttf',
 			weight: '400',
 
 			style: 'normal',
@@ -72,9 +72,7 @@ export default function RootLayout({
 			lang="en"
 			className={`${helvetica.variable} ${BetterVCR.variable} h-full antialiased`}
 		>
-			<body className="min-h-full flex flex-col max-w-301 m-auto relative bg-[#090909]">
-				{children}
-			</body>
+			<body className="bg-[#090909]">{children}</body>
 		</html>
 	);
 }

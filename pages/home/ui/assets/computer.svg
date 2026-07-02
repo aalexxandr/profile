@@ -1,0 +1,30 @@
+<svg width="596" height="508" viewBox="0 0 596 508" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_9664_133378)">
+<path d="M580 16H16V444L580 444V16Z" fill="#3A41C4"/>
+<path d="M572 24H24V436H572V24Z" fill="#3A41C4"/>
+<path d="M16 8H8V452H16V8Z" fill="#232323"/>
+<path d="M588 8H580V452H588V8Z" fill="#232323"/>
+<path d="M580 8H16V16H580V8Z" fill="#232323"/>
+<path d="M580 444H16V452H580V444Z" fill="#232323"/>
+<path d="M473 460H125V476H473V460Z" fill="#232323"/>
+<path d="M580 484H16V500H580V484Z" fill="#232323"/>
+<path d="M8 8H0V452H8V8Z" fill="#888888"/>
+<path d="M596 8H588V452H596V8Z" fill="#888888"/>
+<path d="M588 0H0V8H588V0Z" fill="#888888"/>
+<path d="M588 452H0V460H588V452Z" fill="#888888"/>
+<path d="M580 476H16V484H580V476Z" fill="#888888"/>
+<path d="M580 500H16V508H580V500Z" fill="#888888"/>
+<path d="M125 460H117V476H125V460Z" fill="#888888"/>
+<path d="M572 488H564V496H572V488Z" fill="#00D19C"/>
+<path d="M556 488H548V496H556V488Z" fill="#3A41C4"/>
+<path d="M540 488H532V496H540V488Z" fill="#3A41C4"/>
+<path d="M481 460H473V476H481V460Z" fill="#888888"/>
+<path d="M16 484H8V500H16V484Z" fill="#888888"/>
+<path d="M588 484H580V500H588V484Z" fill="#888888"/>
+</g>
+<defs>
+<clipPath id="clip0_9664_133378">
+<rect width="596" height="508" fill="white"/>
+</clipPath>
+</defs>
+</svg>
