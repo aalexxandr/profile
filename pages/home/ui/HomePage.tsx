@@ -8,8 +8,9 @@ import paintingSrc from './assets/painting.svg';
 import shelvesSrc from './assets/shelves.svg';
 import tableSrc from './assets/table.svg';
 import { Computer } from './Computer';
+import { TypewriterText } from './TypewriterText';
 
-export const HomePage: FC<PropsWithChildren> = ({ children }) => {
+export const HomePage = () => {
 	return (
 		<div className="relative h-dvh w-full overflow-hidden">
 			<div className="relative max-w-301 h-full m-auto">
@@ -47,7 +48,7 @@ export const HomePage: FC<PropsWithChildren> = ({ children }) => {
 						радость, люблю ощущение приключения и интерфейсы, которые цепляют.
 						<br />
 						<br />
-						Never lost, always exploring…
+						<TypewriterText text="Never lost, always exploring…" />
 					</Computer>
 				</div>
 			</div>

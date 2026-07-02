@@ -1,8 +1,0 @@
-- generic [active] [ref=e1]:
-  - img "painting" [ref=e2]
-  - img "shelves" [ref=e3]
-  - generic [ref=e4]:
-    - img "lamp" [ref=e6] [cursor=pointer]
-    - img "table" [ref=e10]
-  - button "Open Next.js Dev Tools" [ref=e18] [cursor=pointer]:
-    - img [ref=e19]
