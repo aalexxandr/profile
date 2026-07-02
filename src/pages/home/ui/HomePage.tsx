@@ -7,8 +7,10 @@ import paintingSrc from "./assets/painting.svg";
 import shelvesSrc from "./assets/shelves.svg";
 import tableSrc from "./assets/table.svg";
 import { Computer } from "./Computer";
-import { TypewriterText } from "./TypewriterText";
+
 import { Button } from "@/shared/ui/Button";
+import { TYPEWRITER_TEXTS } from "../model/constants";
+import { TypewriterTextSequence } from "./TypewriterTextSequence";
 
 export const HomePage = () => {
   return (
@@ -51,8 +53,10 @@ export const HomePage = () => {
             ощущение приключения и интерфейсы, которые цепляют.
             <br />
             <br />
-            <TypewriterText text="Never lost, always exploring…" />
-            <Button className="mt-5" href="#">Перейти к кейсам</Button>
+            <TypewriterTextSequence texts={TYPEWRITER_TEXTS} />
+            <Button className="mt-5" href="#">
+              Перейти к кейсам
+            </Button>
           </Computer>
         </div>
       </div>
