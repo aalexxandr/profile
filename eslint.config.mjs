@@ -11,7 +11,7 @@ const eslintConfig = defineConfig([
     ...betterTailwindcss.configs["recommended"],
     settings: {
       "better-tailwindcss": {
-        entryPoint: "app/globals.css",
+        entryPoint: "src/app/globals.css",
       },
     },
     rules: {

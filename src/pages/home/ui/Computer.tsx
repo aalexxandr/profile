@@ -7,7 +7,7 @@ export const Computer: FC<PropsWithChildren> = ({ children }) => (
     <Image
       src={computerSrc}
       alt="computer"
-      loading="eager"
+      loading="eager" 
       className="absolute inset-0"
     />
     <div className="absolute top-0 left-1/2 h-127 w-149 -translate-x-1/2 p-6 pb-18">

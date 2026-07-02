@@ -8,6 +8,7 @@ import shelvesSrc from "./assets/shelves.svg";
 import tableSrc from "./assets/table.svg";
 import { Computer } from "./Computer";
 import { TypewriterText } from "./TypewriterText";
+import { Button } from "@/shared/ui/Button";
 
 export const HomePage = () => {
   return (
@@ -51,6 +52,7 @@ export const HomePage = () => {
             <br />
             <br />
             <TypewriterText text="Never lost, always exploring…" />
+            <Button className="mt-5" href="#">Перейти к кейсам</Button>
           </Computer>
         </div>
       </div>
