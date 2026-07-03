@@ -1,13 +1,18 @@
 import Image from "next/image";
 import computerSrc from "./assets/computer.svg";
 import { FC, PropsWithChildren } from "react";
+import clsx from "clsx";
 
-export const Computer: FC<PropsWithChildren> = ({ children }) => (
-  <div className="absolute bottom-40 left-1/2 h-127 w-149 -translate-x-1/2 p-10">
+interface ComputerProps extends PropsWithChildren {
+  className?: string;
+}
+
+export const Computer: FC<ComputerProps> = ({ children, className }) => (
+  <div className={clsx("relative h-127 w-149 p-10", className)}>
     <Image
       src={computerSrc}
       alt="computer"
-      loading="eager" 
+      loading="eager"
       className="absolute inset-0"
     />
     <div className="absolute top-0 left-1/2 h-127 w-149 -translate-x-1/2 p-6 pb-18">

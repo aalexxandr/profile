@@ -13,6 +13,82 @@
   --font-vcr: var(--font-betterVCR);
 }
 
+@theme {
+  --animate-reveal-down: reveal-down 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-reveal-fade: reveal-fade 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-reveal-left: reveal-left 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-reveal-right: reveal-right 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-reveal-up: reveal-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes reveal-down {
+    from {
+      opacity: 0;
+      translate: 0 -28px;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes reveal-fade {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes reveal-left {
+    from {
+      opacity: 0;
+      translate: 32px 0;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes reveal-right {
+    from {
+      opacity: 0;
+      translate: -32px 0;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      translate: 0 32px;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: 0ms;
+    animation-duration: 1ms;
+    scroll-behavior: auto;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import lampOn from "./assets/lamp-on.svg";
 import lampOff from "./assets/lamp-off.svg";
@@ -10,8 +10,20 @@ interface LampProps {
   className?: string;
 }
 
+const LAMP_TURN_ON_DELAY_MS = 950;
+
 export const Lamp: FC<LampProps> = ({ className }) => {
-  const [isLampOn, setIsLampOn] = useState(true);
+  const [isLampOn, setIsLampOn] = useState(false);
+
+  useEffect(() => {
+    const turnOnTimer = window.setTimeout(() => {
+      setIsLampOn(true);
+    }, LAMP_TURN_ON_DELAY_MS);
+
+    return () => {
+      window.clearTimeout(turnOnTimer);
+    };
+  }, []);
 
   const toggleLamp = () => {
     setIsLampOn(!isLampOn);

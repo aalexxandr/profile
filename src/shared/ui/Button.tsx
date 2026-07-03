@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Link, { type LinkProps } from "next/link";
 import type { ComponentProps, PropsWithChildren } from "react";
 
-type BaseButtonProps  = PropsWithChildren & {
+type BaseButtonProps = PropsWithChildren & {
   disabled?: boolean;
   isLoading?: boolean;
 };
@@ -27,8 +27,11 @@ const retroShadow =
 const disabledShadow =
   "shadow-[inset_2px_2px_0_0_#dfdfdf,inset_-2px_-2px_0_0_#7f7f7f,inset_1px_1px_0_0_#fff,inset_-1px_-1px_0_0_#000]";
 
-const disabledClassName = clsx("pointer-events-none cursor-default bg-[#a89898] text-[#554a4a] hover:bg-[#a89898] hover:text-[#554a4a]", disabledShadow);
- 
+const disabledClassName = clsx(
+  "pointer-events-none cursor-default bg-[#a89898] text-[#554a4a] hover:bg-[#a89898] hover:text-[#554a4a]",
+  disabledShadow,
+);
+
 const buttonClassName = clsx(
   "flex h-[35px] w-full cursor-pointer items-center justify-center gap-1 border-0 bg-[#cecece] px-4 py-1.5 font-vcr text-[12px] text-[#3a3a3a] uppercase no-underline transition-none outline-none hover:bg-[#db00ff] hover:text-white focus-visible:border focus-visible:border-[#ff5a8f] focus-visible:shadow-none active:bg-[#b102ce]",
   retroShadow,
@@ -89,7 +92,11 @@ export function Button(props: ButtonProps) {
   return (
     <button
       {...buttonProps}
-      className={clsx(buttonClassName, isDisabled && disabledClassName, className)}
+      className={clsx(
+        buttonClassName,
+        isDisabled && disabledClassName,
+        className,
+      )}
       disabled={isDisabled}
       type={type}
     >
