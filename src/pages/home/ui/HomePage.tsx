@@ -73,7 +73,10 @@ export const HomePage = () => {
                 ощущение приключения и интерфейсы, которые цепляют.
                 <br />
                 <br />
-                <TypewriterTextSequence texts={TYPEWRITER_TEXTS} />
+                <TypewriterTextSequence
+                  startDelay={1400}
+                  texts={TYPEWRITER_TEXTS}
+                />
                 <Button className="mt-5" href="#">
                   Перейти к кейсам
                 </Button>

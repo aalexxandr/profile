@@ -1,16 +1,18 @@
 "use client";
 
 import clsx from "clsx";
-import { FC, useEffect, useState } from "react";
-import Image from "next/image";
-import lampOn from "./assets/lamp-on.svg";
-import lampOff from "./assets/lamp-off.svg";
+import { CSSProperties, FC, useEffect, useState } from "react";
+import LampIcon from "./assets/lamp.svg?svgr";
 
 interface LampProps {
   className?: string;
 }
 
 const LAMP_TURN_ON_DELAY_MS = 950;
+type LampColorVars = CSSProperties & {
+  "--lamp-accent": string;
+  "--lamp-shade": string;
+};
 
 export const Lamp: FC<LampProps> = ({ className }) => {
   const [isLampOn, setIsLampOn] = useState(false);
@@ -29,36 +31,26 @@ export const Lamp: FC<LampProps> = ({ className }) => {
     setIsLampOn(!isLampOn);
   };
 
+  const lampColorVars: LampColorVars = {
+    "--lamp-accent": isLampOn ? "#FF6B00" : "#554A4A",
+    "--lamp-shade": isLampOn ? "#FF923F" : "#888888",
+  };
+
   return (
     <div
       className={clsx(
-        "flex w-fit cursor-pointer items-center justify-center",
+        "relative flex w-fit cursor-pointer items-center justify-center",
         className,
       )}
       onClick={toggleLamp}
     >
-      <Image src={isLampOn ? lampOn : lampOff} alt="lamp" unoptimized />
-      {isLampOn && (
-        <div className="absolute -top-10 left-25 z-[-1] size-81 transform-[translate3d(0,0,0)_translateX(-50%)] opacity-90 will-change-[filter] [-webkit-filter:url(#svg-blur)] [background:linear-gradient(94.84deg,#FF6B00_51.74%,#232323_56.65%)]">
-          <svg
-            id="svg-filter"
-            className="hidden"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <filter
-                id="svg-blur"
-                x="-150%"
-                y="-150%"
-                width="400%"
-                height="400%"
-              >
-                <feGaussianBlur in="SourceGraphic" stdDeviation="110" />
-              </filter>
-            </defs>
-          </svg>
-        </div>
-      )}
+      <LampIcon role="img" aria-label="lamp" style={lampColorVars} />
+      <div
+        className={clsx(
+          "absolute -top-10 left-35 z-[-1] size-81 transform-[translate3d(0,0,0)_translateX(-50%)] transition-opacity duration-700 ease-out will-change-[filter,opacity] [-webkit-filter:url(#lamp-light-blur-filter)] [background:linear-gradient(94.84deg,#FF6B00_51.74%,#232323_56.65%)] motion-reduce:transition-none",
+          isLampOn ? "opacity-90" : "opacity-0",
+        )}
+      />
     </div>
   );
 };
