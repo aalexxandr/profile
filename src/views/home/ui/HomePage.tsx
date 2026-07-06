@@ -42,14 +42,14 @@ export const HomePage = () => {
           delay={120}
           direction="left"
         >
-          <Image src={paintingSrc} alt="painting" unoptimized loading="eager" />
+          <Image src={paintingSrc} alt="painting" />
         </Reveal>
         <Reveal
           className="hidden lg:absolute lg:top-27.5 lg:left-0 lg:block"
           delay={180}
           direction="right"
         >
-          <Image src={shelvesSrc} alt="shelves" unoptimized loading="eager" />
+          <Image src={shelvesSrc} alt="shelves" />
         </Reveal>
         <div className="hidden lg:absolute lg:bottom-0 lg:left-1/2 lg:block lg:-translate-x-1/2">
           <Reveal className="relative" delay={260}>
@@ -74,7 +74,6 @@ export const HomePage = () => {
             <Image
               src={tableSrc}
               alt="table"
-              loading="eager"
               className="max-w-none"
             />
           </Reveal>
