@@ -6,16 +6,36 @@ import { Coffee } from "./Coffee";
 import paintingSrc from "./assets/painting.svg";
 import shelvesSrc from "./assets/shelves.svg";
 import tableSrc from "./assets/table.svg";
-import { Computer } from "./Computer";
+import { DeviceBackgrounds } from "./DeviceBackgrounds";
 
 import { Button } from "@/shared/ui/Button";
 import { Reveal } from "@/shared/ui/Reveal";
 import { TYPEWRITER_TEXTS } from "../model/constants";
 import { TypewriterTextSequence } from "./TypewriterTextSequence";
 
+const IntroContent = () => (
+  <>
+    Привет, я Саша. Уже 6 лет я делаю веб.
+    <br />
+    <br />
+    За это время собирал лендинги с анимацией и 3D, сервисы бронирования,
+    финтех-интерфейсы с большими данными, Chrome-виджеты, мобильные приложения и
+    backend. <br />
+    <br />
+    В пикселях, коде и хаосе ищу порядок, смысл и радость, люблю ощущение
+    приключения и интерфейсы, которые цепляют.
+    <br />
+    <br />
+    <TypewriterTextSequence startDelay={1400} texts={TYPEWRITER_TEXTS} />
+    <Button className="mt-5" href="#">
+      Перейти к кейсам
+    </Button>
+  </>
+);
+
 export const HomePage = () => {
   return (
-    <div className="relative h-dvh w-full overflow-hidden">
+    <div className="relative h-dvh min-h-135 w-full overflow-hidden lg:min-h-175">
       <div className="relative m-auto h-full max-w-340">
         <Reveal
           className="hidden lg:absolute lg:top-20.5 lg:right-18 lg:block"
@@ -58,32 +78,10 @@ export const HomePage = () => {
               className="max-w-none"
             />
           </Reveal>
-
-          <div className="absolute bottom-40 left-1/2 -translate-x-1/2">
-            <Reveal delay={360}>
-              <Computer>
-                Привет, я Саша. Уже 6 лет я делаю веб.
-                <br />
-                <br />
-                За это время собирал лендинги с анимацией и 3D, сервисы
-                бронирования, финтех-интерфейсы с большими данными,
-                Chrome-виджеты, мобильные приложения и backend. <br />
-                <br />
-                В пикселях, коде и хаосе ищу порядок, смысл и радость, люблю
-                ощущение приключения и интерфейсы, которые цепляют.
-                <br />
-                <br />
-                <TypewriterTextSequence
-                  startDelay={1400}
-                  texts={TYPEWRITER_TEXTS}
-                />
-                <Button className="mt-5" href="#">
-                  Перейти к кейсам
-                </Button>
-              </Computer>
-            </Reveal>
-          </div>
         </div>
+        <DeviceBackgrounds>
+          <IntroContent />
+        </DeviceBackgrounds>
       </div>
     </div>
   );
