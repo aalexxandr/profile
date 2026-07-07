@@ -28,11 +28,8 @@ export const en = {
     ],
   },
   home: {
-    introParagraphs: [
-      "Hi, I'm Sasha. I have been building for the web for 6 years.",
-      "During that time I have built animated and 3D landing pages, booking services, fintech interfaces with large datasets, Chrome widgets, mobile apps, and backend systems.",
-      "In pixels, code, and chaos I look for order, meaning, and joy. I love the feeling of adventure and interfaces that pull people in.",
-    ],
+    introText:
+      "Hi, I'm Sasha. I have been building for the web for 6 years.\n\nDuring that time I have built animated and 3D landing pages, booking services, fintech interfaces with large datasets, Chrome widgets, mobile apps, and backend systems.\n\nIn pixels, code, and chaos I look for order, meaning, and joy. I love the feeling of adventure and interfaces that pull people in.",
     typewriterTexts: [
       "Never lost, always exploring.",
       "Open mind. Clean code.",

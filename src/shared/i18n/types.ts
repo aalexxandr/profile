@@ -21,7 +21,7 @@ export type Dictionary = {
     items: NavigationItem[];
   };
   home: {
-    introParagraphs: string[];
+    introText: string;
     typewriterTexts: string[];
     cta: {
       label: string;

@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import Image from "next/image";
 import { Lamp } from "./Lamp";
 
@@ -21,17 +20,7 @@ type HomePageProps = {
 
 const IntroContent = ({ ctaHref, home }: HomePageProps) => (
   <>
-    {home.introParagraphs.map((paragraph, index) => (
-      <Fragment key={paragraph}>
-        {index > 0 && (
-          <>
-            <br />
-            <br />
-          </>
-        )}
-        {paragraph}
-      </Fragment>
-    ))}
+    <span className="whitespace-pre-line">{home.introText}</span>
     <br />
     <br />
     <TypewriterTextSequence startDelay={1400} texts={home.typewriterTexts} />
