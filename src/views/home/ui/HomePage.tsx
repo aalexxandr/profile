@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Image from "next/image";
 import { Lamp } from "./Lamp";
 
@@ -10,30 +11,37 @@ import { DeviceBackgrounds } from "./DeviceBackgrounds";
 
 import { Button } from "@/shared/ui/Button";
 import { Reveal } from "@/shared/ui/Reveal";
-import { TYPEWRITER_TEXTS } from "../model/constants";
 import { TypewriterTextSequence } from "./TypewriterTextSequence";
+import type { Dictionary } from "@/shared/i18n";
 
-const IntroContent = () => (
+type HomePageProps = {
+  ctaHref: string;
+  home: Dictionary["home"];
+};
+
+const IntroContent = ({ ctaHref, home }: HomePageProps) => (
   <>
-    Привет, я Саша. Уже 6 лет я делаю веб.
+    {home.introParagraphs.map((paragraph, index) => (
+      <Fragment key={paragraph}>
+        {index > 0 && (
+          <>
+            <br />
+            <br />
+          </>
+        )}
+        {paragraph}
+      </Fragment>
+    ))}
     <br />
     <br />
-    За это время собирал лендинги с анимацией и 3D, сервисы бронирования,
-    финтех-интерфейсы с большими данными, Chrome-виджеты, мобильные приложения и
-    backend. <br />
-    <br />
-    В пикселях, коде и хаосе ищу порядок, смысл и радость, люблю ощущение
-    приключения и интерфейсы, которые цепляют.
-    <br />
-    <br />
-    <TypewriterTextSequence startDelay={1400} texts={TYPEWRITER_TEXTS} />
-    <Button className="mt-5" href="#">
-      Перейти к кейсам
+    <TypewriterTextSequence startDelay={1400} texts={home.typewriterTexts} />
+    <Button className="mt-5" href={ctaHref}>
+      {home.cta.label}
     </Button>
   </>
 );
 
-export const HomePage = () => {
+export const HomePage = ({ ctaHref, home }: HomePageProps) => {
   return (
     <div className="relative h-full min-h-135 overflow-hidden lg:min-h-175">
       <div className="relative m-auto h-full max-w-340">
@@ -42,14 +50,14 @@ export const HomePage = () => {
           delay={120}
           direction="left"
         >
-          <Image src={paintingSrc} alt="painting" />
+          <Image src={paintingSrc} alt={home.imageAlts.painting} />
         </Reveal>
         <Reveal
           className="hidden lg:absolute lg:top-27.5 lg:left-0 lg:block"
           delay={180}
           direction="right"
         >
-          <Image src={shelvesSrc} alt="shelves" />
+          <Image src={shelvesSrc} alt={home.imageAlts.shelves} />
         </Reveal>
         <div className="hidden lg:absolute lg:bottom-0 lg:left-1/2 lg:block lg:-translate-x-1/2">
           <Reveal className="relative" delay={260}>
@@ -58,7 +66,7 @@ export const HomePage = () => {
               delay={420}
               direction="down"
             >
-              <Lamp />
+              <Lamp ariaLabel={home.imageAlts.lamp} />
             </Reveal>
             <Reveal
               className="absolute bottom-17 left-35.5 size-30.25"
@@ -71,11 +79,15 @@ export const HomePage = () => {
                 <CatPaws />
               </Reveal>
             </div>
-            <Image src={tableSrc} alt="table" className="max-w-none" />
+            <Image
+              src={tableSrc}
+              alt={home.imageAlts.table}
+              className="max-w-none"
+            />
           </Reveal>
         </div>
         <DeviceBackgrounds>
-          <IntroContent />
+          <IntroContent ctaHref={ctaHref} home={home} />
         </DeviceBackgrounds>
       </div>
     </div>

@@ -7,6 +7,7 @@ import type { ComponentProps, PropsWithChildren } from "react";
 type BaseButtonProps = PropsWithChildren & {
   disabled?: boolean;
   isLoading?: boolean;
+  loadingLabel?: string;
 };
 
 type ButtonAsButtonProps = BaseButtonProps &
@@ -40,9 +41,10 @@ const buttonClassName = clsx(
 const ButtonContent = ({
   children,
   isLoading,
-}: Pick<BaseButtonProps, "children" | "isLoading">) => {
+  loadingLabel = "Loading...",
+}: Pick<BaseButtonProps, "children" | "isLoading" | "loadingLabel">) => {
   if (isLoading) {
-    return <span className="pt-0.75">Loading...</span>;
+    return <span className="pt-0.75">{loadingLabel}</span>;
   }
 
   return <span className="pt-0.75">{children}</span>;
@@ -56,6 +58,7 @@ export function Button(props: ButtonProps) {
       disabled,
       href,
       isLoading,
+      loadingLabel,
       target,
       ...linkProps
     } = props;
@@ -74,7 +77,9 @@ export function Button(props: ButtonProps) {
         tabIndex={isDisabled ? -1 : linkProps.tabIndex}
         target={target}
       >
-        <ButtonContent isLoading={isLoading}>{children}</ButtonContent>
+        <ButtonContent isLoading={isLoading} loadingLabel={loadingLabel}>
+          {children}
+        </ButtonContent>
       </Link>
     );
   }
@@ -84,6 +89,7 @@ export function Button(props: ButtonProps) {
     className,
     disabled,
     isLoading,
+    loadingLabel,
     type = "button",
     ...buttonProps
   } = props;
@@ -100,7 +106,9 @@ export function Button(props: ButtonProps) {
       disabled={isDisabled}
       type={type}
     >
-      <ButtonContent isLoading={isLoading}>{children}</ButtonContent>
+      <ButtonContent isLoading={isLoading} loadingLabel={loadingLabel}>
+        {children}
+      </ButtonContent>
     </button>
   );
 }

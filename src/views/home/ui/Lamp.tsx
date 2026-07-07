@@ -5,6 +5,7 @@ import { CSSProperties, FC, useEffect, useState } from "react";
 import LampIcon from "./assets/lamp.svg?svgr";
 
 interface LampProps {
+  ariaLabel?: string;
   className?: string;
 }
 
@@ -14,7 +15,7 @@ type LampColorVars = CSSProperties & {
   "--lamp-shade": string;
 };
 
-export const Lamp: FC<LampProps> = ({ className }) => {
+export const Lamp: FC<LampProps> = ({ ariaLabel = "lamp", className }) => {
   const [isLampOn, setIsLampOn] = useState(false);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export const Lamp: FC<LampProps> = ({ className }) => {
       )}
       onClick={toggleLamp}
     >
-      <LampIcon role="img" aria-label="lamp" style={lampColorVars} />
+      <LampIcon role="img" aria-label={ariaLabel} style={lampColorVars} />
       <div
         className={clsx(
           "absolute -top-10 left-35 z-[-1] size-81 transform-[translate3d(0,0,0)_translateX(-50%)] transition-opacity duration-700 ease-out will-change-[filter,opacity] [-webkit-filter:url(#lamp-light-blur-filter)] [background:linear-gradient(94.84deg,#ff6b00_51.74%,#232323_56.65%)] motion-reduce:transition-none",
