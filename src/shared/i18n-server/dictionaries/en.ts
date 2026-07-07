@@ -29,7 +29,7 @@ export const en = {
   },
   home: {
     introText:
-      "Hi, I'm Sasha. I have been building for the web for 6 years.\n\nDuring that time I have built animated and 3D landing pages, booking services, fintech interfaces with large datasets, Chrome widgets, mobile apps, and backend systems.\n\nIn pixels, code, and chaos I look for order, meaning, and joy. I love the feeling of adventure and interfaces that pull people in.",
+      "Hi, I'm Sasha. I have been building for the web for 6\u00a0years.\n\nDuring that time I have built animated and 3D\u00a0landing pages, booking services, fintech interfaces with large datasets, Chrome widgets, mobile apps, and backend systems.\n\nIn pixels, code, and chaos I look for order, meaning, and joy. I love the feeling of adventure and interfaces that pull people in.",
     typewriterTexts: [
       "Never lost, always exploring.",
       "Open mind. Clean code.",
