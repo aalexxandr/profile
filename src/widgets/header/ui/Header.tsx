@@ -18,7 +18,7 @@ type HeaderProps = {
 };
 
 const isItemActive = (pathname: string, href: string) => {
-  if (href === "/" || href === "/en") {
+  if (href === "/ru" || href === "/en") {
     return pathname === href;
   }
 
