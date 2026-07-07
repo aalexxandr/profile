@@ -28,12 +28,12 @@ const disabledShadow =
   "shadow-[inset_2px_2px_0_0_#dfdfdf,inset_-2px_-2px_0_0_#7f7f7f,inset_1px_1px_0_0_#fff,inset_-1px_-1px_0_0_#000]";
 
 const disabledClassName = clsx(
-  "pointer-events-none cursor-default bg-[#a89898] text-[#554a4a] hover:bg-[#a89898] hover:text-[#554a4a]",
+  "pointer-events-none cursor-default bg-control-muted text-control-fg-muted hover:bg-control-muted hover:text-control-fg-muted",
   disabledShadow,
 );
 
 const buttonClassName = clsx(
-  "flex h-[35px] w-full cursor-pointer items-center justify-center gap-1 border-0 bg-[#cecece] px-4 py-1.5 font-vcr text-[12px] text-[#3a3a3a] uppercase no-underline transition-none outline-none hover:bg-[#db00ff] hover:text-white focus-visible:border focus-visible:border-[#ff5a8f] focus-visible:shadow-none active:bg-[#b102ce]",
+  "flex h-[35px] w-full cursor-pointer items-center justify-center gap-1 border-0 bg-control px-4 py-1.5 font-vcr text-[12px] text-control-fg uppercase no-underline transition-none outline-none hover:bg-accent hover:text-white focus-visible:border focus-visible:border-focus-ring focus-visible:shadow-none active:bg-accent-active",
   retroShadow,
 );
 

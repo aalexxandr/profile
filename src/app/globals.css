@@ -14,6 +14,15 @@
 }
 
 @theme {
+  --color-canvas: #090909;
+  --color-control: #cecece;
+  --color-control-muted: #a89898;
+  --color-control-fg: #3a3a3a;
+  --color-control-fg-muted: #554a4a;
+  --color-accent: #db00ff;
+  --color-accent-active: #b102ce;
+  --color-focus-ring: #ff5a8f;
+
   --animate-reveal-down: reveal-down 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-reveal-fade: reveal-fade 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-reveal-left: reveal-left 700ms cubic-bezier(0.22, 1, 0.36, 1) both;

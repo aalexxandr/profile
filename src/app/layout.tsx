@@ -2,6 +2,7 @@ import clsx from "clsx";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Header } from "@/widgets/header";
 
 // Font files can be colocated inside of `pages`
 const helvetica = localFont({
@@ -77,7 +78,10 @@ export default function RootLayout({
         "h-full antialiased",
       )}
     >
-      <body className="bg-[#090909]">{children}</body>
+      <body className="grid min-h-dvh grid-rows-[auto_1fr] bg-canvas">
+        <Header />
+        <main className="grid min-h-0">{children}</main>
+      </body>
     </html>
   );
 }

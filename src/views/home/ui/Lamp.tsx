@@ -32,8 +32,8 @@ export const Lamp: FC<LampProps> = ({ className }) => {
   };
 
   const lampColorVars: LampColorVars = {
-    "--lamp-accent": isLampOn ? "#FF6B00" : "#554A4A",
-    "--lamp-shade": isLampOn ? "#FF923F" : "#888888",
+    "--lamp-accent": isLampOn ? "#ff6b00" : "#554a4a",
+    "--lamp-shade": isLampOn ? "#ff923f" : "#888888",
   };
 
   return (
@@ -47,7 +47,7 @@ export const Lamp: FC<LampProps> = ({ className }) => {
       <LampIcon role="img" aria-label="lamp" style={lampColorVars} />
       <div
         className={clsx(
-          "absolute -top-10 left-35 z-[-1] size-81 transform-[translate3d(0,0,0)_translateX(-50%)] transition-opacity duration-700 ease-out will-change-[filter,opacity] [-webkit-filter:url(#lamp-light-blur-filter)] [background:linear-gradient(94.84deg,#FF6B00_51.74%,#232323_56.65%)] motion-reduce:transition-none",
+          "absolute -top-10 left-35 z-[-1] size-81 transform-[translate3d(0,0,0)_translateX(-50%)] transition-opacity duration-700 ease-out will-change-[filter,opacity] [-webkit-filter:url(#lamp-light-blur-filter)] [background:linear-gradient(94.84deg,#ff6b00_51.74%,#232323_56.65%)] motion-reduce:transition-none",
           isLampOn ? "opacity-90" : "opacity-0",
         )}
       />

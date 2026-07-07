@@ -35,7 +35,7 @@ const IntroContent = () => (
 
 export const HomePage = () => {
   return (
-    <div className="relative h-dvh min-h-135 w-full overflow-hidden lg:min-h-175">
+    <div className="relative h-full min-h-135 overflow-hidden lg:min-h-175">
       <div className="relative m-auto h-full max-w-340">
         <Reveal
           className="hidden lg:absolute lg:top-20.5 lg:right-18 lg:block"
@@ -71,11 +71,7 @@ export const HomePage = () => {
                 <CatPaws />
               </Reveal>
             </div>
-            <Image
-              src={tableSrc}
-              alt="table"
-              className="max-w-none"
-            />
+            <Image src={tableSrc} alt="table" className="max-w-none" />
           </Reveal>
         </div>
         <DeviceBackgrounds>
