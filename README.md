@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My App
 
-## Getting Started
+Next.js 16 приложение с App Router, TypeScript, Tailwind CSS 4, локализацией `ru/en` и FSD-подобной структурой.
 
-First, run the development server:
+## Стек
+
+- `next@16.2.9`
+- `react@19`
+- `typescript`
+- `tailwindcss@4`
+- `lottie-react`
+- `steiger` + `@feature-sliced/steiger-plugin`
+
+## Команды
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun run dev
+bun run lint
+bun run format:check
+bun run build
+bun run check
+bun run fsd:check
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`bun run check` запускает lint, проверку форматирования и production build. `bun run fsd:check` запускается отдельно, потому что в текущем окружении Steiger может падать с `EMFILE: too many open files, watch`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Архитектура
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Код приложения находится в `src`:
 
-## Learn More
+- `src/app` — маршруты, layouts, metadata, sitemap, robots, global styles.
+- `src/views` — крупные страницы и экранные композиции.
+- `src/widgets` — самостоятельные блоки страницы.
+- `src/features` — пользовательские сценарии, когда появятся.
+- `src/entities` — доменные сущности, когда появятся.
+- `src/shared` — общие UI, i18n, config и низкоуровневые helpers.
 
-To learn more about Next.js, take a look at the following resources:
+Подробные правила для ИИ-агентов лежат в `AGENTS.md` и `docs/ai/`. Для FSD-решений используется подключенный skill `feature-sliced-design`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## AI workflow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Перед изменениями агент должен:
 
-## Deploy on Vercel
+- прочитать `AGENTS.md`;
+- изучить релевантные файлы в `docs/ai/`;
+- для Next.js свериться с `node_modules/next/dist/docs/`;
+- для библиотек и SDK использовать Context7 MCP;
+- для UI-задач использовать Figma/Playwright/Chrome DevTools MCP, когда это применимо.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Крупные UI-блоки нужно делить на компоненты, а повторяемую или нетривиальную логику выносить в hooks или helpers.

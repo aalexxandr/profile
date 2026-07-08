@@ -25,7 +25,6 @@ export const getLocalizedPaths = (page: PageKey) => ({
   "x-default": getLocalizedPath(page, defaultLocale),
 });
 
-
 export const getSiteUrl = () => {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
