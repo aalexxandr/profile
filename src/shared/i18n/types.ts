@@ -35,6 +35,12 @@ export type Dictionary = {
   };
   pages: {
     cases: {
+      controlLabels: {
+        close: string;
+        fullScreen: string;
+        minimize: string;
+      };
+      statusSuffix: string;
       title: string;
     };
     contacts: {

@@ -51,6 +51,12 @@ export const en = {
   },
   pages: {
     cases: {
+      controlLabels: {
+        close: "Close window",
+        fullScreen: "Full screen window",
+        minimize: "Minimize window",
+      },
+      statusSuffix: "objects",
       title: "cases",
     },
     contacts: {

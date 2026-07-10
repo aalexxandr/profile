@@ -51,6 +51,12 @@ export const ru = {
   },
   pages: {
     cases: {
+      controlLabels: {
+        close: "Закрыть окно",
+        fullScreen: "Развернуть окно",
+        minimize: "Свернуть окно",
+      },
+      statusSuffix: "объектов",
       title: "кейсы",
     },
     contacts: {
