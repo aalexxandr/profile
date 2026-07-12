@@ -5,6 +5,10 @@ export type NavigationItem = {
   label: string;
 };
 
+type PluralizedLabel = Partial<Record<Intl.LDMLPluralRule, string>> & {
+  other: string;
+};
+
 export type Dictionary = {
   common: {
     loading: string;
@@ -45,12 +49,18 @@ export type Dictionary = {
   };
   pages: {
     cases: {
+      actions: {
+        moreInformation: string;
+        projectLink: string;
+      };
       controlLabels: {
         close: string;
         fullScreen: string;
         minimize: string;
       };
-      statusSuffix: string;
+      status: {
+        objects: PluralizedLabel;
+      };
       title: string;
     };
     contacts: {

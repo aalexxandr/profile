@@ -20,17 +20,17 @@ type RetroWindowProps = {
   children: ReactNode;
   className?: string;
   controlLabels: RetroWindowControlLabels;
-  statusText: string;
+  objectsCount: number;
   title: string;
 };
 
 const RETRO_WINDOW_OUTER_SHADOW =
-  "shadow-[inset_-1px_-1px_0_0_#000,inset_1px_1px_0_0_#fff,inset_-2px_-2px_0_0_#7f7f7f,inset_2px_2px_0_0_#dfdfdf]";
+  "shadow-[inset_-1px_-1px_0_0_#050409,inset_1px_1px_0_0_#d8cbd4,inset_-2px_-2px_0_0_#867883,inset_2px_2px_0_0_#b8adb7]";
 const RETRO_WINDOW_INNER_SHADOW =
-  "shadow-[inset_1px_1px_0_0_#7f7f7f,inset_-1px_-1px_0_0_#fff]";
+  "shadow-[inset_1px_1px_0_0_#b8adb7,inset_-1px_-1px_0_0_#867883]";
 
 const RETRO_WINDOW_BUTTON_CLASS_NAME = clsx(
-  "flex size-4 cursor-pointer appearance-none items-center justify-center border-0 bg-control-fg-muted p-1 text-white outline-none hover:bg-accent focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-focus-ring active:bg-control-fg-muted active:shadow-[inset_1px_1px_0_0_#000,inset_-1px_-1px_0_0_#fff,inset_2px_2px_0_0_#7f7f7f,inset_-2px_-2px_0_0_#dfdfdf]",
+  "flex size-4 cursor-pointer appearance-none items-center justify-center border-0 bg-[#3f3d42] p-1 text-white outline-none hover:bg-[#56525a] focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-focus-ring active:bg-[#2f2b33] active:shadow-[inset_1px_1px_0_0_#050409,inset_-1px_-1px_0_0_#d8cbd4,inset_2px_2px_0_0_#867883,inset_-2px_-2px_0_0_#b8adb7]",
   RETRO_WINDOW_OUTER_SHADOW,
 );
 
@@ -38,13 +38,13 @@ export const RetroWindow = ({
   children,
   className,
   controlLabels,
-  statusText,
+  objectsCount,
   title,
 }: RetroWindowProps) => {
   const { closeWindow, state, toggleCollapse, toggleFullScreen } =
     useRetroWindowAnimation();
   const wrapperClassName = clsx(
-    "flex origin-center flex-col items-start bg-control p-1 font-vcr text-white",
+    "flex origin-center flex-col items-start bg-[#120d1b] p-1 font-vcr text-white",
     RETRO_WINDOW_OUTER_SHADOW,
     state.isShaking &&
       "animate-retro-shake-mobile motion-reduce:animate-none md:animate-retro-shake",
@@ -61,7 +61,7 @@ export const RetroWindow = ({
 
   return (
     <section className={wrapperClassName} aria-label={title}>
-      <header className="flex min-h-5.5 w-full items-start justify-between gap-2 bg-control-fg-muted py-0.5 pr-0.5 pl-1 text-[12px]/[13px]">
+      <header className="flex min-h-5.5 w-full items-start justify-between gap-2 bg-[#120d1b] py-0.5 pr-0.5 pl-1 text-[12px]/[13px]">
         <div className="flex min-w-0 items-end gap-1 pt-px text-white uppercase">
           <FolderIcon
             aria-hidden="true"
@@ -113,7 +113,7 @@ export const RetroWindow = ({
         <div className="relative flex min-h-0 flex-col overflow-hidden">
           <div
             className={clsx(
-              "grid min-h-45 place-items-center bg-[#f2f2f2] p-6",
+              "grid min-h-45 place-items-center bg-[#15101f] p-6",
               RETRO_WINDOW_INNER_SHADOW,
             )}
           >
@@ -121,11 +121,11 @@ export const RetroWindow = ({
           </div>
           <div
             className={clsx(
-              "mt-1 flex min-h-4.5 w-full items-center justify-between pt-1 text-[11px]/3 text-control-fg-muted",
+              "mt-1 flex min-h-4.5 w-full items-center justify-between pt-1 text-[11px]/3 text-[#f7f4fb]",
               RETRO_WINDOW_INNER_SHADOW,
             )}
           >
-            <p className="mb-0.5 ml-1">{statusText}</p>
+            <p className="mb-0.5 ml-1">{objectsCount} objects</p>
           </div>
           <DragIcon
             aria-hidden="true"

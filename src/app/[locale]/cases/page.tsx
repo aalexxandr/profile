@@ -1,4 +1,4 @@
-import { CasesPage as CasesViewPage } from "@/views/cases";
+import { CasesPage as CasesViewPage, getMockCaseItems } from "@/views/cases";
 import {
   createPageMetadata,
   getDictionary,
@@ -19,5 +19,11 @@ export default async function CasesPage({ params }: CasesPageProps) {
   const locale = await getValidatedLocale(params);
   const dictionary = await getDictionary(locale);
 
-  return <CasesViewPage cases={dictionary.pages.cases} />;
+  return (
+    <CasesViewPage
+      caseItems={getMockCaseItems(locale)}
+      cases={dictionary.pages.cases}
+      locale={locale}
+    />
+  );
 }

@@ -64,12 +64,21 @@ export const en = {
   },
   pages: {
     cases: {
+      actions: {
+        moreInformation: "More information",
+        projectLink: "Project link",
+      },
       controlLabels: {
         close: "Close window",
         fullScreen: "Full screen window",
         minimize: "Minimize window",
       },
-      statusSuffix: "objects",
+      status: {
+        objects: {
+          one: "object",
+          other: "objects",
+        },
+      },
       title: "cases",
     },
     contacts: {

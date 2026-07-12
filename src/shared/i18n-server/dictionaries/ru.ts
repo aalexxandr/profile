@@ -64,12 +64,23 @@ export const ru = {
   },
   pages: {
     cases: {
+      actions: {
+        moreInformation: "Подробнее",
+        projectLink: "Ссылка на проект",
+      },
       controlLabels: {
         close: "Закрыть окно",
         fullScreen: "Развернуть окно",
         minimize: "Свернуть окно",
       },
-      statusSuffix: "объектов",
+      status: {
+        objects: {
+          few: "объекта",
+          many: "объектов",
+          one: "объект",
+          other: "объекта",
+        },
+      },
       title: "кейсы",
     },
     contacts: {

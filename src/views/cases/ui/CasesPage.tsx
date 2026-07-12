@@ -1,30 +1,31 @@
-import type { Dictionary } from "@/shared/i18n";
+import type { Dictionary, Locale } from "@/shared/i18n";
 
-import { RetroWindow } from "./RetroWindow";
+import type { CaseShort } from "../model/case";
+import { CaseBlock } from "./CaseBlock";
 
 type CasesPageProps = {
+  caseItems?: CaseShort[];
   cases: Dictionary["pages"]["cases"];
+  locale: Locale;
 };
 
-const STATUS_NUMBER_MIN = 2;
-const STATUS_NUMBER_MAX = 1000;
-
-const getRandomInt = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-const CASES_STATUS_NUMBER = getRandomInt(STATUS_NUMBER_MIN, STATUS_NUMBER_MAX);
-
-export const CasesPage = ({ cases }: CasesPageProps) => (
-  <div className="grid size-full min-h-0 place-items-center px-4 py-8 sm:px-6">
-    <RetroWindow
-      className="w-full max-w-140"
-      controlLabels={cases.controlLabels}
-      statusText={`${CASES_STATUS_NUMBER} ${cases.statusSuffix}`}
-      title={cases.title}
-    >
-      <p className="text-center text-[18px]/7 text-control-fg uppercase sm:text-[20px]/8">
-        {cases.title}
-      </p>
-    </RetroWindow>
+export const CasesPage = ({
+  caseItems = [],
+  cases,
+  locale,
+}: CasesPageProps) => (
+  <div className="size-full min-h-0 overflow-y-auto px-0 py-8 sm:px-4 lg:py-12">
+    <div className="mx-auto flex w-full max-w-310 flex-col gap-10 sm:gap-14 lg:gap-16">
+      <h1 className="sr-only">{cases.title}</h1>
+      {caseItems.map((caseItem, index) => (
+        <CaseBlock
+          caseData={caseItem}
+          caseLabels={cases}
+          index={index}
+          key={caseItem.slug}
+          locale={locale}
+        />
+      ))}
+    </div>
   </div>
 );
