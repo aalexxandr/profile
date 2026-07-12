@@ -21,6 +21,19 @@ export const en = {
   },
   navigation: {
     ariaLabel: "Main navigation",
+    languageSwitcher: {
+      ariaLabel: "Language selector",
+      locales: {
+        en: {
+          label: "EN",
+          title: "English version",
+        },
+        ru: {
+          label: "RU",
+          title: "Russian version",
+        },
+      },
+    },
     items: [
       { page: "home", label: "home" },
       { page: "cases", label: "cases" },

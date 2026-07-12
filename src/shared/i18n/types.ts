@@ -1,4 +1,4 @@
-import type { PageKey } from "./config";
+import type { Locale, PageKey } from "./config";
 
 export type NavigationItem = {
   page: PageKey;
@@ -18,6 +18,16 @@ export type Dictionary = {
   >;
   navigation: {
     ariaLabel: string;
+    languageSwitcher: {
+      ariaLabel: string;
+      locales: Record<
+        Locale,
+        {
+          label: string;
+          title: string;
+        }
+      >;
+    };
     items: NavigationItem[];
   };
   home: {

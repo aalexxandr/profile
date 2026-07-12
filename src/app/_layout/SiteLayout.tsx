@@ -82,6 +82,7 @@ export const SiteLayout = ({
         ariaLabel={dictionary.navigation.ariaLabel}
         currentLocale={locale}
         items={dictionary.navigation.items}
+        languageSwitcher={dictionary.navigation.languageSwitcher}
       />
       <main className="grid min-h-0">{children}</main>
     </body>
