@@ -17,12 +17,15 @@ Next.js 16 приложение с App Router, TypeScript, Tailwind CSS 4, ло�
 bun run dev
 bun run lint
 bun run format:check
+bun run typecheck
 bun run build
 bun run check
 bun run fsd:check
 ```
 
-`bun run check` запускает lint, проверку форматирования и production build. `bun run fsd:check` запускается отдельно, потому что в текущем окружении Steiger может падать с `EMFILE: too many open files, watch`.
+`bun run check` запускает lint, проверку форматирования, typecheck и production build. `bun run fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
+
+Переменные окружения описаны в `.env.example`.
 
 ## Архитектура
 
@@ -35,16 +38,12 @@ bun run fsd:check
 - `src/entities` — доменные сущности, когда появятся.
 - `src/shared` — общие UI, i18n, config и низкоуровневые helpers.
 
-Подробные правила для ИИ-агентов лежат в `CLAUDE.md` и `docs/ai/`. Для FSD-решений используется подключенный skill `feature-sliced-design`.
+## Контроль качества
 
-## AI workflow
+- Pre-commit (husky + lint-staged): ESLint и Prettier по staged-файлам.
+- CI (`.github/workflows/ci.yml`): lint, format:check, typecheck, build, fsd:check.
+- Dependabot обновляет npm-зависимости и GitHub Actions.
 
-Перед изменениями агент должен:
+## Работа с Claude Code
 
-- прочитать `CLAUDE.md`;
-- изучить релевантные файлы в `docs/ai/`;
-- для Next.js свериться с `node_modules/next/dist/docs/`;
-- для библиотек и SDK использовать Context7 MCP;
-- для UI-задач использовать Figma/Playwright/Chrome DevTools MCP, когда это применимо.
-
-Крупные UI-блоки нужно делить на компоненты, а повторяемую или нетривиальную логику выносить в hooks или helpers.
+Правила для агента лежат в `CLAUDE.md`. В `.claude/settings.json` настроены разрешения и хуки: автоформатирование и ESLint после каждой правки файла, typecheck при завершении ответа. Для FSD-решений используется skill `feature-sliced-design`.
