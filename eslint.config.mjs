@@ -19,6 +19,24 @@ const eslintConfig = defineConfig([
       "better-tailwindcss/enforce-consistent-line-wrapping": "off",
     },
   },
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/consistent-type-imports": "error",
+      "no-console": ["error", { allow: ["warn", "error"] }],
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["../../*"],
+              message: "Use the @/ alias instead of deep relative imports.",
+            },
+          ],
+        },
+      ],
+    },
+  },
   prettier,
   // Override default ignores of eslint-config-next.
   globalIgnores([

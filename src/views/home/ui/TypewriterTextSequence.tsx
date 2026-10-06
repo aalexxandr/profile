@@ -1,6 +1,7 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import type { FC } from "react";
+import { useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import clsx from "clsx";
 

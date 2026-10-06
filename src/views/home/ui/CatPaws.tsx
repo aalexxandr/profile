@@ -1,7 +1,9 @@
 "use client";
 
-import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { FC, useRef } from "react";
+import type { LottieRefCurrentProps } from "lottie-react";
+import Lottie from "lottie-react";
+import type { FC } from "react";
+import { useRef } from "react";
 import paws from "./assets/lottie-animations/cat-paws.json";
 
 interface CatPawsProps {

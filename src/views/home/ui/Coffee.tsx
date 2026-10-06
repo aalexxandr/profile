@@ -1,7 +1,7 @@
 "use client";
 
 import Lottie from "lottie-react";
-import { FC } from "react";
+import type { FC } from "react";
 import coffee from "./assets/lottie-animations/coffee-cup.json";
 
 interface CoffeeProps {

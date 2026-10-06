@@ -1,7 +1,8 @@
 "use client";
 
 import clsx from "clsx";
-import { CSSProperties, FC, useEffect, useState } from "react";
+import type { CSSProperties, FC } from "react";
+import { useEffect, useState } from "react";
 import LampIcon from "./assets/lamp.svg?svgr";
 
 interface LampProps {
