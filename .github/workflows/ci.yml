@@ -16,4 +16,7 @@ jobs:
       - run: bun run format:check
       - run: bun run typecheck
       - run: bun run build
+        env:
+          # Required by getSiteUrl() in production builds. CI output is not deployed.
+          NEXT_PUBLIC_SITE_URL: https://example.com
       - run: bun run fsd:check
