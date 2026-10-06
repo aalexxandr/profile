@@ -27,7 +27,7 @@
     "steiger": "^0.5.13"
   },
   "devDependencies": {
-    "@feature-sliced/steiger-plugin": "^0.6.0",
+    "@feature-sliced/steiger-plugin": "^0.8.0",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/negotiator": "^0.6.4",
