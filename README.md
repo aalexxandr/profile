@@ -35,13 +35,13 @@ bun run fsd:check
 - `src/entities` — доменные сущности, когда появятся.
 - `src/shared` — общие UI, i18n, config и низкоуровневые helpers.
 
-Подробные правила для ИИ-агентов лежат в `AGENTS.md` и `docs/ai/`. Для FSD-решений используется подключенный skill `feature-sliced-design`.
+Подробные правила для ИИ-агентов лежат в `CLAUDE.md` и `docs/ai/`. Для FSD-решений используется подключенный skill `feature-sliced-design`.
 
 ## AI workflow
 
 Перед изменениями агент должен:
 
-- прочитать `AGENTS.md`;
+- прочитать `CLAUDE.md`;
 - изучить релевантные файлы в `docs/ai/`;
 - для Next.js свериться с `node_modules/next/dist/docs/`;
 - для библиотек и SDK использовать Context7 MCP;
