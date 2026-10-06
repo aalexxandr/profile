@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Package manager is `bun`. There is no test runner configured.
 
 - `bun run dev` — dev server; `bun run build` / `bun run start` — production build / serve
-- `bun run lint` (`lint:fix` to autofix), `bun run format:check` (`format` to write), `bun run typecheck` (`tsc --noEmit`)
+- `bun run lint` (`lint:fix` to autofix), `bun run format:check` (`format` to write), `bun run typecheck` (`next typegen` + `tsc --noEmit`; typegen creates the gitignored `next-env.d.ts` that CI lacks)
 - `bun run check` — lint + format:check + typecheck + build (run before finishing a change)
 - `bun run fsd:check` — Steiger FSD lint. It may fail with `EMFILE: too many open files, watch`; report that as an environment blocker, not a pass.
 
