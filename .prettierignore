@@ -5,6 +5,6 @@ build
 coverage
 next-env.d.ts
 .agents
-bun.lockb
+bun.lock
 **/*.svg
 **/lottie-animations/**/*.json
