@@ -8,3 +8,6 @@ next-env.d.ts
 bun.lock
 **/*.svg
 **/lottie-animations/**/*.json
+test-results
+playwright-report
+blob-report

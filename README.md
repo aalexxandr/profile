@@ -20,12 +20,13 @@ bun run format:check
 bun run typecheck
 bun run test
 bun run test:watch
+bun run test:e2e
 bun run build
 bun run check
 bun run fsd:check
 ```
 
-`bun run check` запускает lint, проверку форматирования, typecheck, тесты (Vitest) и production build. Тесты лежат рядом с кодом (`*.test.ts(x)`), поэтапный план покрытия — в `TESTING_PLAN.md`. `bun run fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
+`bun run check` запускает lint, проверку форматирования, typecheck, тесты (Vitest) и production build. Тесты лежат рядом с кодом (`*.test.ts(x)`), поэтапный план покрытия — в `TESTING_PLAN.md`. E2E на Playwright (`e2e/`) запускаются отдельно через `bun run test:e2e`: команда сама собирает и поднимает приложение на порту 3100; при первом запуске нужен `bunx playwright install chromium`. `bun run fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
 
 Переменные окружения описаны в `.env.example`.
 
@@ -43,7 +44,7 @@ bun run fsd:check
 ## Контроль качества
 
 - Pre-commit (husky + lint-staged): ESLint и Prettier по staged-файлам.
-- CI (`.github/workflows/ci.yml`): lint, format:check, typecheck, test, build, fsd:check.
+- CI (`.github/workflows/ci.yml`): lint, format:check, typecheck, test, build, fsd:check, e2e (при падении сохраняется отчёт Playwright).
 - Dependabot обновляет npm-зависимости и GitHub Actions.
 
 ## Работа с Claude Code

@@ -11,7 +11,7 @@
 - [x] Итерация 1. Чистая логика
 - [x] Итерация 2. Хуки и компоненты
 - [x] Итерация 3. Исправление найденных багов
-- [ ] Итерация 4. E2E на Playwright
+- [x] Итерация 4. E2E на Playwright
 - [ ] Итерация 5. Доступность и визуальные проверки
 - [ ] Итерация 6. Закрепление
 
@@ -137,30 +137,30 @@
 
 ### Настройка
 
-- [ ] Поставить `@playwright/test` и браузеры (`bunx playwright install --with-deps chromium`)
-- [ ] Создать `playwright.config.ts`: `webServer` запускает `next build && next start`, проекты `desktop` и `mobile`
-- [ ] Добавить скрипт `test:e2e`
-- [ ] Добавить в `.gitignore` `test-results/` и `playwright-report/`
-- [ ] Добавить шаг E2E в CI после `build` (с `NEXT_PUBLIC_SITE_URL`), сохранять `trace` упавших тестов
+- [x] Поставить `@playwright/test` и браузеры (`bunx playwright install --with-deps chromium`)
+- [x] Создать `playwright.config.ts`: `webServer` запускает `next build && next start`, проекты `desktop` и `mobile`
+- [x] Добавить скрипт `test:e2e`
+- [x] Добавить в `.gitignore` `test-results/` и `playwright-report/`
+- [x] Добавить шаг E2E в CI после `build` (с `NEXT_PUBLIC_SITE_URL`), сохранять `trace` упавших тестов
 
 ### Редиректы `proxy.ts`
 
-- [ ] `/` с `Accept-Language: en-US` ведёт на `/en`
-- [ ] `/` с `ru` или без заголовка ведёт на `/ru`
-- [ ] `/cases?x=1` ведёт на `/ru/cases?x=1` (query сохраняется)
-- [ ] `/robots.txt`, `/sitemap.xml`, `/favicon.ico`, `/_next/...` не редиректятся
-- [ ] `/en/cases` не редиректится
-- [ ] `/de` редиректится на `/ru/de` (proxy считает его нелокализованным путём), и там 404; `/ru/cases/unknown` отдаёт 404
+- [x] `/` с `Accept-Language: en-US` ведёт на `/en`
+- [x] `/` с `ru` или без заголовка ведёт на `/ru`
+- [x] `/cases?x=1` ведёт на `/ru/cases?x=1` (query сохраняется)
+- [x] `/robots.txt`, `/sitemap.xml`, `/favicon.ico`, `/_next/...` не редиректятся
+- [x] `/en/cases` не редиректится
+- [x] `/de` редиректится под локаль из `Accept-Language` (например, `/en/de`: proxy считает `de` нелокализованным путём), и там 404; `/ru/cases/unknown` отдаёт 404
 
 ### Страницы и навигация
 
-- [ ] Smoke-проход по всем 6 страницам (3 страницы × 2 локали): статус 200
-- [ ] На каждой странице проверить `title`, `description`, `canonical`, `hreflang`
-- [ ] На каждой странице нет ошибок в консоли (включая ошибки гидратации)
-- [ ] Клик по пункту меню меняет URL и `aria-current`
-- [ ] Переключение языка на `/ru/cases` ведёт на `/en/cases`
-- [ ] Ни одна внутренняя ссылка на страницах не отдаёт 404
-- [ ] Окно кейса сворачивается, разворачивается и закрывается с клавиатуры (Tab, Enter, пробел)
+- [x] Smoke-проход по всем 6 страницам (3 страницы × 2 локали): статус 200
+- [x] На каждой странице проверить `title`, `description`, `canonical`, `hreflang`
+- [x] На каждой странице нет ошибок в консоли (включая ошибки гидратации)
+- [x] Клик по пункту меню меняет URL и `aria-current`
+- [x] Переключение языка на `/ru/cases` ведёт на `/en/cases`
+- [x] Ни одна внутренняя ссылка на страницах не отдаёт 404
+- [x] Окно кейса сворачивается, разворачивается и закрывается с клавиатуры (Tab, Enter, пробел)
 
 **Готово, когда:** E2E стабильно проходят локально и в CI на desktop и mobile.
 

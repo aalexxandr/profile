@@ -21,3 +21,15 @@ jobs:
           # Required by getSiteUrl() in production builds. CI output is not deployed.
           NEXT_PUBLIC_SITE_URL: https://example.com
       - run: bun run fsd:check
+      - run: bunx playwright install --with-deps chromium
+      - run: bun run test:e2e
+        env:
+          NEXT_PUBLIC_SITE_URL: https://example.com
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
