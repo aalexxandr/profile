@@ -69,10 +69,10 @@ describe("CaseBlock status counter", () => {
     renderCaseBlock("ru");
     const count = getStatusCount(caseData.slug);
     const word = new Intl.PluralRules("ru").select(count);
+    const objects: Partial<Record<Intl.LDMLPluralRule, string>> =
+      labelsByLocale.ru.status.objects;
 
-    expect(
-      screen.getByText(`${count} ${labelsByLocale.ru.status.objects[word]}`),
-    ).toBeInTheDocument();
+    expect(screen.getByText(`${count} ${objects[word]}`)).toBeInTheDocument();
     expect(screen.queryByText(/\bobjects?\b/)).not.toBeInTheDocument();
   });
 
