@@ -38,16 +38,6 @@ describe.each(locales)("%s dictionary", (locale) => {
     expect(emptyPaths).toEqual([]);
   });
 
-  it("has a form for every plural category of the locale", () => {
-    const categories = new Intl.PluralRules(locale).resolvedOptions()
-      .pluralCategories;
-    const { objects } = dictionary.pages.cases.status;
-
-    for (const category of categories) {
-      expect(objects[category], `objects.${category}`).toBeTruthy();
-    }
-  });
-
   it("has a label for every locale in the language switcher", () => {
     const { locales: switcherLocales } = dictionary.navigation.languageSwitcher;
 
@@ -59,12 +49,8 @@ describe("dictionaries together", () => {
   it("have the same structure of keys", () => {
     const keysOf = (dictionary: Dictionary) =>
       collectStrings(dictionary).map(([path]) => path);
-    const ruKeys = keysOf(ru).filter(
-      (path) => !path.includes("status.objects"),
-    );
-    const enKeys = keysOf(en).filter(
-      (path) => !path.includes("status.objects"),
-    );
+    const ruKeys = keysOf(ru);
+    const enKeys = keysOf(en);
 
     expect(enKeys).toEqual(ruKeys);
   });

@@ -81,10 +81,7 @@ export const en = {
         stackLabel: "Stack",
       },
       status: {
-        objects: {
-          one: "object",
-          other: "objects",
-        },
+        objects: "objects",
       },
       title: "cases",
     },

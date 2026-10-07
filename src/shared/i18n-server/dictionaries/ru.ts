@@ -81,12 +81,7 @@ export const ru = {
         stackLabel: "Стек",
       },
       status: {
-        objects: {
-          few: "объекта",
-          many: "объектов",
-          one: "объект",
-          other: "объекта",
-        },
+        objects: "объектов",
       },
       title: "кейсы",
     },

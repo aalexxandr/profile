@@ -20,7 +20,7 @@ description: 'Write and run tests for this Next.js project (Vitest + React Testi
 | Keyboard flows, navigation, language switching, links between pages                   | Playwright E2E                                                                        |
 | New route                                                                             | unit test for `generateStaticParams`/sitemap + E2E page in `e2e/support/routes.ts`    |
 | New user-facing string                                                                | nothing extra: dictionary tests already check empty strings and ru/en key parity      |
-| New plural form / new locale                                                          | dictionary tests check `Intl.PluralRules` categories; add the locale to the E2E lists |
+| New locale | dictionary tests check key parity and empty strings; add the locale to the E2E lists and to `e2e/support/routes.ts` |
 
 When in doubt, test the logic as a unit **and** the user-visible behavior in E2E. Test behavior (roles, text, URLs, ARIA attributes), not implementation details like state variable names.
 
@@ -39,7 +39,7 @@ When in doubt, test the logic as a unit **and** the user-visible behavior in E2E
 - Use the `@/` alias, `import type` for types, no `any`, no deep `../../` imports. Strict TS applies to tests too (`noUncheckedIndexedAccess` is on: `array[0]` may be `undefined`).
 - Use `it.each` / `describe.each` for locale and input matrices. Name tests by behavior ("keeps the path and the query string"), not by function.
 - Keep fixtures local to the test. Do not deep-import another layer's internals just to build a fixture (it can break `fsd:check`); build the small object in the test and type it with the public `Dictionary`/`NavigationItem` types.
-- Test both locales (`ru`, `en`) when text, plurals, paths or metadata are involved.
+- Test both locales (`ru`, `en`) when text, paths or metadata are involved.
 
 ## Already handled for you (do not mock again)
 
@@ -120,7 +120,7 @@ Thin route files that only compose (`src/app/[locale]/*/page.tsx`) beyond what E
 ## Definition of done
 
 - [ ] New/changed behavior has unit and/or E2E tests; bug fixes have a regression test that failed before the fix
-- [ ] Both locales covered where text, plurals, paths or metadata are involved
+- [ ] Both locales covered where text, paths or metadata are involved
 - [ ] You saw the tests fail when the behavior is broken
 - [ ] `bun run test` and `bun run check` pass (and `fsd:check` / `test:e2e` where relevant)
 - [ ] Final answer lists the added tests and the check results

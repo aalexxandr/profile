@@ -4,8 +4,6 @@ import Image from "next/image";
 import type { Dictionary, Locale } from "@/shared/i18n";
 import { Button, ExternalLink } from "@/shared/ui";
 
-import { getObjectsLabel } from "../lib/getObjectsLabel";
-import { getStatusCount } from "../lib/getStatusCount";
 import { type CaseShort } from "../model/case";
 import ArrowRightIcon from "./assets/case-block/arrow-right.svg?svgr";
 import { RetroWindow } from "./RetroWindow";
@@ -27,12 +25,6 @@ export const CaseBlock = ({
 }: CaseBlockProps) => {
   const isEven = index % 2 === 0;
   const caseHref = `/${locale}/cases/${caseData.slug}`;
-  const objectsCount = getStatusCount(caseData.slug);
-  const objectsLabel = getObjectsLabel(
-    objectsCount,
-    locale,
-    caseLabels.status.objects,
-  );
 
   return (
     <article
@@ -55,8 +47,8 @@ export const CaseBlock = ({
       <RetroWindow
         className="w-65 sm:w-95 md:w-132 lg:w-142 xl:w-160"
         controlLabels={caseLabels.controlLabels}
-        objectsCount={objectsCount}
-        objectsLabel={objectsLabel}
+        objectsCount={caseData.objectsCount}
+        objectsLabel={caseLabels.status.objects}
         title={`${caseData.name}`}
       >
         <div className="flex h-73 flex-col items-start font-sans sm:h-50">

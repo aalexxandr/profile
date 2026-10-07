@@ -5,10 +5,6 @@ export type NavigationItem = {
   label: string;
 };
 
-type PluralizedLabel = Partial<Record<Intl.LDMLPluralRule, string>> & {
-  other: string;
-};
-
 export type Dictionary = {
   common: {
     loading: string;
@@ -66,7 +62,7 @@ export type Dictionary = {
         stackLabel: string;
       };
       status: {
-        objects: PluralizedLabel;
+        objects: string;
       };
       title: string;
     };

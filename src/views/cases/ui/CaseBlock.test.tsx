@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from "vitest";
 
 import type { Dictionary, Locale } from "@/shared/i18n";
 
-import { getStatusCount } from "../lib/getStatusCount";
 import type { CaseShort } from "../model/case";
 import { CaseBlock } from "./CaseBlock";
 
@@ -16,6 +15,7 @@ const caseData: CaseShort = {
   blurImage: "https://picsum.photos/seed/product-ui/10/10",
   image: "https://picsum.photos/seed/product-ui/520/430",
   name: "Product UI",
+  objectsCount: 347,
   projectLink: "https://example.com/product-ui",
   shortDesc: "Short description",
   slug: "product-ui",
@@ -39,7 +39,7 @@ const labelsByLocale = {
       roleLabel: "Role",
       stackLabel: "Stack",
     },
-    status: { objects: { one: "object", other: "objects" } },
+    status: { objects: "objects" },
     title: "cases",
   },
   ru: {
@@ -56,14 +56,7 @@ const labelsByLocale = {
       roleLabel: "Роль",
       stackLabel: "Стек",
     },
-    status: {
-      objects: {
-        few: "объекта",
-        many: "объектов",
-        one: "объект",
-        other: "объекта",
-      },
-    },
+    status: { objects: "объектов" },
     title: "кейсы",
   },
 } satisfies Record<Locale, Dictionary["pages"]["cases"]>;
@@ -79,22 +72,16 @@ const renderCaseBlock = (locale: Locale) =>
   );
 
 describe("CaseBlock status counter", () => {
-  it("is written in Russian with the correct plural form on /ru", () => {
+  it("shows the count from the case data with the Russian word on /ru", () => {
     renderCaseBlock("ru");
-    const count = getStatusCount(caseData.slug);
-    const word = new Intl.PluralRules("ru").select(count);
-    const objects: Partial<Record<Intl.LDMLPluralRule, string>> =
-      labelsByLocale.ru.status.objects;
 
-    expect(screen.getByText(`${count} ${objects[word]}`)).toBeInTheDocument();
+    expect(screen.getByText("347 объектов")).toBeInTheDocument();
     expect(screen.queryByText(/\bobjects?\b/)).not.toBeInTheDocument();
   });
 
-  it("is written in English on /en", () => {
+  it("shows the count from the case data with the English word on /en", () => {
     renderCaseBlock("en");
 
-    expect(
-      screen.getByText(`${getStatusCount(caseData.slug)} objects`),
-    ).toBeInTheDocument();
+    expect(screen.getByText("347 objects")).toBeInTheDocument();
   });
 });

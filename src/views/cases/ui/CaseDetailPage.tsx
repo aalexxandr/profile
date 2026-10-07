@@ -3,8 +3,6 @@ import Image from "next/image";
 import { getLocalizedPath, type Dictionary, type Locale } from "@/shared/i18n";
 import { Button, ExternalLink } from "@/shared/ui";
 
-import { getObjectsLabel } from "../lib/getObjectsLabel";
-import { getStatusCount } from "../lib/getStatusCount";
 import type { CaseFull } from "../model/case";
 import { RetroWindow } from "./RetroWindow";
 
@@ -19,13 +17,6 @@ export const CaseDetailPage = ({
   cases,
   locale,
 }: CaseDetailPageProps) => {
-  const objectsCount = getStatusCount(caseItem.slug);
-  const objectsLabel = getObjectsLabel(
-    objectsCount,
-    locale,
-    cases.status.objects,
-  );
-
   return (
     <div className="size-full min-h-0 overflow-y-auto px-0 py-8 sm:px-4 lg:py-12">
       <article className="mx-auto flex w-full max-w-310 flex-col items-center gap-5 p-2.5 sm:px-6 lg:flex-row lg:items-start lg:px-5">
@@ -41,8 +32,8 @@ export const CaseDetailPage = ({
         <RetroWindow
           className="w-65 sm:w-95 md:w-132 lg:w-142 xl:w-160"
           controlLabels={cases.controlLabels}
-          objectsCount={objectsCount}
-          objectsLabel={objectsLabel}
+          objectsCount={caseItem.objectsCount}
+          objectsLabel={cases.status.objects}
           title={caseItem.name}
         >
           <div className="flex w-full flex-col items-start font-sans text-white">

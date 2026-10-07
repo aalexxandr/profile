@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { locales } from "@/shared/i18n";
+import { locales, type Locale } from "@/shared/i18n";
 
 import { getMockCaseItems } from "./case";
 
@@ -40,4 +40,28 @@ describe("getMockCaseItems", () => {
       expect(shortDesc.trim()).not.toBe("");
     }
   });
+
+  it("has the same objects count for every locale", () => {
+    const countsOf = (locale: Locale) =>
+      getMockCaseItems(locale).map(({ objectsCount }) => objectsCount);
+
+    expect(countsOf("ru")).toEqual(countsOf("en"));
+  });
+
+  // The word next to the count is a fixed dictionary string, so a hand-picked
+  // count must read correctly with it: ru "объектов" (many), en "objects" (not 1).
+  it.each([
+    ["ru", "many"],
+    ["en", "other"],
+  ] as const)(
+    "has counts that agree with the fixed %s word",
+    (locale, expectedCategory) => {
+      for (const { name, objectsCount } of getMockCaseItems(locale)) {
+        expect(Number.isInteger(objectsCount), name).toBe(true);
+        expect(new Intl.PluralRules(locale).select(objectsCount), name).toBe(
+          expectedCategory,
+        );
+      }
+    },
+  );
 });

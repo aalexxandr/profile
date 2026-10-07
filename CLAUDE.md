@@ -44,7 +44,7 @@ When a change alters the project architecture (layers/slices, `src` structure, r
 
 ## Testing
 
-- **Every new feature, behavior change and bug fix must ship with tests in the same change; never finish a task without them.** New functionality: cover logic with Vitest units and user-visible behavior (routes, redirects, navigation, keyboard flows) with Playwright E2E. Bug fix: write a failing regression test first. Cover both locales (`ru`, `en`) when text, plurals, paths or metadata are involved, and confirm new tests fail when the behavior is broken.
+- **Every new feature, behavior change and bug fix must ship with tests in the same change; never finish a task without them.** New functionality: cover logic with Vitest units and user-visible behavior (routes, redirects, navigation, keyboard flows) with Playwright E2E. Bug fix: write a failing regression test first. Cover both locales (`ru`, `en`) when text, paths or metadata are involved, and confirm new tests fail when the behavior is broken.
 - Use the `writing-tests` skill for where tests live, which level to pick, ready patterns and known pitfalls (e.g. `userEvent` hangs under fake timers: use `fireEvent`).
 - If something cannot be tested, say what and why in the final answer.
 
