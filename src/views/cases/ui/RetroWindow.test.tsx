@@ -14,7 +14,7 @@ const renderWindow = () =>
   render(
     <RetroWindow
       controlLabels={controlLabels}
-      objectsCount={7}
+      statusLabel="7 objects"
       title="Product UI"
     >
       <p>Window content</p>
@@ -50,6 +50,12 @@ describe("RetroWindow", () => {
         "button",
       );
     }
+  });
+
+  it("shows the status label it is given", () => {
+    renderWindow();
+
+    expect(screen.getByText("7 objects")).toBeInTheDocument();
   });
 
   it("renders its children", () => {

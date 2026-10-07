@@ -20,7 +20,7 @@ type RetroWindowProps = {
   children: ReactNode;
   className?: string;
   controlLabels: RetroWindowControlLabels;
-  objectsCount: number;
+  statusLabel: string;
   title: string;
 };
 
@@ -38,7 +38,7 @@ export const RetroWindow = ({
   children,
   className,
   controlLabels,
-  objectsCount,
+  statusLabel,
   title,
 }: RetroWindowProps) => {
   const { closeWindow, state, toggleCollapse, toggleFullScreen } =
@@ -125,7 +125,7 @@ export const RetroWindow = ({
               RETRO_WINDOW_INNER_SHADOW,
             )}
           >
-            <p className="mb-0.5 ml-1">{objectsCount} objects</p>
+            <p className="mb-0.5 ml-1">{statusLabel}</p>
           </div>
           <DragIcon
             aria-hidden="true"

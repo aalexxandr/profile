@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { Dictionary, Locale } from "@/shared/i18n";
 import { Button, ExternalLink } from "@/shared/ui";
 
+import { formatObjectsCount } from "../lib/formatObjectsCount";
 import { getStatusCount } from "../lib/getStatusCount";
 import { type CaseShort } from "../model/case";
 import ArrowRightIcon from "./assets/case-block/arrow-right.svg?svgr";
@@ -26,7 +27,11 @@ export const CaseBlock = ({
 }: CaseBlockProps) => {
   const isEven = index % 2 === 0;
   const caseHref = `/${locale}/cases/${caseData.slug}`;
-  const objectsCount = getStatusCount(caseData.slug);
+  const statusLabel = formatObjectsCount(
+    getStatusCount(caseData.slug),
+    locale,
+    caseLabels.status.objects,
+  );
 
   return (
     <article
@@ -49,7 +54,7 @@ export const CaseBlock = ({
       <RetroWindow
         className="w-65 sm:w-95 md:w-132 lg:w-142 xl:w-160"
         controlLabels={caseLabels.controlLabels}
-        objectsCount={objectsCount}
+        statusLabel={statusLabel}
         title={`${caseData.name}`}
       >
         <div className="flex h-73 flex-col items-start font-sans sm:h-50">
