@@ -3,12 +3,7 @@ import { usePathname } from "next/navigation";
 
 import type { Locale } from "@/shared/i18n";
 
-const getLanguageHref = (pathname: string, locale: Locale) => {
-  const segments = pathname.split("/");
-  segments[1] = locale;
-
-  return segments.join("/") || `/${locale}`;
-};
+import { getLanguageHref } from "./navigation-paths";
 
 export const useLanguageSwitcher = () => {
   const pathname = usePathname();

@@ -8,7 +8,7 @@
 **Прогресс:** итерации 0–6 (отмечайте итерацию целиком, когда выполнены все её пункты и критерий готовности).
 
 - [x] Итерация 0. Подготовка
-- [ ] Итерация 1. Чистая логика
+- [x] Итерация 1. Чистая логика
 - [ ] Итерация 2. Хуки и компоненты
 - [ ] Итерация 3. Исправление найденных багов
 - [ ] Итерация 4. E2E на Playwright
@@ -40,34 +40,34 @@
 
 ### `shared/i18n/config.ts`
 
-- [ ] `isLocale`: `ru` и `en` проходят; `RU`, `""`, `de`, `ru-RU` не проходят
-- [ ] `getLocalizedPath`: `home` даёт `/ru` без завершающего слеша, `cases` даёт `/en/cases`
-- [ ] `getLocalizedPaths` и `getLocalizedUrls`: в `x-default` стоит `defaultLocale`
-- [ ] `getSiteUrl` (через `vi.stubEnv`): берёт значение из env
-- [ ] `getSiteUrl`: в dev без env возвращает `http://localhost:3000`
-- [ ] `getSiteUrl`: в production без env бросает ошибку
+- [x] `isLocale`: `ru` и `en` проходят; `RU`, `""`, `de`, `ru-RU` не проходят
+- [x] `getLocalizedPath`: `home` даёт `/ru` без завершающего слеша, `cases` даёт `/en/cases`
+- [x] `getLocalizedPaths` и `getLocalizedUrls`: в `x-default` стоит `defaultLocale`
+- [x] `getSiteUrl` (через `vi.stubEnv`): берёт значение из env
+- [x] `getSiteUrl`: в dev без env возвращает `http://localhost:3000`
+- [x] `getSiteUrl`: в production без env бросает ошибку
 
 ### Словари `ru` и `en`
 
-- [ ] Нет пустых строк
-- [ ] Одинаковый набор и порядок `navigation.items` в обеих локалях
-- [ ] Для каждого `PluralizedLabel` есть форма для каждой категории `Intl.PluralRules(locale)`
+- [x] Нет пустых строк
+- [x] Одинаковый набор и порядок `navigation.items` в обеих локалях
+- [x] Для каждого `PluralizedLabel` есть форма для каждой категории `Intl.PluralRules(locale)`
 
 ### Вспомогательные функции (сначала вынести из компонентов в `lib/`)
 
-- [ ] Вынести `getLanguageHref` и `isItemActive` из `widgets/header` в `lib/`
-- [ ] Тесты `getLanguageHref`: `/ru` → `/en`, `/ru/cases` → `/en/cases`, хвост пути сохраняется
-- [ ] Тесты `isItemActive`: главная не активна на `/ru/cases`, `/ru/cases-foo` не подсвечивает «Кейсы»
-- [ ] Вынести `getStatusCount` из `CaseBlock` в `lib/`
-- [ ] Тесты `getStatusCount`: результат детерминирован и лежит в диапазоне `[2, 1000]`
+- [x] Вынести `getLanguageHref` и `isItemActive` из `widgets/header` в `lib/`
+- [x] Тесты `getLanguageHref`: `/ru` → `/en`, `/ru/cases` → `/en/cases`, хвост пути сохраняется
+- [x] Тесты `isItemActive`: главная не активна на `/ru/cases`, `/ru/cases-foo` не подсвечивает «Кейсы»
+- [x] Вынести `getStatusCount` из `CaseBlock` в `lib/`
+- [x] Тесты `getStatusCount`: результат детерминирован и лежит в диапазоне `[2, 1000]`
 
 ### Данные и SEO
 
-- [ ] `getMockCaseItems`: одинаковые `slug` в обеих локалях, изображения только с `picsum.photos`
-- [ ] `sitemap.ts`: 6 записей (3 страницы × 2 локали), у каждой есть `alternates` с `x-default`
-- [ ] `robots.ts`: ссылка на sitemap строится из `getSiteUrl()`
-- [ ] `getValidatedLocale` (мок `notFound`): неизвестная локаль вызывает `notFound()`
-- [ ] `createPageMetadata` (мок `server-only`): правильные `canonical` и `languages` для каждой пары «страница × локаль»
+- [x] `getMockCaseItems`: одинаковые `slug` в обеих локалях, изображения только с `picsum.photos`
+- [x] `sitemap.ts`: 6 записей (3 страницы × 2 локали), у каждой есть `alternates` с `x-default`
+- [x] `robots.ts`: ссылка на sitemap строится из `getSiteUrl()`
+- [x] `getValidatedLocale` (мок `notFound`): неизвестная локаль вызывает `notFound()`
+- [x] `createPageMetadata` (мок `server-only`): правильные `canonical` и `languages` для каждой пары «страница × локаль»
 
 **Готово, когда:** при поломке словаря, роутинга или SEO-метаданных тест падает с понятным сообщением.
 

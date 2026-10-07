@@ -12,6 +12,7 @@ import {
   type NavigationItem,
 } from "@/shared/i18n";
 
+import { isItemActive } from "../lib/navigation-paths";
 import { useActiveNavigationIndicator } from "../lib/useActiveNavigationIndicator";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -20,14 +21,6 @@ type HeaderProps = {
   currentLocale: Locale;
   items: NavigationItem[];
   languageSwitcher: Dictionary["navigation"]["languageSwitcher"];
-};
-
-const isItemActive = (pathname: string, href: string) => {
-  if (href === "/ru" || href === "/en") {
-    return pathname === href;
-  }
-
-  return pathname === href || pathname.startsWith(`${href}/`);
 };
 
 export const Header = ({

@@ -20,8 +20,22 @@ const svgrStub = (): Plugin => ({
   },
 });
 
+// `server-only` only exists inside Next's bundler; resolve it to an empty module
+// so server modules that import it can be tested.
+const SERVER_ONLY_ID = "\0server-only-stub";
+const serverOnlyStub = (): Plugin => ({
+  name: "server-only-stub",
+  enforce: "pre",
+  resolveId(source) {
+    return source === "server-only" ? SERVER_ONLY_ID : null;
+  },
+  load(id) {
+    return id === SERVER_ONLY_ID ? "export {};" : null;
+  },
+});
+
 export default defineConfig({
-  plugins: [svgrStub(), react()],
+  plugins: [svgrStub(), serverOnlyStub(), react()],
   resolve: { tsconfigPaths: true },
   test: {
     environment: "happy-dom",

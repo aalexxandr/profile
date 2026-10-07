@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { Dictionary, Locale } from "@/shared/i18n";
 import { Button, ExternalLink } from "@/shared/ui";
 
+import { getStatusCount } from "../lib/getStatusCount";
 import { type CaseShort } from "../model/case";
 import ArrowRightIcon from "./assets/case-block/arrow-right.svg?svgr";
 import { RetroWindow } from "./RetroWindow";
@@ -14,20 +15,6 @@ type CaseBlockProps = {
   className?: string;
   index: number;
   locale: Locale;
-};
-
-const STATUS_NUMBER_MIN = 2;
-const STATUS_NUMBER_MAX = 1000;
-const STATUS_NUMBER_RANGE = STATUS_NUMBER_MAX - STATUS_NUMBER_MIN + 1;
-
-const getStatusCount = (slug: CaseShort["slug"]) => {
-  let hash = 0;
-
-  for (const char of slug) {
-    hash = (hash * 31 + char.charCodeAt(0)) % STATUS_NUMBER_RANGE;
-  }
-
-  return STATUS_NUMBER_MIN + hash;
 };
 
 export const CaseBlock = ({
