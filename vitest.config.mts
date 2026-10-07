@@ -41,5 +41,25 @@ export default defineConfig({
     environment: "happy-dom",
     include: ["src/**/*.test.{ts,tsx}"],
     setupFiles: ["./vitest.setup.ts"],
+    coverage: {
+      provider: "v8",
+      include: ["src/**/*.{ts,tsx}"],
+      // Thin route/layout files only compose pages and are covered by E2E.
+      exclude: [
+        "**/*.test.{ts,tsx}",
+        "**/*.d.ts",
+        "src/app/**/page.tsx",
+        "src/app/**/layout.tsx",
+        "src/app/_layout/**",
+      ],
+      reporter: ["text", "html", "json-summary"],
+      // Keep the current level from regressing; raise them as coverage grows.
+      thresholds: {
+        branches: 75,
+        functions: 75,
+        lines: 80,
+        statements: 80,
+      },
+    },
   },
 });

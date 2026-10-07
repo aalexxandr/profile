@@ -29,7 +29,7 @@ When in doubt, test the logic as a unit **and** the user-visible behavior in E2E
 1. **Bug fix:** write the failing test first, see it fail for the right reason, then fix the code, see it pass.
 2. **New feature:** write tests with the code. If logic is trapped inside a component, extract it to `lib/` (a helper or `useSomething` hook) so it can be tested directly; this matches the project conventions.
 3. **Prove the tests bite:** temporarily break the implementation (flip a condition, drop a `clearTimeout`, hardcode an attribute), confirm the new tests fail, then restore the code. Only restore with `git checkout <file>` when that file has no other uncommitted work; otherwise undo the edit by hand.
-4. **Run:** `bun run test`, then `bun run check`; plus `bun run fsd:check` for placement/import changes and `bun run test:e2e` for routing, `proxy.ts`, navigation or UI-flow changes. Commit only when everything is green (chain with `&&`, never commit after a failed check).
+4. **Run:** `bun run test`, then `bun run check` (CI runs `bun run test:coverage`: if you add code, add tests so the global thresholds in `vitest.config.mts` still hold; never lower thresholds to pass); plus `bun run fsd:check` for placement/import changes and `bun run test:e2e` for routing, `proxy.ts`, navigation or UI-flow changes. Commit only when everything is green (chain with `&&`, never commit after a failed check).
 5. **Report:** list the tests you added and the check results in the final answer.
 
 ## Conventions

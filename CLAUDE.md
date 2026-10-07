@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Package manager is `bun`. Tests: Vitest + React Testing Library (happy-dom), colocated as `src/**/*.test.ts(x)`; `bun run test` (one run) / `bun run test:watch`. E2E: Playwright in `e2e/` (desktop + mobile Chromium), `bun run test:e2e` builds and serves the app on port 3100 itself; it is not part of `check`, run it after routing/UI/proxy changes (needs `bunx playwright install chromium` once). Coverage rollout plan is in `TESTING_PLAN.md`. `?svgr` imports are stubbed in `vitest.config.mts`.
+Package manager is `bun`. Tests: Vitest + React Testing Library (happy-dom), colocated as `src/**/*.test.ts(x)`; `bun run test` (one run) / `bun run test:watch` / `bun run test:coverage` (V8 coverage with global thresholds in `vitest.config.mts`, HTML report in `coverage/`; CI runs this instead of plain `test`, so raise thresholds as coverage grows and never lower them to make a build pass). E2E: Playwright in `e2e/` (desktop + mobile Chromium), `bun run test:e2e` builds and serves the app on port 3100 itself; it is not part of `check`, run it after routing/UI/proxy changes (needs `bunx playwright install chromium` once). Coverage rollout plan is in `TESTING_PLAN.md`. `?svgr` imports are stubbed in `vitest.config.mts`.
 
 - `bun run dev` — dev server; `bun run build` / `bun run start` — production build / serve
 - `bun run lint` (`lint:fix` to autofix), `bun run format:check` (`format` to write), `bun run typecheck` (`next typegen` + `tsc --noEmit`; typegen creates the gitignored `next-env.d.ts` that CI lacks)
-- `bun run check` — lint + format:check + typecheck + test + build (run before finishing a change)
+- `bun run check` — lint + format:check + typecheck + test + build (plain `test`, no coverage) (run before finishing a change)
 - `bun run fsd:check` — Steiger FSD lint. It may fail with `EMFILE: too many open files, watch`; report that as an environment blocker, not a pass.
 
 ## Automation
