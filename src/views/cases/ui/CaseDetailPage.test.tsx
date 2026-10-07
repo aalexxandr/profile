@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import type { Dictionary } from "@/shared/i18n";
 
+import { getStatusCount } from "../lib/getStatusCount";
 import { getMockCase } from "../model/case-full";
 import { CaseDetailPage } from "./CaseDetailPage";
 
@@ -57,8 +58,15 @@ describe("CaseDetailPage", () => {
     expect(screen.getByText(caseItem.description)).toBeInTheDocument();
     expect(screen.getByText(caseItem.role)).toBeInTheDocument();
     expect(screen.getByText(caseItem.stack.join(", "))).toBeInTheDocument();
+    expect(screen.getByText("Category")).toBeInTheDocument();
+    expect(screen.getByText(caseItem.category)).toBeInTheDocument();
+  });
+
+  it("shows the same objects counter as the cases list", () => {
+    const caseItem = renderPage();
+
     expect(
-      screen.getByText(`Category: ${caseItem.category}`),
+      screen.getByText(`${getStatusCount(caseItem.slug)} objects`),
     ).toBeInTheDocument();
   });
 

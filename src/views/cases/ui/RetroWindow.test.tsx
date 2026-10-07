@@ -14,7 +14,8 @@ const renderWindow = () =>
   render(
     <RetroWindow
       controlLabels={controlLabels}
-      statusLabel="7 objects"
+      objectsCount={7}
+      objectsLabel="objects"
       title="Product UI"
     >
       <p>Window content</p>
