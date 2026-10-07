@@ -18,12 +18,14 @@ bun run dev
 bun run lint
 bun run format:check
 bun run typecheck
+bun run test
+bun run test:watch
 bun run build
 bun run check
 bun run fsd:check
 ```
 
-`bun run check` запускает lint, проверку форматирования, typecheck и production build. `bun run fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
+`bun run check` запускает lint, проверку форматирования, typecheck, тесты (Vitest) и production build. Тесты лежат рядом с кодом (`*.test.ts(x)`), поэтапный план покрытия — в `TESTING_PLAN.md`. `bun run fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
 
 Переменные окружения описаны в `.env.example`.
 
@@ -41,7 +43,7 @@ bun run fsd:check
 ## Контроль качества
 
 - Pre-commit (husky + lint-staged): ESLint и Prettier по staged-файлам.
-- CI (`.github/workflows/ci.yml`): lint, format:check, typecheck, build, fsd:check.
+- CI (`.github/workflows/ci.yml`): lint, format:check, typecheck, test, build, fsd:check.
 - Dependabot обновляет npm-зависимости и GitHub Actions.
 
 ## Работа с Claude Code

@@ -4,17 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Package manager is `bun`. There is no test runner configured.
+Package manager is `bun`. Tests: Vitest + React Testing Library (happy-dom), colocated as `src/**/*.test.ts(x)`; `bun run test` (one run) / `bun run test:watch`. Coverage rollout plan is in `TESTING_PLAN.md`. `?svgr` imports are stubbed in `vitest.config.mts`.
 
 - `bun run dev` — dev server; `bun run build` / `bun run start` — production build / serve
 - `bun run lint` (`lint:fix` to autofix), `bun run format:check` (`format` to write), `bun run typecheck` (`next typegen` + `tsc --noEmit`; typegen creates the gitignored `next-env.d.ts` that CI lacks)
-- `bun run check` — lint + format:check + typecheck + build (run before finishing a change)
+- `bun run check` — lint + format:check + typecheck + test + build (run before finishing a change)
 - `bun run fsd:check` — Steiger FSD lint. It may fail with `EMFILE: too many open files, watch`; report that as an environment blocker, not a pass.
 
 ## Automation
 
 - `.claude/settings.json` hooks: after every Edit/Write the file is formatted (Prettier) and fixed (ESLint) by `.claude/hooks/format-file.ts`; remaining ESLint errors are returned to you, fix them. On Stop, `typecheck` must pass (`.claude/hooks/typecheck-on-stop.ts`).
-- Pre-commit (husky + lint-staged) runs ESLint/Prettier on staged files. CI (`.github/workflows/ci.yml`) runs lint, format:check, typecheck, build and fsd:check.
+- Pre-commit (husky + lint-staged) runs ESLint/Prettier on staged files. CI (`.github/workflows/ci.yml`) runs lint, format:check, typecheck, test, build and fsd:check.
 - Reading `.env*` is denied in `.claude/settings.json`; `.env.example` lists the variables.
 
 ## Next.js version warning
