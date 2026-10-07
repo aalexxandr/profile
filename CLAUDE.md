@@ -25,7 +25,7 @@ This is Next.js 16 (React 19, Tailwind 4) with breaking changes vs. older versio
 
 - FSD-like layout in `src/`: `app` → `views` → `widgets` → `shared`. (Next's `app/` is the FSD app layer; pages live in `views/` and are composed by thin route files in `src/app`.) Use the `feature-sliced-design` skill for any placement/import/public-API decision.
 - Imports use the `@/` alias (e.g. `@/shared/i18n`); deep `../../` imports are an ESLint error.
-- **i18n routing**: all routes live under `src/app/[locale]/` (locales `ru`, `en`; config in `src/shared/i18n`): `/`, `/cases`, `/contacts`. `src/proxy.ts` redirects unlocalized paths using the `Accept-Language` header. Server-only dictionary loading, metadata helpers and locale validation are in `src/shared/i18n-server` (dictionaries in `dictionaries/ru.ts` and `en.ts`).
+- **i18n routing**: all routes live under `src/app/[locale]/` (locales `ru`, `en`; config in `src/shared/i18n`): `/`, `/cases`, `/cases/[slug]` (case details, mock data in `src/views/cases/model`, listed in the sitemap), `/contacts`. `src/proxy.ts` redirects unlocalized paths using the `Accept-Language` header. Server-only dictionary loading, metadata helpers and locale validation are in `src/shared/i18n-server` (dictionaries in `dictionaries/ru.ts` and `en.ts`).
 - Every user-facing string, alt text, nav label and metadata goes through the dictionaries: add keys to the `Dictionary` type and to **both** `ru` and `en` (both are `satisfies Dictionary`, so `typecheck` catches mismatches).
 - `src/app/_layout/SiteLayout.tsx` holds site-wide layout composition.
 - SVGs imported with the `?svgr` query are converted to React components via `@svgr/webpack` (Turbopack rule in `next.config.ts`). Remote images are only allowed from `picsum.photos`.

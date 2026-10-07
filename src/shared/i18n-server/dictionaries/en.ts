@@ -73,6 +73,13 @@ export const en = {
         fullScreen: "Full screen window",
         minimize: "Minimize window",
       },
+      detail: {
+        achievementsTitle: "Results",
+        backToCases: "Back to cases",
+        categoryLabel: "Category",
+        roleLabel: "Role",
+        stackLabel: "Stack",
+      },
       status: {
         objects: {
           one: "object",

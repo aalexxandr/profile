@@ -32,6 +32,13 @@ const labelsByLocale = {
       fullScreen: "Full screen window",
       minimize: "Minimize window",
     },
+    detail: {
+      achievementsTitle: "Results",
+      backToCases: "Back to cases",
+      categoryLabel: "Category",
+      roleLabel: "Role",
+      stackLabel: "Stack",
+    },
     status: { objects: { one: "object", other: "objects" } },
     title: "cases",
   },
@@ -41,6 +48,13 @@ const labelsByLocale = {
       close: "Закрыть окно",
       fullScreen: "Развернуть окно",
       minimize: "Свернуть окно",
+    },
+    detail: {
+      achievementsTitle: "Результаты",
+      backToCases: "Назад к кейсам",
+      categoryLabel: "Категория",
+      roleLabel: "Роль",
+      stackLabel: "Стек",
     },
     status: {
       objects: {

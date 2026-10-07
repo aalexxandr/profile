@@ -73,6 +73,13 @@ export const ru = {
         fullScreen: "Развернуть окно",
         minimize: "Свернуть окно",
       },
+      detail: {
+        achievementsTitle: "Результаты",
+        backToCases: "Назад к кейсам",
+        categoryLabel: "Категория",
+        roleLabel: "Роль",
+        stackLabel: "Стек",
+      },
       status: {
         objects: {
           few: "объекта",

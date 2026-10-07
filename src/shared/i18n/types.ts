@@ -58,6 +58,13 @@ export type Dictionary = {
         fullScreen: string;
         minimize: string;
       };
+      detail: {
+        achievementsTitle: string;
+        backToCases: string;
+        categoryLabel: string;
+        roleLabel: string;
+        stackLabel: string;
+      };
       status: {
         objects: PluralizedLabel;
       };

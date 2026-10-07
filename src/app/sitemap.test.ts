@@ -11,7 +11,7 @@ afterEach(() => {
 });
 
 describe("sitemap", () => {
-  it("has an entry for every page in every locale", () => {
+  it("has an entry for every page and every case in every locale", () => {
     expect(sitemap().map(({ url }) => url)).toEqual([
       "https://example.com/ru",
       "https://example.com/en",
@@ -19,6 +19,12 @@ describe("sitemap", () => {
       "https://example.com/en/cases",
       "https://example.com/ru/contacts",
       "https://example.com/en/contacts",
+      "https://example.com/ru/cases/product-ui",
+      "https://example.com/en/cases/product-ui",
+      "https://example.com/ru/cases/booking-flow",
+      "https://example.com/en/cases/booking-flow",
+      "https://example.com/ru/cases/fintech-console",
+      "https://example.com/en/cases/fintech-console",
     ]);
   });
 
@@ -47,5 +53,17 @@ describe("sitemap", () => {
     for (const { lastModified } of sitemap()) {
       expect(lastModified).toBeInstanceOf(Date);
     }
+  });
+
+  it("links a case page to all its language versions", () => {
+    const entry = sitemap().find(
+      ({ url }) => url === "https://example.com/en/cases/product-ui",
+    );
+
+    expect(entry?.alternates?.languages).toEqual({
+      en: "https://example.com/en/cases/product-ui",
+      ru: "https://example.com/ru/cases/product-ui",
+      "x-default": "https://example.com/ru/cases/product-ui",
+    });
   });
 });
