@@ -42,7 +42,13 @@ When a change alters the project architecture (layers/slices, `src` structure, r
 - Accessibility: interactive elements need an accessible name; images get meaningful `alt` from the dictionary, decorative ones are explicitly decorative.
 - Page metadata is created through the existing i18n helpers.
 
+## Testing
+
+- **Every new feature, behavior change and bug fix must ship with tests in the same change; never finish a task without them.** New functionality: cover logic with Vitest units and user-visible behavior (routes, redirects, navigation, keyboard flows) with Playwright E2E. Bug fix: write a failing regression test first. Cover both locales (`ru`, `en`) when text, plurals, paths or metadata are involved, and confirm new tests fail when the behavior is broken.
+- Use the `writing-tests` skill for where tests live, which level to pick, ready patterns and known pitfalls (e.g. `userEvent` hangs under fake timers: use `fireEvent`).
+- If something cannot be tested, say what and why in the final answer.
+
 ## Verification
 
-- Before finishing: `bun run check`, plus `bun run fsd:check` for architectural changes. If a check cannot run, say why. In the final answer list changed areas and check results.
+- Before finishing: `bun run check`, plus `bun run fsd:check` for architectural changes and `bun run test:e2e` for routing, `proxy.ts`, navigation or UI-flow changes. If a check cannot run, say why. In the final answer list changed areas, the tests you added, and check results.
 - For UI work, verify with Playwright/Chrome DevTools MCP on desktop and mobile viewports: no clipped/overlapping text, focus/hover/active states, no console errors. Use Figma MCP when given a design (treat it as a reference, adapt to FSD, local components, Tailwind and i18n); use Context7 for library docs (`resolve-library-id` first, then `query-docs`); use Next DevTools MCP (`.mcp.json`, versions pinned) to diagnose the running dev server.

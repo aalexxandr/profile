@@ -49,4 +49,4 @@ bun run fsd:check
 
 ## Работа с Claude Code
 
-Правила для агента лежат в `CLAUDE.md`. В `.claude/settings.json` настроены разрешения и хуки: автоформатирование и ESLint после каждой правки файла, typecheck при завершении ответа. Для FSD-решений используется skill `feature-sliced-design`.
+Правила для агента лежат в `CLAUDE.md`. В `.claude/settings.json` настроены разрешения и хуки: автоформатирование и ESLint после каждой правки файла, typecheck при завершении ответа. Для FSD-решений используется skill `feature-sliced-design`, для написания тестов — skill `writing-tests` (лежит в `.agents/skills`, симлинк в `.claude/skills`). По правилам из `CLAUDE.md` любая новая функциональность и любое исправление бага поставляются с тестами.
