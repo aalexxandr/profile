@@ -51,4 +51,6 @@ When a change alters the project architecture (layers/slices, `src` structure, r
 ## Verification
 
 - Before finishing: `bun run check`, plus `bun run fsd:check` for architectural changes and `bun run test:e2e` for routing, `proxy.ts`, navigation or UI-flow changes. If a check cannot run, say why. In the final answer list changed areas, the tests you added, and check results.
+- **Any UI/UX change must be made using the `ui-ux-pro-max` skill** (invoke it before designing or editing components, layout, styles, interactions or accessibility).
+- **Every UI change must be followed by a UI/UX check via the Playwright MCP** (never skip it, even for small tweaks).
 - For UI work, verify with Playwright/Chrome DevTools MCP on desktop and mobile viewports: no clipped/overlapping text, focus/hover/active states, no console errors. Use Figma MCP when given a design (treat it as a reference, adapt to FSD, local components, Tailwind and i18n); use Context7 for library docs (`resolve-library-id` first, then `query-docs`); use Next DevTools MCP (`.mcp.json`, versions pinned) to diagnose the running dev server.
