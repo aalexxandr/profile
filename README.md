@@ -27,7 +27,7 @@ bun run check
 bun run fsd:check
 ```
 
-`bun run check` запускает lint, проверку форматирования, typecheck, тесты (Vitest) и production build. Тесты лежат рядом с кодом (`*.test.ts(x)`); `bun run test:coverage` считает покрытие и падает, если оно ниже порогов из `vitest.config.mts` (в CI запускается именно он, HTML-отчёт сохраняется артефактом `coverage-report`), поэтапный план покрытия — в `TESTING_PLAN.md`. E2E на Playwright (`e2e/`) запускаются отдельно через `bun run test:e2e`: команда сама собирает и поднимает приложение на порту 3100; при первом запуске нужен `bunx playwright install chromium`. `bun run fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
+`bun run check` запускает lint, проверку форматирования, typecheck, тесты (Vitest) и production build. Тесты лежат рядом с кодом (`*.test.ts(x)`); `bun run test:coverage` считает покрытие и падает, если оно ниже порогов из `vitest.config.mts` (в CI запускается именно он, HTML-отчёт сохраняется артефактом `coverage-report`). E2E на Playwright (`e2e/`) запускаются отдельно через `bun run test:e2e`: команда сама собирает и поднимает приложение на порту 3100; при первом запуске нужен `bunx playwright install chromium`. `bun run fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
 
 Переменные окружения описаны в `.env.example`.
 
