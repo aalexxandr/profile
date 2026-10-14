@@ -5,7 +5,7 @@
     "": {
       "name": "my-app",
       "dependencies": {
-        "@formatjs/intl-localematcher": "^0.8.10",
+        "@formatjs/intl-localematcher": "^0.9.0",
         "clsx": "^2.1.1",
         "lottie-react": "^2.4.1",
         "negotiator": "^1.1.0",
@@ -292,9 +292,9 @@
 
     "@feature-sliced/steiger-plugin": ["@feature-sliced/steiger-plugin@0.6.0", "", { "dependencies": { "@feature-sliced/filesystem": "^3.1.0", "fastest-levenshtein": "^1.0.16", "lodash-es": "^4.17.21", "pluralize": "^8.0.0", "tsconfck": "^3.1.6", "web-tree-sitter": "^0.26.8" } }, "sha512-TO7DbHYcldgyasVK5iwoou+J0rJonDgH18B+IBQqXedeB2/MURpkbUw9PFPV84pysG5C3uvIDhk+lLMW2MgQ4Q=="],
 
-    "@formatjs/fast-memoize": ["@formatjs/fast-memoize@3.1.6", "", {}, "sha512-H5aexk1Le7T9TPmscacZ+1pR6CTa2n1wq+HDVGXhH8TzUlQQpeXzZs91dRtmFHrbeNbjPFPfQujUqm7MHgVoXQ=="],
+    "@formatjs/fast-memoize": ["@formatjs/fast-memoize@3.1.7", "", {}, "sha512-zXfhLpvA6T7+efdt9JLbBwZ00tT7NsBMDVnDu8rpHeNNv8KfRZAMo2gkG0k9lK/Nzc//3kJ9pImsfuJxk3KhUA=="],
 
-    "@formatjs/intl-localematcher": ["@formatjs/intl-localematcher@0.8.10", "", { "dependencies": { "@formatjs/fast-memoize": "3.1.6" } }, "sha512-P/IC3qws3jH+1fEs+o0RIFgXKRaQlFehjS5W0FPAqdo6hgzawLl+eD0q0JjheQ3XtoOe5n8WSYfX06KQZI/QJA=="],
+    "@formatjs/intl-localematcher": ["@formatjs/intl-localematcher@0.9.0", "", { "dependencies": { "@formatjs/fast-memoize": "3.1.7" } }, "sha512-Z7TD3ssNry1Av1dVDoq/mzpxGyxqWwU0ClWEo+BB3k0JQTeQvUGmeK9WZGYvlqStS0UqkaKXk3dfjsb6NaHAxw=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.2", "", { "dependencies": { "@humanfs/types": "^0.15.0" } }, "sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA=="],
 
