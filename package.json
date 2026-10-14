@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@feature-sliced/steiger-plugin": "^0.6.0",
-    "@playwright/test": "^1.63.0",
+    "@playwright/test": "^1.64.0",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.2",
