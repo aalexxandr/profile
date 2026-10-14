@@ -16,7 +16,7 @@ jobs:
       - run: bun run format:check
       - run: bun run typecheck
       - run: bun run test:coverage
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: coverage-report
@@ -31,7 +31,7 @@ jobs:
       - run: bun run test:e2e
         env:
           NEXT_PUBLIC_SITE_URL: https://example.com
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report
