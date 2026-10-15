@@ -1,32 +1,14 @@
 schema: spec-driven
 
-# Project context (optional)
-# Add only constraints that should guide OpenSpec artifacts and workflows.
-# Include constraints an agent cannot infer by reading the code.
-# Keep general project documentation and discoverable codebase facts out.
-# Example:
-#   context: |
-#     Designs and tasks must cover Windows, macOS, and Linux
-#     Write all artifacts in Spanish
+context: |
+  Write all OpenSpec artifacts in English, even if the user's request is in Russian.
+  Development is test-first (TDD): see "Testing" in CLAUDE.md and the writing-tests skill.
+  Both locales (ru, en) must be covered when text, paths or metadata change.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always state what is out of scope
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
-
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+rules:
+  proposal:
+    - Always state what is out of scope
+  tasks:
+    - For every behavior change add the failing-test task (red) before its implementation task (green)
+    - Final tasks: bun run check; bun run fsd:check for architectural changes; bun run test:e2e for routing, proxy.ts, navigation or UI changes
+    - UI tasks must include a Playwright MCP check on desktop and mobile viewports
