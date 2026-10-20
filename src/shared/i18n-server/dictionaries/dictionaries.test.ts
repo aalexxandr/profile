@@ -45,6 +45,22 @@ describe.each(locales)("%s dictionary", (locale) => {
   });
 });
 
+describe.each(locales)("%s case texts", (locale) => {
+  const { detail, noImage } = dictionaries[locale].pages.cases;
+
+  it("has a label for every case role", () => {
+    expect(Object.keys(detail.roles).sort()).toEqual(["FRONTEND", "FULLSTACK"]);
+  });
+
+  it("has the no-image text and the project facts labels", () => {
+    expect(noImage).toBeTruthy();
+    expect(detail.companyLabel).toBeTruthy();
+    expect(detail.teamSizeLabel).toBeTruthy();
+    expect(detail.periodLabel).toBeTruthy();
+    expect(detail.periodPresent).toBeTruthy();
+  });
+});
+
 describe("dictionaries together", () => {
   it("have the same structure of keys", () => {
     const keysOf = (dictionary: Dictionary) =>

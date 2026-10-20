@@ -14,6 +14,7 @@
     "test:e2e": "playwright test",
     "fsd:check": "steiger ./src",
     "api:generate": "bun scripts/generate-api.ts",
+    "stub:start": "bun scripts/stub-api/server.ts",
     "format": "prettier . --write --ignore-unknown",
     "format:check": "prettier . --check --ignore-unknown",
     "check": "bun run lint && bun run format:check && bun run typecheck && bun run test && bun run build",

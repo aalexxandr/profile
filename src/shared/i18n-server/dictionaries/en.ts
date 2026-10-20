@@ -77,9 +77,18 @@ export const en = {
         achievementsTitle: "Results",
         backToCases: "Back to cases",
         categoryLabel: "Category",
+        companyLabel: "Company",
+        periodLabel: "Period",
+        periodPresent: "present",
         roleLabel: "Role",
+        roles: {
+          FRONTEND: "Frontend developer",
+          FULLSTACK: "Fullstack developer",
+        },
         stackLabel: "Stack",
+        teamSizeLabel: "Team size",
       },
+      noImage: "No image",
       status: {
         objects: "objects",
       },

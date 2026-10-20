@@ -8,13 +8,13 @@ import {
   type Locale,
 } from "@/shared/i18n";
 
-import type { CaseFull } from "../model/case";
+import type { CaseDetail } from "../api/types";
 
-const getCasePath = (locale: Locale, slug: CaseFull["slug"]) =>
+const getCasePath = (locale: Locale, slug: CaseDetail["slug"]) =>
   `${getLocalizedPath("cases", locale)}/${slug}`;
 
 export const createCaseMetadata = (
-  caseItem: CaseFull,
+  caseItem: CaseDetail,
   locale: Locale,
 ): Metadata => ({
   title: caseItem.name,

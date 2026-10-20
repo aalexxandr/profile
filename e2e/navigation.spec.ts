@@ -67,15 +67,15 @@ test("the language switcher keeps the page and switches the locale", async ({
 });
 
 test("the language switcher keeps a case details page", async ({ page }) => {
-  await page.goto("/ru/cases/product-ui");
+  await page.goto("/ru/cases/spectre");
 
   await page
     .getByRole("navigation", { name: "Выбор языка" })
-    .locator('a[href="/en/cases/product-ui"]')
+    .locator('a[href="/en/cases/spectre"]')
     .click();
 
-  await expect(page).toHaveURL(/\/en\/cases\/product-ui$/);
+  await expect(page).toHaveURL(/\/en\/cases\/spectre$/);
   await expect(
-    page.getByRole("heading", { level: 1, name: "Product UI" }),
+    page.getByRole("heading", { level: 1, name: "Spectre Explorer" }),
   ).toBeVisible();
 });

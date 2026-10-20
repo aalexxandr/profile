@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { getMockCaseItems } from "@/views/cases";
+import { getCases } from "@/views/cases";
 import {
   defaultLocale,
   getLocalizedPath,
@@ -13,9 +13,8 @@ import {
 
 const pages: PageKey[] = ["home", "cases", "contacts"];
 
-const caseSlugs = getMockCaseItems(defaultLocale).map(({ slug }) => slug);
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const caseSlugs = (await getCases(defaultLocale)).map(({ slug }) => slug);
   const lastModified = new Date();
   const siteUrl = getSiteUrl();
   const pageEntries = pages.flatMap((page) =>

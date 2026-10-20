@@ -8,10 +8,10 @@ test.describe("retro window on the cases page", () => {
   });
 
   const getWindow = (page: Page) =>
-    page.getByRole("region", { name: "Product UI" });
+    page.getByRole("region", { name: "Spectre Explorer" });
 
   const getContent = (page: Page) =>
-    page.locator('section[aria-label="Product UI"] > div[aria-hidden]');
+    page.locator('section[aria-label="Spectre Explorer"] > div[aria-hidden]');
 
   test("can be collapsed and expanded with the keyboard", async ({ page }) => {
     const window = getWindow(page);
@@ -61,11 +61,13 @@ test.describe("case details", () => {
   test("opens from the list and returns back", async ({ page }) => {
     await page.goto("/ru/cases");
 
-    await page.getByRole("link", { name: "Подробнее: Product UI" }).click();
+    await page
+      .getByRole("link", { name: "Подробнее: Spectre Explorer" })
+      .click();
 
-    await expect(page).toHaveURL(/\/ru\/cases\/product-ui$/);
+    await expect(page).toHaveURL(/\/ru\/cases\/spectre$/);
     await expect(
-      page.getByRole("heading", { level: 1, name: "Product UI" }),
+      page.getByRole("heading", { level: 1, name: "Spectre Explorer" }),
     ).toBeVisible();
 
     await page.getByRole("link", { name: "Назад к кейсам" }).click();

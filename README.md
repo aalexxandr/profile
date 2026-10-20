@@ -43,7 +43,7 @@ bun run api:generate
 - `src/widgets` — самостоятельные блоки страницы.
 - `src/features` — пользовательские сценарии, когда появятся.
 - `src/entities` — доменные сущности, когда появятся.
-- `src/shared` — общие UI, i18n, config и низкоуровневые helpers; `shared/api` — сгенерированные из OpenAPI бэкенда типы и типизированный клиент (только `GET`, серверный, адрес в `API_URL`). Запросы кейсов (`getCases`, `getCase`) лежат рядом с потребителем, в `src/views/cases/api`.
+- `src/shared` — общие UI, i18n, config и низкоуровневые helpers; `shared/api` — сгенерированные из OpenAPI бэкенда типы и типизированный клиент (только `GET`, серверный, адрес в `API_URL`). Запросы кейсов лежат рядом с потребителем: `getCases` в `src/views/cases/api` (список), `getCase` в `src/views/case-details/api` (страница кейса). Страницы кейсов генерируются статически (SSG), поэтому `bun run build` обращается к бэкенду (`API_URL`); без бэкенда используйте заглушку `bun run stub:start` (`scripts/stub-api`), на ней же собирается CI и работают E2E.
 
 ## Контроль качества
 

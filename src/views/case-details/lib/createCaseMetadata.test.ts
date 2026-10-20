@@ -2,8 +2,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { locales } from "@/shared/i18n";
 
-import { getMockCase } from "../model/case-full";
+import type { CaseDetail } from "../api/types";
 import { createCaseMetadata } from "./createCaseMetadata";
+
+const caseItem = {
+  name: "Spectre Explorer",
+  shortDescription: "A large service for browsing blockchain operations.",
+  slug: "spectre",
+} as CaseDetail;
 
 beforeEach(() => {
   vi.stubEnv("NEXT_PUBLIC_SITE_URL", "https://example.com");
@@ -15,30 +21,18 @@ afterEach(() => {
 
 describe("createCaseMetadata", () => {
   it.each(locales)("uses the case texts for %s", (locale) => {
-    const caseItem = getMockCase(locale, "product-ui");
-
-    if (!caseItem) {
-      throw new Error("Expected the product-ui mock case to exist");
-    }
-
     const metadata = createCaseMetadata(caseItem, locale);
 
-    expect(metadata.title).toBe(caseItem.name);
+    expect(metadata.title).toBe("Spectre Explorer");
     expect(metadata.description).toBe(caseItem.shortDescription);
-    expect(metadata.alternates?.canonical).toBe(`/${locale}/cases/product-ui`);
+    expect(metadata.alternates?.canonical).toBe(`/${locale}/cases/spectre`);
   });
 
   it("lists every language version and x-default", () => {
-    const caseItem = getMockCase("en", "booking-flow");
-
-    if (!caseItem) {
-      throw new Error("Expected the booking-flow mock case to exist");
-    }
-
     expect(createCaseMetadata(caseItem, "en").alternates?.languages).toEqual({
-      en: "/en/cases/booking-flow",
-      ru: "/ru/cases/booking-flow",
-      "x-default": "/ru/cases/booking-flow",
+      en: "/en/cases/spectre",
+      ru: "/ru/cases/spectre",
+      "x-default": "/ru/cases/spectre",
     });
   });
 });
