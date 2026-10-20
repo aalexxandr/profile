@@ -9,13 +9,14 @@ Package manager is `bun`. Tests: Vitest + React Testing Library (happy-dom), col
 - `bun run dev` — dev server; `bun run build` / `bun run start` — production build / serve
 - `bun run lint` (`lint:fix` to autofix), `bun run format:check` (`format` to write), `bun run typecheck` (`next typegen` + `tsc --noEmit`; typegen creates the gitignored `next-env.d.ts` that CI lacks)
 - `bun run check` — lint + format:check + typecheck + test + build (plain `test`, no coverage) (run before finishing a change)
+- `bun run api:generate` — reads the backend OpenAPI document (`$API_URL/docs-json`, default `http://localhost:3000`) and writes the types straight to `src/shared/api/generated/schema.d.ts` (the committed file is the contract snapshot; logic in `scripts/generate-api.ts`). Run it before using new backend fields; it fails with a short message without touching the file if the backend is unreachable. TODO (after the backend is deployed): add `api:check` (regenerate and fail on a diff vs. the committed `schema.d.ts`) to CI.
 - `bun run fsd:check` — Steiger FSD lint. It may fail with `EMFILE: too many open files, watch`; report that as an environment blocker, not a pass.
 
 ## Automation
 
 - `.claude/settings.json` hooks: after every Edit/Write the file is formatted (Prettier) and fixed (ESLint) by `.claude/hooks/format-file.ts`; remaining ESLint errors are returned to you, fix them. On Stop, `typecheck` must pass (`.claude/hooks/typecheck-on-stop.ts`).
 - Pre-commit (husky + lint-staged) runs ESLint/Prettier on staged files. CI (`.github/workflows/ci.yml`) runs lint, format:check, typecheck, test, build, fsd:check and e2e.
-- Reading `.env*` is denied in `.claude/settings.json`; `.env.example` lists the variables.
+- Reading secret env files (`.env`, `.env.local`, `.env.{development,production,test}[.local]`) is denied in `.claude/settings.json`; `.env.example` is readable and lists the variables.
 
 ## Next.js version warning
 
@@ -27,6 +28,7 @@ This is Next.js 16 (React 19, Tailwind 4) with breaking changes vs. older versio
 - Imports use the `@/` alias (e.g. `@/shared/i18n`); deep `../../` imports are an ESLint error.
 - **i18n routing**: all routes live under `src/app/[locale]/` (locales `ru`, `en`; config in `src/shared/i18n`): `/`, `/cases`, `/cases/[slug]` (case details, mock data in `src/views/cases/model`, listed in the sitemap), `/contacts`. `src/proxy.ts` redirects unlocalized paths using the `Accept-Language` header. Server-only dictionary loading, metadata helpers and locale validation are in `src/shared/i18n-server` (dictionaries in `dictionaries/ru.ts` and `en.ts`).
 - Every user-facing string, alt text, nav label and metadata goes through the dictionaries: add keys to the `Dictionary` type and to **both** `ru` and `en` (both are `satisfies Dictionary`, so `typecheck` catches mismatches).
+- **Backend API**: the backend is the source of truth for case data. `src/shared/api` holds the generated types (`generated/`, never edit by hand) and a thin GET-only client on `openapi-fetch`: `error.ts` (`ApiError`), `client.ts` (`createApiClient` from `API_URL`, `unwrap`), exported with the `Schemas` type from `@/shared/api`. The case requests live with their only consumer in `src/views/cases/api` (`getCases(locale)`, `getCase(slug, locale)` and the `CaseListItem` / `CaseDetail` types); move a request to `shared/api` only when a second slice needs it. It is server-only and reads the server-only `API_URL` variable (no `NEXT_PUBLIC_`, listed in `.env.example`); admin operations are not exposed. Dates arrive as strings. The pages still use the mocks in `src/views/cases/model` until they are switched to the client.
 - `src/app/_layout/SiteLayout.tsx` holds site-wide layout composition.
 - SVGs imported with the `?svgr` query are converted to React components via `@svgr/webpack` (Turbopack rule in `next.config.ts`). Remote images are only allowed from `picsum.photos`.
 
