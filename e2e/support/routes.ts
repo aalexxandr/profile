@@ -7,9 +7,9 @@ export const pageSuffixes = [
   "",
   "/cases",
   "/contacts",
-  "/cases/product-ui",
-  "/cases/booking-flow",
-  "/cases/fintech-console",
+  "/cases/spectre",
+  "/cases/orbit",
+  "/cases/nova",
 ] as const;
 
 export const allPaths = locales.flatMap((locale) =>

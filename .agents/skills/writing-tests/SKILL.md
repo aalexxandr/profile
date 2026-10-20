@@ -46,7 +46,7 @@ When in doubt, test the logic as a unit **and** the user-visible behavior in E2E
 - `*.svg?svgr` imports render a plain `<svg>` (plugin in `vitest.config.mts`).
 - `server-only` resolves to an empty module (same config), so `get-dictionary.ts` and `metadata.ts` can be imported.
 - `@/` alias works through `resolve.tsconfigPaths`.
-- E2E: remote images (`/_next/image`, `picsum.photos`) are stubbed by the `page` fixture in `e2e/support/test.ts`, so tests do not need the internet.
+- E2E: remote images (`/_next/image`, the image storage host) are stubbed by the `page` fixture in `e2e/support/test.ts`, so tests do not need the internet.
 
 ## Unit patterns
 

@@ -1,10 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { ApiError } from "@/shared/api";
 import { locales } from "@/shared/i18n";
 
-import { getCase, getCases } from "./cases";
-import type { CaseDetail, CaseListItem } from "./types";
+import { getCases } from "./cases";
+import type { CaseListItem } from "./types";
 
 const API_URL = "http://backend.test";
 
@@ -17,18 +16,6 @@ const listItem: CaseListItem = {
   shortDescription: "Short",
   image: null,
   blurImage: null,
-};
-
-const detail: CaseDetail = {
-  ...listItem,
-  description: "Full",
-  role: "FRONTEND",
-  projectLink: "https://thespectre.io",
-  company: null,
-  teamSize: null,
-  startedAt: "2024-01-01",
-  endedAt: null,
-  achievements: [],
 };
 
 const jsonResponse = (body: unknown, status = 200) =>
@@ -102,46 +89,5 @@ describe("getCases", () => {
 
     await expect(getCases("ru")).rejects.toThrow("API_URL");
     expect(fetchMock).not.toHaveBeenCalled();
-  });
-});
-
-describe("getCase", () => {
-  it.each(locales)("requests the case with lang=%s", async (locale) => {
-    fetchMock.mockResolvedValue(jsonResponse(detail));
-
-    const result = await getCase("spectre", locale);
-
-    const url = new URL(lastRequest().url);
-    expect(lastRequest().method).toBe("GET");
-    expect(url.origin + url.pathname).toBe(`${API_URL}/cases/spectre`);
-    expect(url.searchParams.get("lang")).toBe(locale);
-    expect(result).toEqual(detail);
-  });
-
-  it("encodes the slug in the path", async () => {
-    fetchMock.mockResolvedValue(jsonResponse(detail));
-
-    await getCase("a/b", "ru");
-
-    expect(new URL(lastRequest().url).pathname).toBe("/cases/a%2Fb");
-  });
-
-  it("does not send credentials", async () => {
-    fetchMock.mockResolvedValue(jsonResponse(detail));
-
-    await getCase("spectre", "ru");
-
-    expect(lastRequest().headers.has("Authorization")).toBe(false);
-  });
-
-  it("raises ApiError with the status and message of a 404", async () => {
-    fetchMock.mockResolvedValue(
-      jsonResponse({ status: 404, message: "Case not found" }, 404),
-    );
-
-    const error = await getCase("unknown", "ru").catch((e: unknown) => e);
-
-    expect(error).toBeInstanceOf(ApiError);
-    expect(error).toMatchObject({ status: 404, message: "Case not found" });
   });
 });

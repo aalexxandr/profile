@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation";
 
+import { ApiError } from "@/shared/api";
 import {
   CaseDetailPage,
   createCaseMetadata,
-  getMockCase,
-  getMockCaseItems,
-} from "@/views/cases";
+  getCase,
+} from "@/views/case-details";
+import { getCases } from "@/views/cases";
 import { locales } from "@/shared/i18n";
 import { getDictionary, getValidatedLocale } from "@/shared/i18n-server";
 
@@ -15,21 +16,28 @@ type CasePageProps = {
 
 export const dynamicParams = false;
 
-export const generateStaticParams = () =>
-  locales.flatMap((locale) =>
-    getMockCaseItems(locale).map(({ slug }) => ({ locale, slug })),
-  );
+export const generateStaticParams = async () =>
+  (
+    await Promise.all(
+      locales.map(async (locale) =>
+        (await getCases(locale)).map(({ slug }) => ({ locale, slug })),
+      ),
+    )
+  ).flat();
 
 const getCaseOrNotFound = async (params: CasePageProps["params"]) => {
   const locale = await getValidatedLocale(params);
   const { slug } = await params;
-  const caseItem = getMockCase(locale, slug);
 
-  if (!caseItem) {
-    notFound();
+  try {
+    return { caseItem: await getCase(slug, locale), locale };
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      notFound();
+    }
+
+    throw error;
   }
-
-  return { caseItem, locale };
 };
 
 export const generateMetadata = async ({ params }: CasePageProps) => {

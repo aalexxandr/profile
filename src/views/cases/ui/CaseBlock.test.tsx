@@ -1,85 +1,103 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import type { Dictionary, Locale } from "@/shared/i18n";
+import { locales, type Locale } from "@/shared/i18n";
+import { en } from "@/shared/i18n-server/dictionaries/en";
+import { ru } from "@/shared/i18n-server/dictionaries/ru";
 
-import type { CaseShort } from "../model/case";
+import type { CaseListItem } from "../api/types";
 import { CaseBlock } from "./CaseBlock";
 
+type MockImageProps = { alt: string; blurDataURL?: string; src: string };
+
 vi.mock("next/image", () => ({
-  // eslint-disable-next-line @next/next/no-img-element
-  default: ({ alt }: { alt: string }) => <img alt={alt} />,
+  default: ({ alt, blurDataURL, src }: MockImageProps) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img alt={alt} data-blur={blurDataURL} src={src} />
+  ),
 }));
 
-const caseData: CaseShort = {
-  blurImage: "https://picsum.photos/seed/product-ui/10/10",
-  image: "https://picsum.photos/seed/product-ui/520/430",
-  name: "Product UI",
-  objectsCount: 347,
-  projectLink: "https://example.com/product-ui",
-  shortDesc: "Short description",
-  slug: "product-ui",
+const caseData: CaseListItem = {
+  blurImage: "data:image/png;base64,AAAA",
+  category: "FinTech / Web App",
+  image: "https://cdn.test/spectre.webp",
+  locale: "en",
+  name: "Spectre Explorer",
+  shortDescription: "Short description",
+  slug: "spectre",
+  stack: ["React"],
 };
 
-const labelsByLocale = {
-  en: {
-    actions: {
-      moreInformation: "More information",
-      projectLink: "Project link",
-    },
-    controlLabels: {
-      close: "Close window",
-      fullScreen: "Full screen window",
-      minimize: "Minimize window",
-    },
-    detail: {
-      achievementsTitle: "Results",
-      backToCases: "Back to cases",
-      categoryLabel: "Category",
-      roleLabel: "Role",
-      stackLabel: "Stack",
-    },
-    status: { objects: "objects" },
-    title: "cases",
-  },
-  ru: {
-    actions: { moreInformation: "Подробнее", projectLink: "Ссылка на проект" },
-    controlLabels: {
-      close: "Закрыть окно",
-      fullScreen: "Развернуть окно",
-      minimize: "Свернуть окно",
-    },
-    detail: {
-      achievementsTitle: "Результаты",
-      backToCases: "Назад к кейсам",
-      categoryLabel: "Категория",
-      roleLabel: "Роль",
-      stackLabel: "Стек",
-    },
-    status: { objects: "объектов" },
-    title: "кейсы",
-  },
-} satisfies Record<Locale, Dictionary["pages"]["cases"]>;
+const labelsByLocale = { en: en.pages.cases, ru: ru.pages.cases };
 
-const renderCaseBlock = (locale: Locale) =>
+const renderCaseBlock = (locale: Locale, data: CaseListItem = caseData) =>
   render(
     <CaseBlock
-      caseData={caseData}
+      caseData={data}
       caseLabels={labelsByLocale[locale]}
       index={0}
       locale={locale}
     />,
   );
 
+describe("CaseBlock", () => {
+  it("shows the name and short description", () => {
+    renderCaseBlock("en");
+
+    expect(
+      screen.getByRole("heading", { name: "Spectre Explorer" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Short description")).toBeInTheDocument();
+  });
+
+  it.each(locales)("links to the case page in %s", (locale) => {
+    renderCaseBlock(locale);
+
+    expect(
+      screen.getByRole("link", {
+        name: `${labelsByLocale[locale].actions.moreInformation}: Spectre Explorer`,
+      }),
+    ).toHaveAttribute("href", `/${locale}/cases/spectre`);
+  });
+
+  it("has no link to the external project", () => {
+    renderCaseBlock("en");
+
+    expect(
+      screen.queryByRole("link", { name: /Project link/ }),
+    ).not.toBeInTheDocument();
+    for (const link of screen.getAllByRole("link")) {
+      expect(link).not.toHaveAttribute("target", "_blank");
+    }
+  });
+
+  it("shows the picture with its blur preview", () => {
+    renderCaseBlock("en");
+    const image = screen.getByRole("img", { name: "Spectre Explorer" });
+
+    expect(image).toHaveAttribute("src", "https://cdn.test/spectre.webp");
+    expect(image).toHaveAttribute("data-blur", "data:image/png;base64,AAAA");
+  });
+
+  it.each(locales)("shows the no-image text in %s", (locale) => {
+    renderCaseBlock(locale, { ...caseData, blurImage: null, image: null });
+
+    expect(
+      screen.getByText(labelsByLocale[locale].noImage),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+  });
+});
+
 describe("CaseBlock status counter", () => {
-  it("shows the count from the case data with the Russian word on /ru", () => {
+  it("shows the decorative count with the Russian word on /ru", () => {
     renderCaseBlock("ru");
 
     expect(screen.getByText("347 объектов")).toBeInTheDocument();
     expect(screen.queryByText(/\bobjects?\b/)).not.toBeInTheDocument();
   });
 
-  it("shows the count from the case data with the English word on /en", () => {
+  it("shows the decorative count with the English word on /en", () => {
     renderCaseBlock("en");
 
     expect(screen.getByText("347 objects")).toBeInTheDocument();

@@ -25,7 +25,7 @@ test("no internal link on any page leads to a missing page", async ({
 
   // Guard against a vacuous pass: the case links must have been collected.
   expect([...hrefs]).toEqual(
-    expect.arrayContaining(["/ru/cases/product-ui", "/en/cases/product-ui"]),
+    expect.arrayContaining(["/ru/cases/spectre", "/en/cases/spectre"]),
   );
 
   const broken: string[] = [];

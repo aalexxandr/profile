@@ -3,12 +3,12 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
 
-import CloseWindowIcon from "./assets/retro-window/close-window.svg?svgr";
-import DragIcon from "./assets/retro-window/drag.svg?svgr";
-import FolderIcon from "./assets/retro-window/folder.svg?svgr";
-import FullScreenWindowIcon from "./assets/retro-window/fullscreen-window.svg?svgr";
-import MinimizeWindowIcon from "./assets/retro-window/minimize-window.svg?svgr";
-import { useRetroWindowAnimation } from "../lib/useRetroWindowAnimation";
+import CloseWindowIcon from "./assets/close-window.svg?svgr";
+import DragIcon from "./assets/drag.svg?svgr";
+import FolderIcon from "./assets/folder.svg?svgr";
+import FullScreenWindowIcon from "./assets/fullscreen-window.svg?svgr";
+import MinimizeWindowIcon from "./assets/minimize-window.svg?svgr";
+import { useRetroWindowAnimation } from "./useRetroWindowAnimation";
 
 type RetroWindowControlLabels = {
   close: string;

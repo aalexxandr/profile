@@ -1,15 +1,16 @@
 import clsx from "clsx";
-import Image from "next/image";
 
 import type { Dictionary, Locale } from "@/shared/i18n";
-import { Button, ExternalLink } from "@/shared/ui";
+import { Button, ImageWithFallback, RetroWindow } from "@/shared/ui";
 
-import { type CaseShort } from "../model/case";
+import type { CaseListItem } from "../api/types";
 import ArrowRightIcon from "./assets/case-block/arrow-right.svg?svgr";
-import { RetroWindow } from "./RetroWindow";
+
+// Mocked: the status line is decorative and the backend has no such value.
+const OBJECTS_COUNT = 347;
 
 type CaseBlockProps = {
-  caseData: CaseShort;
+  caseData: CaseListItem;
   caseLabels: Dictionary["pages"]["cases"];
   className?: string;
   index: number;
@@ -34,20 +35,20 @@ export const CaseBlock = ({
         className,
       )}
     >
-      <Image
+      <ImageWithFallback
         alt={caseData.name}
+        blurSrc={caseData.blurImage}
         className="h-auto w-65 sm:mb-0 sm:w-74 md:w-110 lg:w-108"
+        fallback={caseLabels.noImage}
+        height={430}
         loading="lazy"
         src={caseData.image}
-        placeholder="blur"
-        blurDataURL={caseData.blurImage}
         width={520}
-        height={430}
       />
       <RetroWindow
         className="w-65 sm:w-95 md:w-132 lg:w-142 xl:w-160"
         controlLabels={caseLabels.controlLabels}
-        objectsCount={caseData.objectsCount}
+        objectsCount={OBJECTS_COUNT}
         objectsLabel={caseLabels.status.objects}
         title={`${caseData.name}`}
       >
@@ -55,15 +56,8 @@ export const CaseBlock = ({
           <h2 className="max-w-full truncate text-2xl/7 font-bold text-white uppercase sm:text-[32px]/[34px]">
             {caseData.name}
           </h2>
-          <ExternalLink
-            aria-label={`${caseLabels.actions.projectLink}: ${caseData.name}`}
-            className="mt-2"
-            href={caseData.projectLink}
-          >
-            {caseLabels.actions.projectLink}
-          </ExternalLink>
           <p className="mt-6 mb-0 line-clamp-3 text-sm/5 font-bold text-white sm:text-base/6 xl:line-clamp-2">
-            {caseData.shortDesc}
+            {caseData.shortDescription}
           </p>
           <div className="mt-5 w-full sm:w-51.25 md:w-66.25">
             <Button

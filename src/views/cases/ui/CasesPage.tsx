@@ -1,10 +1,10 @@
 import type { Dictionary, Locale } from "@/shared/i18n";
 
-import type { CaseShort } from "../model/case";
+import type { CaseListItem } from "../api/types";
 import { CaseBlock } from "./CaseBlock";
 
 type CasesPageProps = {
-  caseItems?: CaseShort[];
+  caseItems?: CaseListItem[];
   cases: Dictionary["pages"]["cases"];
   locale: Locale;
 };

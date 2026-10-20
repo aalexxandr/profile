@@ -1,7 +1,7 @@
 import { expect, test as base, type Route } from "@playwright/test";
 
 // 1x1 transparent PNG, used instead of remote images so tests do not depend
-// on picsum.photos being reachable.
+// on the image storage being reachable.
 const PIXEL_PNG = Buffer.from(
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
   "base64",
@@ -18,7 +18,10 @@ export const test = base.extend<Fixtures>({
       route.fulfill({ body: PIXEL_PNG, contentType: "image/png" });
 
     await page.route("**/_next/image**", fulfillWithPixel);
-    await page.route("https://picsum.photos/**", fulfillWithPixel);
+    await page.route(
+      "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/**",
+      fulfillWithPixel,
+    );
 
     await provide(page);
   },

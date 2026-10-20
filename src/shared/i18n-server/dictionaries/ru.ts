@@ -77,9 +77,18 @@ export const ru = {
         achievementsTitle: "Результаты",
         backToCases: "Назад к кейсам",
         categoryLabel: "Категория",
+        companyLabel: "Компания",
+        periodLabel: "Период",
+        periodPresent: "по настоящее время",
         roleLabel: "Роль",
+        roles: {
+          FRONTEND: "Frontend-разработчик",
+          FULLSTACK: "Fullstack-разработчик",
+        },
         stackLabel: "Стек",
+        teamSizeLabel: "Размер команды",
       },
+      noImage: "Нет картинки",
       status: {
         objects: "объектов",
       },

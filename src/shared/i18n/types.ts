@@ -1,3 +1,5 @@
+import type { Schemas } from "@/shared/api";
+
 import type { Locale, PageKey } from "./config";
 
 export type NavigationItem = {
@@ -58,9 +60,15 @@ export type Dictionary = {
         achievementsTitle: string;
         backToCases: string;
         categoryLabel: string;
+        companyLabel: string;
+        periodLabel: string;
+        periodPresent: string;
         roleLabel: string;
+        roles: Record<Schemas["CaseDetailDto"]["role"], string>;
         stackLabel: string;
+        teamSizeLabel: string;
       };
+      noImage: string;
       status: {
         objects: string;
       };
