@@ -11,3 +11,6 @@ bun.lock
 test-results
 playwright-report
 blob-report
+
+# Generated from the backend OpenAPI document (bun run api:generate)
+src/shared/api/generated
