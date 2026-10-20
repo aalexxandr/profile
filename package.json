@@ -21,7 +21,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.8.10",
+    "@formatjs/intl-localematcher": "^0.9.0",
     "clsx": "^2.1.1",
     "lottie-react": "^2.4.1",
     "negotiator": "^1.1.0",
