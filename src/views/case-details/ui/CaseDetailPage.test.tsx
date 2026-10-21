@@ -24,6 +24,8 @@ const caseItem: CaseDetail = {
     { description: "Faster reviews", metric: "-40%", title: "Reporting" },
     { description: "Reusable states", metric: "30+", title: "UI states" },
   ],
+  backgroundBlurImage: null,
+  backgroundImage: null,
   blurImage: "data:image/png;base64,AAAA",
   category: "FinTech / Web App",
   company: "Spectre Labs",

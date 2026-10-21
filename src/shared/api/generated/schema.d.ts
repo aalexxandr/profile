@@ -80,6 +80,30 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/cases/{slug}/background": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Upload the background of a case
+         * @description Admin only. Sets or replaces the background picture of a case, drafts included. It is independent of the case picture (`PUT /cases/{slug}/image`), which stays unchanged. Send one file in the multipart field `file`. The server re-encodes it to a real WebP (at most 1920 px wide, never enlarged, EXIF orientation applied, metadata removed) and generates the blurred placeholder itself, so only one version is ever uploaded. The response is the case with the new `backgroundImage` URL and `backgroundBlurImage` data URI and the text of every language. A previous background is removed from the storage. Uploading the same file again changes nothing. The background is shown in the public detail view, not in the list.
+         */
+        put: operations["CaseController_setBackground"];
+        post?: never;
+        /**
+         * Remove the background of a case
+         * @description Admin only. Clears `backgroundImage` and `backgroundBlurImage` of the case and removes the stored file; the case picture stays. Repeating the call for a case that has no background is harmless and answers 204 as well.
+         */
+        delete: operations["CaseController_removeBackground"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -143,7 +167,7 @@ export interface components {
              */
             projectLink: string;
             /**
-             * @description Technologies used: 1 to 10 unique non-empty names
+             * @description Technologies used: 1 to 30 unique non-empty names
              * @example [
              *       "React",
              *       "TypeScript",
@@ -251,6 +275,16 @@ export interface components {
              * @example data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoU...
              */
             blurImage: string | null;
+            /**
+             * @description Absolute public URL of the case background picture (WebP, at most 1920 px wide); null while the case has no background. Independent of `image`
+             * @example https://storage.example.com/cases/spectre/background/3f9a1c2b7d4e5f60.webp
+             */
+            backgroundImage: string | null;
+            /**
+             * @description Tiny blurred preview of the background (about 20 px wide) as a data: URI, generated on upload. Show it instantly as a placeholder while `backgroundImage` loads; null while the case has no background
+             * @example data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoU...
+             */
+            backgroundBlurImage: string | null;
             /**
              * @description The author's role on the project
              * @example FRONTEND
@@ -414,6 +448,16 @@ export interface components {
              */
             blurImage: string | null;
             /**
+             * @description Absolute public URL of the case background picture (WebP, at most 1920 px wide); null while the case has no background. Independent of `image`
+             * @example https://storage.example.com/cases/spectre/background/3f9a1c2b7d4e5f60.webp
+             */
+            backgroundImage: string | null;
+            /**
+             * @description Tiny blurred preview of the background (about 20 px wide) as a data: URI, generated on upload. Show it instantly as a placeholder while `backgroundImage` loads; null while the case has no background
+             * @example data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoU...
+             */
+            backgroundBlurImage: string | null;
+            /**
              * @description Full description for the detail page
              * @example A blockchain browser for exploring and analysing Ethereum data.
              */
@@ -484,7 +528,7 @@ export interface components {
              */
             projectLink?: string;
             /**
-             * @description Technologies used: 1 to 10 unique non-empty names
+             * @description Technologies used: 1 to 30 unique non-empty names
              * @example [
              *       "React",
              *       "TypeScript",
@@ -826,6 +870,114 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description The case has no picture now */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Missing or invalid admin token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseDto"];
+                };
+            };
+            /** @description Unknown case */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseDto"];
+                };
+            };
+        };
+    };
+    CaseController_setBackground: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Unique identifier of the case (lowercase kebab-case) */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description The background picture: JPEG, PNG or WebP (recognised by content, not by name), up to 10 MB
+                     */
+                    file: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The case with its new background and all its translations */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CaseFullDto"];
+                };
+            };
+            /** @description The `file` field is missing, or the file is not a valid JPEG, PNG or WebP image */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseDto"];
+                };
+            };
+            /** @description Missing or invalid admin token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseDto"];
+                };
+            };
+            /** @description Unknown case */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseDto"];
+                };
+            };
+            /** @description The file is larger than 10 MB */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseDto"];
+                };
+            };
+        };
+    };
+    CaseController_removeBackground: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Unique identifier of the case (lowercase kebab-case) */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The case has no background now */
             204: {
                 headers: {
                     [name: string]: unknown;

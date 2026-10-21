@@ -10,6 +10,11 @@ describe("case list contract types", () => {
     expectTypeOf<CaseListItem["blurImage"]>().toEqualTypeOf<string | null>();
   });
 
+  it("does not carry the background fields", () => {
+    expectTypeOf<CaseListItem>().not.toHaveProperty("backgroundImage");
+    expectTypeOf<CaseListItem>().not.toHaveProperty("backgroundBlurImage");
+  });
+
   it("accepts only the supported locales", () => {
     expectTypeOf<CaseListItem["locale"]>().toEqualTypeOf<"ru" | "en">();
   });
