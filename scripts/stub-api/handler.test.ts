@@ -62,6 +62,16 @@ describe("stub API", () => {
     expect(details.some(({ image }) => image === null)).toBe(true);
     expect(details.some(({ image }) => image !== null)).toBe(true);
     expect(details.some(({ blurImage }) => blurImage === null)).toBe(true);
+    expect(
+      details.some(({ backgroundImage }) => backgroundImage === null),
+    ).toBe(true);
+    expect(
+      details.some(
+        ({ backgroundImage, backgroundBlurImage }) =>
+          typeof backgroundImage === "string" &&
+          typeof backgroundBlurImage === "string",
+      ),
+    ).toBe(true);
     expect(details.some(({ company }) => company === null)).toBe(true);
     expect(details.some(({ teamSize }) => teamSize === null)).toBe(true);
     expect(details.some(({ endedAt }) => endedAt === null)).toBe(true);

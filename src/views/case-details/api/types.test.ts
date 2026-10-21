@@ -8,6 +8,12 @@ describe("case detail contract types", () => {
   it("allows null for the picture and optional fact fields", () => {
     expectTypeOf<CaseDetail["image"]>().toEqualTypeOf<string | null>();
     expectTypeOf<CaseDetail["blurImage"]>().toEqualTypeOf<string | null>();
+    expectTypeOf<CaseDetail["backgroundImage"]>().toEqualTypeOf<
+      string | null
+    >();
+    expectTypeOf<CaseDetail["backgroundBlurImage"]>().toEqualTypeOf<
+      string | null
+    >();
     expectTypeOf<CaseDetail["company"]>().toEqualTypeOf<string | null>();
     expectTypeOf<CaseDetail["teamSize"]>().toEqualTypeOf<number | null>();
     expectTypeOf<CaseDetail["endedAt"]>().toEqualTypeOf<string | null>();

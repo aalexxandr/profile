@@ -38,6 +38,8 @@ const detail: CaseDetail = {
   shortDescription: "Short",
   image: null,
   blurImage: null,
+  backgroundImage: null,
+  backgroundBlurImage: null,
   description: "Full",
   role: "FRONTEND",
   projectLink: "https://thespectre.io",
