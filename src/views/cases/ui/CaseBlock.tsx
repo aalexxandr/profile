@@ -11,9 +11,6 @@ import {
 import type { CaseListItem } from "../api/types";
 import ArrowRightIcon from "./assets/case-block/arrow-right.svg?svgr";
 
-// Mocked: the status line is decorative and the backend has no such value.
-const OBJECTS_COUNT = 347;
-
 type CaseBlockProps = {
   caseData: CaseListItem;
   caseLabels: Dictionary["pages"]["cases"];
@@ -53,7 +50,6 @@ export const CaseBlock = ({
       <RetroWindow
         className="w-65 sm:w-95 md:w-132 lg:w-142 xl:w-160"
         controlLabels={caseLabels.controlLabels}
-        objectsCount={OBJECTS_COUNT}
         objectsLabel={caseLabels.status.objects}
         title={`${caseData.name}`}
       >

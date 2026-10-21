@@ -97,13 +97,13 @@ describe("CaseBlock status counter", () => {
   it("shows the decorative count with the Russian word on /ru", () => {
     renderCaseBlock("ru");
 
-    expect(screen.getByText("347 объектов")).toBeInTheDocument();
+    expect(screen.getByText(/^\d{3} объектов$/)).toBeInTheDocument();
     expect(screen.queryByText(/\bobjects?\b/)).not.toBeInTheDocument();
   });
 
   it("shows the decorative count with the English word on /en", () => {
     renderCaseBlock("en");
 
-    expect(screen.getByText("347 objects")).toBeInTheDocument();
+    expect(screen.getByText(/^\d{3} objects$/)).toBeInTheDocument();
   });
 });

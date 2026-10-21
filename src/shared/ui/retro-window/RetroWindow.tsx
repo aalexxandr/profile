@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 
 import CloseWindowIcon from "./assets/close-window.svg?svgr";
 import DragIcon from "./assets/drag.svg?svgr";
@@ -20,10 +20,11 @@ type RetroWindowProps = {
   children: ReactNode;
   className?: string;
   controlLabels: RetroWindowControlLabels;
-  objectsCount: number;
   objectsLabel: string;
   title: string;
 };
+
+const getRandomObjectsCount = () => Math.floor(100 + Math.random() * 900);
 
 const RETRO_WINDOW_OUTER_SHADOW =
   "shadow-[inset_-1px_-1px_0_0_#050409,inset_1px_1px_0_0_#d8cbd4,inset_-2px_-2px_0_0_#867883,inset_2px_2px_0_0_#b8adb7]";
@@ -39,12 +40,13 @@ export const RetroWindow = ({
   children,
   className,
   controlLabels,
-  objectsCount,
   objectsLabel,
   title,
 }: RetroWindowProps) => {
   const { closeWindow, state, toggleCollapse, toggleFullScreen } =
     useRetroWindowAnimation();
+  const [objectsCount] = useState(getRandomObjectsCount);
+
   const wrapperClassName = clsx(
     "flex origin-center flex-col items-start bg-[#120d1b] p-1 font-vcr text-white",
     RETRO_WINDOW_OUTER_SHADOW,
@@ -115,7 +117,7 @@ export const RetroWindow = ({
         <div className="relative flex min-h-0 flex-col overflow-hidden">
           <div
             className={clsx(
-              "grid min-h-45 place-items-center bg-[#15101f] p-6",
+              "grid min-h-45 bg-[#15101f] p-6",
               RETRO_WINDOW_INNER_SHADOW,
             )}
           >
@@ -127,7 +129,7 @@ export const RetroWindow = ({
               RETRO_WINDOW_INNER_SHADOW,
             )}
           >
-            <p className="mb-0.5 ml-1">
+            <p className="mb-0.5 ml-1" suppressHydrationWarning>
               {objectsCount} {objectsLabel}
             </p>
           </div>
