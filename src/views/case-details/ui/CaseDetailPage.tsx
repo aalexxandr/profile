@@ -8,9 +8,6 @@ import {
 
 import type { CaseDetail } from "../api/types";
 
-// Mocked: the status line is decorative and the backend has no such value.
-const OBJECTS_COUNT = 347;
-
 type CaseDetailPageProps = {
   caseItem: CaseDetail;
   cases: Dictionary["pages"]["cases"];
@@ -51,7 +48,6 @@ export const CaseDetailPage = ({
         <RetroWindow
           className="w-65 sm:w-95 md:w-132 lg:w-142 xl:w-160"
           controlLabels={cases.controlLabels}
-          objectsCount={OBJECTS_COUNT}
           objectsLabel={cases.status.objects}
           title={caseItem.name}
         >

@@ -14,6 +14,7 @@ const listItem: CaseListItem = {
   category: "FinTech / Web App",
   stack: ["React"],
   shortDescription: "Short",
+  projectLink: "https://thespectre.io",
   image: null,
   blurImage: null,
 };

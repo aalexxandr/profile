@@ -157,6 +157,7 @@ export const getListItems = (locale: Locale): Schemas["CaseListItemDto"][] =>
     locale,
     name: texts[locale].name,
     category: texts[locale].category,
+    projectLink: shared.projectLink,
     stack: shared.stack,
     shortDescription: texts[locale].shortDescription,
     image: shared.image,

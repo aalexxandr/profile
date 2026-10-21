@@ -21,6 +21,7 @@ const item = (slug: string, name: string): CaseListItem => ({
   image: null,
   locale: "en",
   name,
+  projectLink: `https://example.com/${slug}`,
   shortDescription: `${name} description`,
   slug,
   stack: [],

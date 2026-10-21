@@ -16,7 +16,7 @@ const labels = {
 
 for (const locale of locales) {
   test.describe(`cases in ${locale}`, () => {
-    test("the list shows every backend case without an external link", async ({
+    test("the list shows every backend case with its project link", async ({
       page,
     }) => {
       await page.goto(`/${locale}/cases`);
@@ -31,7 +31,7 @@ for (const locale of locales) {
           page.getByRole("heading", { level: 2, name }),
         ).toBeVisible();
       }
-      await expect(page.locator('main a[target="_blank"]')).toHaveCount(0);
+      await expect(page.locator('main a[target="_blank"]')).toHaveCount(3);
     });
 
     test("the list shows the no-image text for a case without a picture", async ({

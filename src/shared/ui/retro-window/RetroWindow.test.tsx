@@ -14,7 +14,6 @@ const renderWindow = () =>
   render(
     <RetroWindow
       controlLabels={controlLabels}
-      objectsCount={7}
       objectsLabel="objects"
       title="Product UI"
     >
@@ -53,11 +52,24 @@ describe("RetroWindow", () => {
     }
   });
 
-  it("shows the status label it is given", () => {
+  it("shows a random three-digit objects count with the given label", () => {
+    vi.spyOn(Math, "random").mockReturnValue(0.5);
     renderWindow();
 
-    expect(screen.getByText("7 objects")).toBeInTheDocument();
+    expect(screen.getByText("550 objects")).toBeInTheDocument();
+    vi.restoreAllMocks();
   });
+
+  it.each([0, 0.999999])(
+    "keeps the objects count three-digit for Math.random() = %s",
+    (value) => {
+      vi.spyOn(Math, "random").mockReturnValue(value);
+      renderWindow();
+
+      expect(screen.getByText(/^\d{3} objects$/)).toBeInTheDocument();
+      vi.restoreAllMocks();
+    },
+  );
 
   it("renders its children", () => {
     renderWindow();
