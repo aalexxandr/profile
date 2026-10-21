@@ -1,7 +1,12 @@
 import clsx from "clsx";
 
 import type { Dictionary, Locale } from "@/shared/i18n";
-import { Button, ImageWithFallback, RetroWindow } from "@/shared/ui";
+import {
+  Button,
+  ExternalLink,
+  ImageWithFallback,
+  RetroWindow,
+} from "@/shared/ui";
 
 import type { CaseListItem } from "../api/types";
 import ArrowRightIcon from "./assets/case-block/arrow-right.svg?svgr";
@@ -56,6 +61,13 @@ export const CaseBlock = ({
           <h2 className="max-w-full truncate text-2xl/7 font-bold text-white uppercase sm:text-[32px]/[34px]">
             {caseData.name}
           </h2>
+          <ExternalLink
+            aria-label={`${caseLabels.actions.projectLink}: ${caseData.name}`}
+            className="mt-2"
+            href={caseData.projectLink}
+          >
+            {caseLabels.actions.projectLink}
+          </ExternalLink>
           <p className="mt-6 mb-0 line-clamp-3 text-sm/5 font-bold text-white sm:text-base/6 xl:line-clamp-2">
             {caseData.shortDescription}
           </p>

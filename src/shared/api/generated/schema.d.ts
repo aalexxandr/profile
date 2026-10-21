@@ -237,6 +237,11 @@ export interface components {
              */
             stack: string[];
             /**
+             * @description Link to the live project
+             * @example https://thespectre.io
+             */
+            projectLink: string;
+            /**
              * @description Absolute public URL of the case picture (WebP, at most 1920 px wide); null while the case has no picture
              * @example https://storage.example.com/cases/spectre/3f9a1c2b7d4e5f60.webp
              */
@@ -252,11 +257,6 @@ export interface components {
              * @enum {string}
              */
             role: "FRONTEND" | "FULLSTACK";
-            /**
-             * @description Link to the live project
-             * @example https://thespectre.io
-             */
-            projectLink: string;
             /**
              * @description Company the project was done for; null for personal projects
              * @example Acme
@@ -348,6 +348,11 @@ export interface components {
              */
             shortDescription: string;
             /**
+             * @description Link to the live project
+             * @example https://thespectre.io
+             */
+            projectLink: string;
+            /**
              * @description Absolute public URL of the case picture (WebP, at most 1920 px wide); null while the case has no picture
              * @example https://storage.example.com/cases/spectre/3f9a1c2b7d4e5f60.webp
              */
@@ -394,6 +399,11 @@ export interface components {
              */
             shortDescription: string;
             /**
+             * @description Link to the live project
+             * @example https://thespectre.io
+             */
+            projectLink: string;
+            /**
              * @description Absolute public URL of the case picture (WebP, at most 1920 px wide); null while the case has no picture
              * @example https://storage.example.com/cases/spectre/3f9a1c2b7d4e5f60.webp
              */
@@ -414,11 +424,6 @@ export interface components {
              * @enum {string}
              */
             role: "FRONTEND" | "FULLSTACK";
-            /**
-             * @description Link to the live project
-             * @example https://thespectre.io
-             */
-            projectLink: string;
             /**
              * @description Company the project was done for; null for personal projects
              * @example Acme

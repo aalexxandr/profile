@@ -23,6 +23,7 @@ const caseData: CaseListItem = {
   image: "https://cdn.test/spectre.webp",
   locale: "en",
   name: "Spectre Explorer",
+  projectLink: "https://example.com/spectre",
   shortDescription: "Short description",
   slug: "spectre",
   stack: ["React"],
@@ -60,16 +61,19 @@ describe("CaseBlock", () => {
     ).toHaveAttribute("href", `/${locale}/cases/spectre`);
   });
 
-  it("has no link to the external project", () => {
-    renderCaseBlock("en");
+  it.each(locales)(
+    "opens the project in a new tab with a descriptive name in %s",
+    (locale) => {
+      renderCaseBlock(locale);
+      const link = screen.getByRole("link", {
+        name: `${labelsByLocale[locale].actions.projectLink}: Spectre Explorer`,
+      });
 
-    expect(
-      screen.queryByRole("link", { name: /Project link/ }),
-    ).not.toBeInTheDocument();
-    for (const link of screen.getAllByRole("link")) {
-      expect(link).not.toHaveAttribute("target", "_blank");
-    }
-  });
+      expect(link).toHaveAttribute("href", "https://example.com/spectre");
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
+    },
+  );
 
   it("shows the picture with its blur preview", () => {
     renderCaseBlock("en");
