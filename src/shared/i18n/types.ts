@@ -57,16 +57,19 @@ export type Dictionary = {
         minimize: string;
       };
       detail: {
+        aboutTitle: string;
         achievementsTitle: string;
         backToCases: string;
-        categoryLabel: string;
         companyLabel: string;
         periodLabel: string;
         periodPresent: string;
         roleLabel: string;
         roles: Record<Schemas["CaseDetailDto"]["role"], string>;
-        stackLabel: string;
+        stackTitle: string;
         teamSizeLabel: string;
+        teamSizeUnit: Partial<Record<Intl.LDMLPluralRule, string>> & {
+          other: string;
+        };
       };
       noImage: string;
       status: {
