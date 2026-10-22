@@ -24,6 +24,9 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/consistent-type-imports": "error",
       "no-console": ["error", { allow: ["warn", "error"] }],
+      // One component per file: helpers, types and subcomponents go to their own
+      // files (see "Code conventions" in CLAUDE.md).
+      "react/no-multi-comp": "warn",
       "no-restricted-imports": [
         "error",
         {
