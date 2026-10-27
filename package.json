@@ -31,7 +31,7 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-simple-typewriter": "5.0.1",
-    "steiger": "^0.7.0"
+    "steiger": "^0.8.0"
   },
   "devDependencies": {
     "@feature-sliced/steiger-plugin": "^0.6.0",
