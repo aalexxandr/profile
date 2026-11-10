@@ -48,7 +48,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Generated from the backend OpenAPI document (`bun run api:generate`).
+    // Generated from the backend OpenAPI document (`pnpm api:generate`).
     "src/shared/api/generated/**",
     // Generated reports.
     "coverage/**",

@@ -10,12 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: oven-sh/setup-bun@v2
-      - run: bun install --frozen-lockfile
-      - run: bun run lint
-      - run: bun run format:check
-      - run: bun run typecheck
-      - run: bun run test:coverage
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm typecheck
+      - run: pnpm test:coverage
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -25,18 +29,18 @@ jobs:
       # The pages are generated from the backend at build time; CI has no
       # backend, so it builds against the stub.
       - run: |
-          bun run stub:start &
+          pnpm stub:start &
           timeout 30 sh -c 'until curl -sf http://localhost:3101/cases > /dev/null; do sleep 1; done'
         env:
           API_URL: http://localhost:3101
-      - run: bun run build
+      - run: pnpm build
         env:
           API_URL: http://localhost:3101
           # Required by getSiteUrl() in production builds. CI output is not deployed.
           NEXT_PUBLIC_SITE_URL: https://example.com
-      - run: bun run fsd:check
-      - run: bunx playwright install --with-deps chromium
-      - run: bun run test:e2e
+      - run: pnpm fsd:check
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
         env:
           NEXT_PUBLIC_SITE_URL: https://example.com
       - uses: actions/upload-artifact@v7

@@ -10,5 +10,5 @@ rules:
     - Always state what is out of scope
   tasks:
     - For every behavior change add the failing-test task (red) before its implementation task (green)
-    - Final tasks: bun run check; bun run fsd:check for architectural changes; bun run test:e2e for routing, proxy.ts, navigation or UI changes
+    - Final tasks: pnpm check; pnpm fsd:check for architectural changes; pnpm test:e2e for routing, proxy.ts, navigation or UI changes
     - UI tasks must include a Playwright MCP check on desktop and mobile viewports

@@ -25,7 +25,7 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: "bun run stub:start",
+      command: "pnpm stub:start",
       url: `${STUB_API_URL}/cases`,
       env: { API_URL: STUB_API_URL },
       // CI starts the stub before its build step and the tests reuse it.
@@ -34,7 +34,7 @@ export default defineConfig({
     },
     {
       // CI builds in a dedicated step before running the tests.
-      command: isCI ? "bun run start" : "bun run build && bun run start",
+      command: isCI ? "pnpm start" : "pnpm build && pnpm start",
       url: baseURL,
       env: { API_URL: STUB_API_URL, PORT: String(PORT) },
       reuseExistingServer: !isCI,

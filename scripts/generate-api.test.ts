@@ -5,7 +5,7 @@ import { join } from "node:path";
 import type { OpenAPI3 } from "openapi-typescript";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { generateApiTypes } from "./generate-api";
+import { generateApiTypes } from "./generate-api.mjs";
 
 const document: OpenAPI3 = {
   openapi: "3.0.0",
