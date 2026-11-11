@@ -13,11 +13,11 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "fsd:check": "steiger ./src",
-    "api:generate": "bun scripts/generate-api.ts",
-    "stub:start": "bun scripts/stub-api/server.ts",
+    "api:generate": "tsx scripts/generate-api.mts",
+    "stub:start": "tsx scripts/stub-api/server.ts",
     "format": "prettier . --write --ignore-unknown",
     "format:check": "prettier . --check --ignore-unknown",
-    "check": "bun run lint && bun run format:check && bun run typecheck && bun run test && bun run build",
+    "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test && pnpm build",
     "typecheck": "next typegen && tsc --noEmit",
     "prepare": "husky"
   },
@@ -30,8 +30,7 @@
     "openapi-fetch": "0.17.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "react-simple-typewriter": "5.0.1",
-    "steiger": "^0.7.0"
+    "react-simple-typewriter": "5.0.1"
   },
   "devDependencies": {
     "@feature-sliced/steiger-plugin": "^0.6.0",
@@ -58,21 +57,15 @@
     "openapi-typescript": "7.13.0",
     "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
+    "steiger": "^0.7.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5",
     "vitest": "^5.0.3"
   },
-  "ignoreScripts": [
-    "sharp",
-    "unrs-resolver"
-  ],
-  "trustedDependencies": [
-    "sharp",
-    "unrs-resolver"
-  ],
-  "packageManager": "bun@1.4.2",
+  "packageManager": "pnpm@12.6.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "lint-staged": {
     "*.{ts,tsx,mjs}": [

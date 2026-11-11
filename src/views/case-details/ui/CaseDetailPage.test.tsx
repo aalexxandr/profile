@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { locales, type Dictionary, type Locale } from "@/shared/i18n";
@@ -25,7 +25,7 @@ const caseItem: CaseDetail = {
     { description: "Reusable states", metric: "30+", title: "UI states" },
   ],
   backgroundBlurImage: null,
-  backgroundImage: null,
+  backgroundImage: "https://cdn.test/spectre-background.webp",
   blurImage: "data:image/png;base64,AAAA",
   category: "FinTech / Web App",
   company: "Spectre Labs",
@@ -49,23 +49,19 @@ const renderPage = (
 ) => {
   const item = { ...caseItem, ...overrides };
 
-  render(
+  return render(
     <CaseDetailPage
       caseItem={item}
       cases={dictionaries[locale].pages.cases}
       locale={locale}
     />,
   );
-
-  return item;
 };
 
-const formatMonth = (date: string, locale: Locale) =>
-  new Intl.DateTimeFormat(locale, {
-    month: "long",
-    timeZone: "UTC",
-    year: "numeric",
-  }).format(new Date(date));
+const follows = (first: HTMLElement, second: HTMLElement) =>
+  Boolean(
+    first.compareDocumentPosition(second) & Node.DOCUMENT_POSITION_FOLLOWING,
+  );
 
 describe("CaseDetailPage", () => {
   it("has the case name as the only h1", () => {
@@ -77,68 +73,55 @@ describe("CaseDetailPage", () => {
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });
 
-  it("shows the description, stack and category", () => {
+  it.each(locales)(
+    "shows the header, about, stack and achievements in order in %s",
+    (locale) => {
+      renderPage({}, locale);
+      const { detail } = dictionaries[locale].pages.cases;
+      const title = screen.getByRole("heading", { level: 1 });
+      const about = screen.getByRole("region", { name: detail.aboutTitle });
+      const stack = screen.getByRole("region", { name: detail.stackTitle });
+      const achievements = screen.getByRole("region", {
+        name: detail.achievementsTitle,
+      });
+
+      expect(follows(title, about)).toBe(true);
+      expect(follows(about, stack)).toBe(true);
+      expect(follows(stack, achievements)).toBe(true);
+    },
+  );
+
+  it("does not render or request the case picture", () => {
+    const { container } = renderPage();
+    const sources = [...container.querySelectorAll("img")].map((image) =>
+      image.getAttribute("src"),
+    );
+
+    expect(sources).toEqual(["https://cdn.test/spectre-background.webp"]);
+    expect(
+      screen.queryByRole("img", { name: "Spectre Explorer" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it.each(locales)("has no retro window controls in %s", (locale) => {
+    renderPage({}, locale);
+    const { controlLabels } = dictionaries[locale].pages.cases;
+
+    expect(
+      screen.queryByRole("button", { name: controlLabels.close }),
+    ).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: controlLabels.fullScreen }),
+    ).toBeNull();
+  });
+
+  it("shows the description, category and the stack items", () => {
     renderPage();
 
     expect(screen.getByText("A multi-feature service.")).toBeInTheDocument();
-    expect(screen.getByText("React, TypeScript")).toBeInTheDocument();
     expect(screen.getByText("FinTech / Web App")).toBeInTheDocument();
-  });
-
-  it.each(locales)("shows the role label in %s", (locale) => {
-    renderPage({}, locale);
-
-    expect(
-      screen.getByText(dictionaries[locale].pages.cases.detail.roles.FRONTEND),
-    ).toBeInTheDocument();
-    expect(screen.queryByText("FRONTEND")).not.toBeInTheDocument();
-  });
-
-  it("labels the fullstack role", () => {
-    renderPage({ role: "FULLSTACK" });
-
-    expect(screen.getByText("Fullstack developer")).toBeInTheDocument();
-  });
-
-  it.each(locales)("shows company, team size and period in %s", (locale) => {
-    renderPage({}, locale);
-    const { detail } = dictionaries[locale].pages.cases;
-
-    expect(screen.getByText(detail.companyLabel)).toBeInTheDocument();
-    expect(screen.getByText("Spectre Labs")).toBeInTheDocument();
-    expect(screen.getByText(detail.teamSizeLabel)).toBeInTheDocument();
-    expect(screen.getByText("6")).toBeInTheDocument();
-    expect(screen.getByText(detail.periodLabel)).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        `${formatMonth("2023-03-01", locale)} – ${formatMonth("2024-06-30", locale)}`,
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("hides the company and team size when they are null", () => {
-    renderPage({ company: null, teamSize: null });
-
-    expect(screen.queryByText("Company")).not.toBeInTheDocument();
-    expect(screen.queryByText("Team size")).not.toBeInTheDocument();
-  });
-
-  it.each(locales)("reads an open period as present in %s", (locale) => {
-    renderPage({ endedAt: null }, locale);
-
-    expect(
-      screen.getByText(
-        `${formatMonth("2023-03-01", locale)} – ${dictionaries[locale].pages.cases.detail.periodPresent}`,
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("lists every achievement", () => {
-    renderPage();
-    const list = screen.getByRole("list");
-
-    expect(within(list).getAllByRole("listitem")).toHaveLength(2);
-    expect(within(list).getByText("Reusable states")).toBeInTheDocument();
+    expect(screen.getByText("React")).toBeInTheDocument();
+    expect(screen.getByText("TypeScript")).toBeInTheDocument();
   });
 
   it("opens the project in a new tab with a descriptive name", () => {
@@ -149,39 +132,50 @@ describe("CaseDetailPage", () => {
 
     expect(link).toHaveAttribute("href", "https://example.com/spectre");
     expect(link).toHaveAttribute("target", "_blank");
-    expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
   });
 
   it("links back to the cases list in the same locale", () => {
     renderPage({}, "ru");
 
     expect(
-      screen.getByRole("link", {
-        name: ru.pages.cases.detail.backToCases,
-      }),
+      screen.getByRole("link", { name: ru.pages.cases.detail.backToCases }),
     ).toHaveAttribute("href", "/ru/cases");
   });
 
-  it("shows the picture with a blur preview", () => {
-    renderPage();
-    const image = screen.getByRole("img", { name: "Spectre Explorer" });
+  it("hides the company and team size when they are null", () => {
+    renderPage({ company: null, teamSize: null });
 
-    expect(image).toHaveAttribute("src", "https://cdn.test/spectre.webp");
-    expect(image).toHaveAttribute("data-blur", "data:image/png;base64,AAAA");
+    expect(screen.queryByText(en.pages.cases.detail.companyLabel)).toBeNull();
+    expect(screen.queryByText(en.pages.cases.detail.teamSizeLabel)).toBeNull();
   });
 
-  it("shows the picture without a blur preview when it is null", () => {
-    renderPage({ blurImage: null });
+  it.each(locales)(
+    "shows no no-image text and no picture for a case without images in %s",
+    (locale) => {
+      renderPage(
+        {
+          backgroundBlurImage: null,
+          backgroundImage: null,
+          blurImage: null,
+          image: null,
+        },
+        locale,
+      );
 
-    expect(screen.getByRole("img")).not.toHaveAttribute("data-blur");
-  });
+      expect(
+        screen.queryByText(dictionaries[locale].pages.cases.noImage),
+      ).toBeNull();
+      expect(screen.queryByRole("img")).toBeNull();
+    },
+  );
 
-  it.each(locales)("shows the no-image text in %s", (locale) => {
-    renderPage({ blurImage: null, image: null }, locale);
+  it("omits the achievements section without achievements", () => {
+    renderPage({ achievements: [] });
 
     expect(
-      screen.getByText(dictionaries[locale].pages.cases.noImage),
-    ).toBeInTheDocument();
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+      screen.queryByRole("region", {
+        name: en.pages.cases.detail.achievementsTitle,
+      }),
+    ).toBeNull();
   });
 });

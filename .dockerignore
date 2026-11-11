@@ -1,0 +1,56 @@
+# deps / build output
+node_modules
+.next
+out
+build
+*.tsbuildinfo
+next-env.d.ts
+
+# secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# vcs / ci / hooks
+.git
+.github
+.husky
+
+# tests
+e2e
+playwright.config.ts
+playwright-report
+blob-report
+test-results
+coverage
+vitest.config.mts
+vitest.setup.ts
+**/*.test.ts
+**/*.test.tsx
+
+# dev tooling
+scripts
+delete
+.editorconfig
+.prettierignore
+prettier.config.mjs
+eslint.config.mjs
+steiger.config.ts
+
+# AI / docs
+.claude
+.agents
+.playwright-mcp
+.mcp.json
+openspec
+skills-lock.json
+*.md
+
+# docker / misc
+Dockerfile
+.dockerignore
+docker-compose*
+.DS_Store
+*.log
+.vercel

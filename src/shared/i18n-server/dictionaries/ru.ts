@@ -74,9 +74,9 @@ export const ru = {
         minimize: "Свернуть окно",
       },
       detail: {
-        achievementsTitle: "Результаты",
+        aboutTitle: "О кейсе",
+        achievementsTitle: "Достижения",
         backToCases: "Назад к кейсам",
-        categoryLabel: "Категория",
         companyLabel: "Компания",
         periodLabel: "Период",
         periodPresent: "по настоящее время",
@@ -85,8 +85,14 @@ export const ru = {
           FRONTEND: "Frontend-разработчик",
           FULLSTACK: "Fullstack-разработчик",
         },
-        stackLabel: "Стек",
-        teamSizeLabel: "Размер команды",
+        stackTitle: "Стек",
+        teamSizeLabel: "Команда",
+        teamSizeUnit: {
+          few: "человека",
+          many: "человек",
+          one: "человек",
+          other: "человека",
+        },
       },
       noImage: "Нет картинки",
       status: {

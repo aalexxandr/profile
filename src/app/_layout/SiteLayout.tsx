@@ -77,7 +77,7 @@ export const SiteLayout = ({
       "h-full antialiased",
     )}
   >
-    <body className="grid min-h-dvh grid-rows-[auto_1fr] bg-canvas">
+    <body className="relative grid min-h-dvh grid-rows-[auto_1fr] bg-canvas">
       <Header
         ariaLabel={dictionary.navigation.ariaLabel}
         currentLocale={locale}

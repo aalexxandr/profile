@@ -63,8 +63,13 @@ describe.each(locales)("%s case texts", (locale) => {
 
 describe("dictionaries together", () => {
   it("have the same structure of keys", () => {
+    // Plural forms differ per language; only the `other` fallback is shared.
+    const isSharedKey = (path: string) =>
+      !path.includes("teamSizeUnit.") || path.endsWith("teamSizeUnit.other");
     const keysOf = (dictionary: Dictionary) =>
-      collectStrings(dictionary).map(([path]) => path);
+      collectStrings(dictionary)
+        .map(([path]) => path)
+        .filter(isSharedKey);
     const ruKeys = keysOf(ru);
     const enKeys = keysOf(en);
 
@@ -81,5 +86,33 @@ describe("dictionaries together", () => {
     expect(Object.keys(en.metadata).sort()).toEqual(
       Object.keys(ru.metadata).sort(),
     );
+  });
+});
+
+describe("team size texts", () => {
+  it("uses the short labels", () => {
+    expect(ru.pages.cases.detail.teamSizeLabel).toBe("Команда");
+    expect(en.pages.cases.detail.teamSizeLabel).toBe("Team");
+  });
+
+  it.each(locales)("has a non-empty fallback unit in %s", (locale) => {
+    const { teamSizeUnit } = dictionaries[locale].pages.cases.detail;
+
+    expect(teamSizeUnit.other.trim()).not.toBe("");
+  });
+
+  it("has every plural form Russian needs", () => {
+    const { teamSizeUnit } = ru.pages.cases.detail;
+
+    expect(teamSizeUnit.one).toBe("человек");
+    expect(teamSizeUnit.few).toBe("человека");
+    expect(teamSizeUnit.many).toBe("человек");
+  });
+
+  it("has the singular and the plural in English", () => {
+    const { teamSizeUnit } = en.pages.cases.detail;
+
+    expect(teamSizeUnit.one).toBe("person");
+    expect(teamSizeUnit.other).toBe("people");
   });
 });

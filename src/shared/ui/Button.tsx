@@ -4,6 +4,8 @@ import clsx from "clsx";
 import Link, { type LinkProps } from "next/link";
 import type { ComponentProps, PropsWithChildren } from "react";
 
+import { ButtonContent } from "./ButtonContent";
+
 type BaseButtonProps = PropsWithChildren & {
   disabled?: boolean;
   isLoading?: boolean;
@@ -37,18 +39,6 @@ const buttonClassName = clsx(
   "flex h-[35px] w-full cursor-pointer items-center justify-center gap-1 border-0 bg-control px-4 py-1.5 font-vcr text-[12px] text-control-fg uppercase no-underline transition-none outline-none hover:bg-accent hover:text-white focus-visible:border focus-visible:border-focus-ring focus-visible:shadow-none active:bg-accent-active",
   retroShadow,
 );
-
-const ButtonContent = ({
-  children,
-  isLoading,
-  loadingLabel = "Loading...",
-}: Pick<BaseButtonProps, "children" | "isLoading" | "loadingLabel">) => {
-  if (isLoading) {
-    return <span className="pt-0.75">{loadingLabel}</span>;
-  }
-
-  return <span className="pt-0.75">{children}</span>;
-};
 
 export function Button(props: ButtonProps) {
   if (props.href !== undefined) {

@@ -5,12 +5,12 @@ build
 coverage
 next-env.d.ts
 .agents
-bun.lock
+pnpm-lock.yaml
 **/*.svg
 **/lottie-animations/**/*.json
 test-results
 playwright-report
 blob-report
 
-# Generated from the backend OpenAPI document (bun run api:generate)
+# Generated from the backend OpenAPI document (pnpm api:generate)
 src/shared/api/generated

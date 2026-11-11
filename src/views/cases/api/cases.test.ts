@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { getCaseList } from "@/shared/content";
 import { locales } from "@/shared/i18n";
 
 import { getCases } from "./cases";
@@ -85,10 +86,13 @@ describe("getCases", () => {
     );
   });
 
-  it("names API_URL and sends no request when it is missing", async () => {
-    vi.stubEnv("API_URL", "");
+  it.each(locales)(
+    "serves the static list for %s and sends no request without API_URL",
+    async (locale) => {
+      vi.stubEnv("API_URL", "");
 
-    await expect(getCases("ru")).rejects.toThrow("API_URL");
-    expect(fetchMock).not.toHaveBeenCalled();
-  });
+      await expect(getCases(locale)).resolves.toEqual(getCaseList(locale));
+      expect(fetchMock).not.toHaveBeenCalled();
+    },
+  );
 });

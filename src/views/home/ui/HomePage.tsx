@@ -8,27 +8,14 @@ import shelvesSrc from "./assets/shelves.svg";
 import tableSrc from "./assets/table.svg";
 import { DeviceBackgrounds } from "./DeviceBackgrounds";
 
-import { Button } from "@/shared/ui/Button";
 import { Reveal } from "@/shared/ui/Reveal";
-import { TypewriterTextSequence } from "./TypewriterTextSequence";
+import { IntroContent } from "./IntroContent";
 import type { Dictionary } from "@/shared/i18n";
 
 type HomePageProps = {
   ctaHref: string;
   home: Dictionary["home"];
 };
-
-const IntroContent = ({ ctaHref, home }: HomePageProps) => (
-  <>
-    <span className="whitespace-pre-line">{home.introText}</span>
-    <br />
-    <br />
-    <TypewriterTextSequence startDelay={1400} texts={home.typewriterTexts} />
-    <Button className="mt-5" href={ctaHref}>
-      {home.cta.label}
-    </Button>
-  </>
-);
 
 export const HomePage = ({ ctaHref, home }: HomePageProps) => {
   return (

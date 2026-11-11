@@ -74,9 +74,9 @@ export const en = {
         minimize: "Minimize window",
       },
       detail: {
-        achievementsTitle: "Results",
+        aboutTitle: "About case",
+        achievementsTitle: "Achievements",
         backToCases: "Back to cases",
-        categoryLabel: "Category",
         companyLabel: "Company",
         periodLabel: "Period",
         periodPresent: "present",
@@ -85,8 +85,12 @@ export const en = {
           FRONTEND: "Frontend developer",
           FULLSTACK: "Fullstack developer",
         },
-        stackLabel: "Stack",
-        teamSizeLabel: "Team size",
+        stackTitle: "Stack",
+        teamSizeLabel: "Team",
+        teamSizeUnit: {
+          one: "person",
+          other: "people",
+        },
       },
       noImage: "No image",
       status: {

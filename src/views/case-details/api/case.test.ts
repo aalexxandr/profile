@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ApiError } from "@/shared/api";
+import { findCase } from "@/shared/content";
 import { locales } from "@/shared/i18n";
 
 import { getCase } from "./case";
@@ -126,5 +127,25 @@ describe("getCase", () => {
     await Promise.all([getCase("memo", "en"), getCase("memo", "en")]);
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  describe("without API_URL", () => {
+    beforeEach(() => {
+      vi.stubEnv("API_URL", "");
+    });
+
+    it.each(locales)("serves the static case for %s", async (locale) => {
+      const expected = findCase("spectre", locale);
+
+      await expect(getCase("spectre", locale)).resolves.toEqual(expected);
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("raises a 404 ApiError for an unknown slug", async () => {
+      const error = await getCase("unknown", "ru").catch((e: unknown) => e);
+
+      expect(error).toBeInstanceOf(ApiError);
+      expect(error).toMatchObject({ status: 404 });
+    });
   });
 });
