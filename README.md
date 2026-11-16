@@ -8,7 +8,7 @@ Next.js 16 приложение с App Router, TypeScript, Tailwind CSS 4, ло�
 - `react@19`
 - `typescript`
 - `tailwindcss@4`
-- `lottie-react`
+- `lottie-react@3`
 - `steiger` + `@feature-sliced/steiger-plugin`
 
 ## Команды
@@ -49,7 +49,7 @@ pnpm api:generate
 
 - Pre-commit (husky + lint-staged): ESLint и Prettier по staged-файлам.
 - CI (`.github/workflows/ci.yml`): lint, format:check, typecheck, test, build, fsd:check, e2e. У job и у шагов установки браузера и e2e есть `timeout-minutes` (20 / 8 + 5 / 8), у Playwright в CI — `globalTimeout` 5 минут; установка зависимостей и браузера повторяется через `scripts/retry.sh`, браузер кэшируется; устаревшие запуски той же ветки отменяются (`concurrency`). В логе e2e есть построчный репортер `list`, отчёт Playwright сохраняется всегда (`if: always()`).
-- Dependabot обновляет npm-зависимости и GitHub Actions.
+- Dependabot обновляет npm-зависимости и GitHub Actions раз в неделю. `react` и `react-dom` обновляются одним PR (группа `react`: версии закреплены и должны совпадать), а новые мажорные версии `eslint` и `typescript` игнорируются, пока их не поддержат `eslint-plugin-react` и `typescript-eslint` (правила и причина описаны в `.github/dependabot.yml`; конфиг защищён тестом `scripts/dependabot-config.test.ts`).
 
 ## Работа с Claude Code
 

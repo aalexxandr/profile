@@ -4,6 +4,23 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # react and react-dom are pinned to the same exact version and React fails
+    # at startup when they differ, so they must be updated in one pull request.
+    groups:
+      react:
+        patterns:
+          - react
+          - react-dom
+    # New majors that the lint toolchain cannot run yet: eslint 10 breaks
+    # eslint-plugin-react, typescript 7 breaks typescript-eslint. Remove a rule
+    # once the plugin supports that major. Minor and patch updates still arrive.
+    ignore:
+      - dependency-name: eslint
+        update-types:
+          - version-update:semver-major
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
   - package-ecosystem: github-actions
     directory: /
     schedule:
