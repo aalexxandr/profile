@@ -1,9 +1,8 @@
 "use client";
 
-import type { LottieRefCurrentProps } from "lottie-react";
-import Lottie from "lottie-react";
+import { Lottie } from "lottie-react";
 import type { FC } from "react";
-import { useRef } from "react";
+import { useAlternatingDirection } from "../lib/useAlternatingDirection";
 import paws from "./assets/lottie-animations/cat-paws.json";
 
 interface CatPawsProps {
@@ -11,23 +10,15 @@ interface CatPawsProps {
 }
 
 export const CatPaws: FC<CatPawsProps> = ({ className }) => {
-  const lottieRef = useRef<LottieRefCurrentProps>(null);
-  const directionRef = useRef<1 | -1>(1);
-
-  const handleComplete = () => {
-    directionRef.current = directionRef.current === 1 ? -1 : 1;
-
-    lottieRef.current?.setDirection(directionRef.current);
-    lottieRef.current?.play();
-  };
+  const { lottieRef, subscriptions } = useAlternatingDirection();
 
   return (
     <Lottie
-      animationData={paws}
+      src={paws}
       loop={false}
       autoplay
       lottieRef={lottieRef}
-      onComplete={handleComplete}
+      subscriptions={subscriptions}
       className={className}
     />
   );

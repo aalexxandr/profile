@@ -8,7 +8,7 @@ Next.js 16 приложение с App Router, TypeScript, Tailwind CSS 4, ло�
 - `react@19`
 - `typescript`
 - `tailwindcss@4`
-- `lottie-react`
+- `lottie-react@3`
 - `steiger` + `@feature-sliced/steiger-plugin`
 
 ## Команды
