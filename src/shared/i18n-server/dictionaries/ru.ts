@@ -67,6 +67,7 @@ export const ru = {
       actions: {
         moreInformation: "Подробнее",
         projectLink: "Ссылка на проект",
+        projectPrivate: "Закрытый проект",
       },
       controlLabels: {
         close: "Закрыть окно",

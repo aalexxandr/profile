@@ -17,6 +17,14 @@ describe("stub API", () => {
     expect(list.every(({ locale }) => locale === "en")).toBe(true);
   });
 
+  it("lists a case without a project link", async () => {
+    const list: Schemas["CaseListItemDto"][] = await (
+      await get("/cases?lang=en")
+    ).json();
+
+    expect(list.some(({ projectLink }) => projectLink === null)).toBe(true);
+  });
+
   it("falls back to Russian when lang is missing or unsupported", async () => {
     for (const path of ["/cases", "/cases?lang=de"]) {
       const list: Schemas["CaseListItemDto"][] = await (await get(path)).json();
@@ -71,6 +79,10 @@ describe("stub API", () => {
           typeof backgroundImage === "string" &&
           typeof backgroundBlurImage === "string",
       ),
+    ).toBe(true);
+    expect(details.some(({ projectLink }) => projectLink === null)).toBe(true);
+    expect(
+      details.some(({ projectLink }) => typeof projectLink === "string"),
     ).toBe(true);
     expect(details.some(({ company }) => company === null)).toBe(true);
     expect(details.some(({ teamSize }) => teamSize === null)).toBe(true);

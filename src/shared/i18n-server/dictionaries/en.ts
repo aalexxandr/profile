@@ -67,6 +67,7 @@ export const en = {
       actions: {
         moreInformation: "More information",
         projectLink: "Project link",
+        projectPrivate: "Private project",
       },
       controlLabels: {
         close: "Close window",

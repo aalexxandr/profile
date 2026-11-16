@@ -162,10 +162,10 @@ export interface components {
              */
             slug: string;
             /**
-             * @description Link to the live project, http or https
+             * @description Link to the live project, http or https; omit if the project has no public link
              * @example https://thespectre.io
              */
-            projectLink: string;
+            projectLink?: string;
             /**
              * @description Technologies used: 1 to 30 unique non-empty names
              * @example [
@@ -261,10 +261,10 @@ export interface components {
              */
             stack: string[];
             /**
-             * @description Link to the live project
+             * @description Link to the live project; null when the case has no link
              * @example https://thespectre.io
              */
-            projectLink: string;
+            projectLink: string | null;
             /**
              * @description Absolute public URL of the case picture (WebP, at most 1920 px wide); null while the case has no picture
              * @example https://storage.example.com/cases/spectre/3f9a1c2b7d4e5f60.webp
@@ -382,10 +382,10 @@ export interface components {
              */
             shortDescription: string;
             /**
-             * @description Link to the live project
+             * @description Link to the live project; null when the case has no link
              * @example https://thespectre.io
              */
-            projectLink: string;
+            projectLink: string | null;
             /**
              * @description Absolute public URL of the case picture (WebP, at most 1920 px wide); null while the case has no picture
              * @example https://storage.example.com/cases/spectre/3f9a1c2b7d4e5f60.webp
@@ -433,10 +433,10 @@ export interface components {
              */
             shortDescription: string;
             /**
-             * @description Link to the live project
+             * @description Link to the live project; null when the case has no link
              * @example https://thespectre.io
              */
-            projectLink: string;
+            projectLink: string | null;
             /**
              * @description Absolute public URL of the case picture (WebP, at most 1920 px wide); null while the case has no picture
              * @example https://storage.example.com/cases/spectre/3f9a1c2b7d4e5f60.webp
@@ -523,7 +523,7 @@ export interface components {
         };
         UpdateCaseDto: {
             /**
-             * @description Link to the live project, http or https
+             * @description Link to the live project, http or https; omit if the project has no public link
              * @example https://thespectre.io
              */
             projectLink?: string;
