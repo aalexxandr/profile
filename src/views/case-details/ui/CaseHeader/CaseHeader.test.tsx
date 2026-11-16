@@ -6,6 +6,7 @@ import { en } from "@/shared/i18n-server/dictionaries/en";
 import { ru } from "@/shared/i18n-server/dictionaries/ru";
 import type { CaseDetail } from "@/views/case-details/api/types";
 
+import { CASE_HEADER_ID } from "@/views/case-details/config/caseHeaderId";
 import { CaseHeader } from "./CaseHeader";
 
 type MockImageProps = { alt: string; blurDataURL?: string; src: string };
@@ -180,6 +181,17 @@ describe("CaseHeader", () => {
 
     expect(screen.getByRole("heading", { level: 1 }).parentElement).toHaveClass(
       "animate-reveal-up",
+    );
+  });
+});
+
+describe("CaseHeader boundary", () => {
+  it("carries the id the cursor glow uses as its boundary", () => {
+    const { container } = renderHeader();
+
+    expect(container.querySelector("header")).toHaveAttribute(
+      "id",
+      CASE_HEADER_ID,
     );
   });
 });

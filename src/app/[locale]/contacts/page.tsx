@@ -3,6 +3,7 @@ import {
   getDictionary,
   getValidatedLocale,
 } from "@/shared/i18n-server";
+import { ContactsPage as ContactsViewPage } from "@/views/contacts";
 
 type ContactsPageProps = {
   params: Promise<{ locale: string }>;
@@ -18,9 +19,5 @@ export default async function ContactsPage({ params }: ContactsPageProps) {
   const locale = await getValidatedLocale(params);
   const dictionary = await getDictionary(locale);
 
-  return (
-    <div className="grid size-full min-h-0 place-items-center px-6 font-vcr text-[16px]/6 text-white uppercase">
-      {dictionary.pages.contacts.title}
-    </div>
-  );
+  return <ContactsViewPage contacts={dictionary.pages.contacts} />;
 }

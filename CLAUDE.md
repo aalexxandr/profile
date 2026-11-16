@@ -24,7 +24,7 @@ This is Next.js 16 (React 19, Tailwind 4) with breaking changes vs. older versio
 
 ## Architecture
 
-- FSD-like layout in `src/`: `app` → `views` → `widgets` → `shared`. (Next's `app/` is the FSD app layer; pages live in `views/` and are composed by thin route files in `src/app`.) Use the `feature-sliced-design` skill for any placement/import/public-API decision.
+- FSD-like layout in `src/`: `app` → `views` → `widgets` → `shared`. (Next's `app/` is the FSD app layer; pages live in `views/` (`cases`, `case-details`, `contacts`, `home`) and are composed by thin route files in `src/app`.) Use the `feature-sliced-design` skill for any placement/import/public-API decision.
 - Imports use the `@/` alias (e.g. `@/shared/i18n`); deep `../../` imports are an ESLint error.
 - **i18n routing**: all routes live under `src/app/[locale]/` (locales `ru`, `en`; config in `src/shared/i18n`): `/`, `/cases`, `/cases/[slug]` (case details; slugs and data come from the backend, listed in the sitemap), `/contacts`. `src/proxy.ts` redirects unlocalized paths using the `Accept-Language` header. Server-only dictionary loading, metadata helpers and locale validation are in `src/shared/i18n-server` (dictionaries in `dictionaries/ru.ts` and `en.ts`).
 - Every user-facing string, alt text, nav label and metadata goes through the dictionaries: add keys to the `Dictionary` type and to **both** `ru` and `en` (both are `satisfies Dictionary`, so `typecheck` catches mismatches).
@@ -42,7 +42,13 @@ This is Next.js 16 (React 19, Tailwind 4) with breaking changes vs. older versio
   - Case page: the header back link, title and facts use `mount`, staggered 80/160/260 ms; the background only fades. About, Stack, the achievements title and each achievement (`lib/getStaggerDelay`) use `visible`.
   - Never put a translating `Reveal` around `CaseBackground` or its ancestors (the `header`). A `translate` makes the element the containing block of the absolute background and detaches it from the page top; only `direction="fade"` (opacity) may wrap its inner layers.
   - Behaviour is covered by `e2e/cases-animations.spec.ts`.
-- SVGs imported with the `?svgr` query are converted to React components via `@svgr/webpack` (Turbopack rule in `next.config.ts`). Remote images are only allowed from the S3 storage host `437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz`. `RetroWindow`, `ImageWithFallback`, `ProjectLink` and `Reveal` live in `shared/ui`.
+- **Cursor glow** (`CursorGlow`, `shared/ui/cursor-glow`, from `@/shared/ui`): a blue spot that lags behind the mouse on `/cases`, `/cases/[slug]` and `/contacts` (rendered by `CasesPage`, `CaseDetailPage` and `ContactsPage`, never in `SiteLayout`, so not on the home page).
+  - One `position: fixed` decorative layer (`aria-hidden`, `pointer-events-none`, `-z-1`) with one element painted by a pre-built `radial-gradient` (`--background-image-glow-spot`, `--color-glow` in `globals.css`). Never add a blur or SVG filter: movement is `transform` only, written straight to `el.style` by `useCursorGlow` (no custom properties, no `top`/`left`), so it stays on the compositor with no layout or paint.
+  - The rAF loop eases over real time (`getGlowStep`: `1 - exp(-dt / GLOW_LAG_MS)`, 220 ms, so the lag is the same on 60 and 120 Hz and the glow trails the cursor a little); it idles once settled; `mousemove`, `resize` and a capture-phase `scroll` listener wake it (page scroll does not bubble). Cleanup removes the listeners and cancels the frame.
+  - Rendered only for `(hover: hover) and (pointer: fine)` without `prefers-reduced-motion` (`useGlowEnabled`, `useSyncExternalStore`, server snapshot `false`); otherwise nothing is in the DOM.
+  - Optional `boundaryId`: nothing of the glow is drawn over that element. Every frame its bottom edge is measured; the glow centre never rises above it (`getGlowTarget`) and the layer is cut there by a `mask-image` with a soft `GLOW_EDGE_FADE` (100 px) below the edge (`getGlowEdgeMask`), written only when the edge moves. The glow therefore reaches the content right under the element. The case page passes `CASE_HEADER_ID` (`views/case-details/config`), which `CaseHeader` puts on its `<header>`; an id and not a ref, because the page is a Server Component.
+  - Covered by `e2e/cursor-glow.spec.ts` (mouse, boundary, no glow on touch or with reduced motion).
+- SVGs imported with the `?svgr` query are converted to React components via `@svgr/webpack` (Turbopack rule in `next.config.ts`). Remote images are only allowed from the S3 storage host `437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz`. `RetroWindow`, `ImageWithFallback`, `ProjectLink`, `Reveal` and `CursorGlow` live in `shared/ui`.
 
 ## Keeping docs current
 
