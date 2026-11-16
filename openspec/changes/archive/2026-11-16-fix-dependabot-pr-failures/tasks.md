@@ -20,7 +20,7 @@
 
 - [x] 3.1 Update `README.md` and `CLAUDE.md` where `lottie-react` or the home-page animations are described; verify no text mentions the 2.x API (`animationData`, `onComplete`, `LottieRefCurrentProps`)
 - [x] 3.2 Run `pnpm check`, `pnpm fsd:check` (report an `EMFILE` failure as an environment blocker) and `pnpm test:e2e`; verify all pass
-- [ ] 3.3 After the branch is pushed, verify on GitHub that CI is green on the updated `lottie-react`, and that a rebased Dependabot PR for `react` now arrives as one PR for both packages
+- [x] 3.3 After the branch is pushed, verify on GitHub that CI is green on the updated `lottie-react`, and that a rebased Dependabot PR for `react` now arrives as one PR for both packages
 
 ## Workflow follow-up
 
