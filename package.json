@@ -57,7 +57,7 @@
     "openapi-typescript": "7.13.0",
     "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "steiger": "^0.7.0",
+    "steiger": "^0.10.0",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5",
