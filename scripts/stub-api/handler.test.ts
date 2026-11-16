@@ -88,7 +88,7 @@ describe("stub API", () => {
     expect(details.some(({ teamSize }) => teamSize === null)).toBe(true);
     expect(details.some(({ endedAt }) => endedAt === null)).toBe(true);
     expect(new Set(details.map(({ role }) => role))).toEqual(
-      new Set(["FRONTEND", "FULLSTACK"]),
+      new Set(["FRONTEND", "FULLSTACK", "PRODUCT"]),
     );
   });
 });

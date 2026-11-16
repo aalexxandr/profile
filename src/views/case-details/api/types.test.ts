@@ -22,7 +22,7 @@ describe("case detail contract types", () => {
 
   it("accepts only the declared roles", () => {
     expectTypeOf<CaseDetail["role"]>().toEqualTypeOf<
-      "FRONTEND" | "FULLSTACK"
+      "FRONTEND" | "FULLSTACK" | "PRODUCT"
     >();
   });
 });

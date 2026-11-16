@@ -85,6 +85,7 @@ export const ru = {
         roles: {
           FRONTEND: "Frontend-разработчик",
           FULLSTACK: "Fullstack-разработчик",
+          PRODUCT: "Product engineer",
         },
         stackTitle: "Стек",
         teamSizeLabel: "Команда",

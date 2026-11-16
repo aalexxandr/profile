@@ -176,11 +176,11 @@ export interface components {
              */
             stack: string[];
             /**
-             * @description The author's role on the project
+             * @description The author's role on the project: `FRONTEND`, `FULLSTACK` or `PRODUCT` (product engineer); any other value is rejected with 400
              * @example FRONTEND
              * @enum {string}
              */
-            role: "FRONTEND" | "FULLSTACK";
+            role: "FRONTEND" | "FULLSTACK" | "PRODUCT";
             /** @description Text of the case per language. `ru` is required; `en` is required when `published` is true */
             translations: components["schemas"]["CreateCaseTranslationsDto"];
             /**
@@ -286,11 +286,11 @@ export interface components {
              */
             backgroundBlurImage: string | null;
             /**
-             * @description The author's role on the project
+             * @description The author's role on the project: `FRONTEND`, `FULLSTACK` or `PRODUCT` (product engineer)
              * @example FRONTEND
              * @enum {string}
              */
-            role: "FRONTEND" | "FULLSTACK";
+            role: "FRONTEND" | "FULLSTACK" | "PRODUCT";
             /**
              * @description Company the project was done for; null for personal projects
              * @example Acme
@@ -463,11 +463,11 @@ export interface components {
              */
             description: string;
             /**
-             * @description The author's role on the project
+             * @description The author's role on the project: `FRONTEND`, `FULLSTACK` or `PRODUCT` (product engineer)
              * @example FRONTEND
              * @enum {string}
              */
-            role: "FRONTEND" | "FULLSTACK";
+            role: "FRONTEND" | "FULLSTACK" | "PRODUCT";
             /**
              * @description Company the project was done for; null for personal projects
              * @example Acme
@@ -537,11 +537,11 @@ export interface components {
              */
             stack?: string[];
             /**
-             * @description The author's role on the project
+             * @description The author's role on the project: `FRONTEND`, `FULLSTACK` or `PRODUCT` (product engineer); any other value is rejected with 400
              * @example FRONTEND
              * @enum {string}
              */
-            role?: "FRONTEND" | "FULLSTACK";
+            role?: "FRONTEND" | "FULLSTACK" | "PRODUCT";
             /**
              * @description Company the project was done for; omit for personal projects
              * @example Acme

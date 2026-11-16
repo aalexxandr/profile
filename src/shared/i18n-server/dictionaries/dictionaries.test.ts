@@ -49,7 +49,11 @@ describe.each(locales)("%s case texts", (locale) => {
   const { detail, noImage } = dictionaries[locale].pages.cases;
 
   it("has a label for every case role", () => {
-    expect(Object.keys(detail.roles).sort()).toEqual(["FRONTEND", "FULLSTACK"]);
+    expect(Object.keys(detail.roles).sort()).toEqual([
+      "FRONTEND",
+      "FULLSTACK",
+      "PRODUCT",
+    ]);
   });
 
   it("has the no-image text and the project facts labels", () => {

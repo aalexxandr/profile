@@ -85,6 +85,7 @@ export const en = {
         roles: {
           FRONTEND: "Frontend developer",
           FULLSTACK: "Fullstack developer",
+          PRODUCT: "Product engineer",
         },
         stackTitle: "Stack",
         teamSizeLabel: "Team",

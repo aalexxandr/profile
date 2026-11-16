@@ -115,7 +115,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       blurImage: null,
       backgroundImage: null,
       backgroundBlurImage: null,
-      role: "FRONTEND",
+      role: "PRODUCT",
       projectLink: null,
       company: "Nova Systems",
       teamSize: 3,
