@@ -167,8 +167,10 @@ const PAUSED = "[animation-play-state:paused]";
 
 const pictureReveal = () =>
   screen.getByRole("img", { name: "Spectre Explorer" }).parentElement;
+// The window sits in two wrappers of the slot inside the reveal element.
 const windowReveal = () =>
-  screen.getByRole("region", { name: "Spectre Explorer" }).parentElement;
+  screen.getByRole("region", { name: "Spectre Explorer" }).parentElement
+    ?.parentElement?.parentElement;
 
 describe("CaseBlock entrance animation", () => {
   beforeEach(() => {

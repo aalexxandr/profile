@@ -12,6 +12,7 @@ import {
 import { getCaseBlockReveal } from "../lib/getCaseBlockReveal";
 
 import type { CaseListItem } from "../api/types";
+import { CaseWindowSlot } from "./CaseWindowSlot";
 import ArrowRightIcon from "./assets/case-block/arrow-right.svg?svgr";
 
 type CaseBlockProps = {
@@ -58,44 +59,46 @@ export const CaseBlock = ({
         direction={reveal.windowDirection}
         trigger={reveal.trigger}
       >
-        <RetroWindow
-          className="w-65 sm:w-95 md:w-132 lg:w-142 xl:w-160"
-          controlLabels={caseLabels.controlLabels}
-          objectsLabel={caseLabels.status.objects}
-          title={`${caseData.name}`}
-        >
-          <div className="flex flex-col items-start font-sans">
-            <h2 className="max-w-full text-2xl/7 font-bold text-white uppercase sm:text-[32px]/[34px]">
-              {caseData.name}
-            </h2>
-            <ProjectLink
-              ariaLabel={`${caseLabels.actions.projectLink}: ${caseData.name}`}
-              className="mt-2"
-              href={caseData.projectLink}
-              label={caseLabels.actions.projectLink}
-              privateLabel={caseLabels.actions.projectPrivate}
-            />
-            <p className="mt-6 mb-0 text-sm/5 font-bold text-white sm:text-base/6">
-              {caseData.shortDescription}
-            </p>
-            <div className="mt-5 w-full sm:w-51.25 md:w-66.25">
-              <Button
-                aria-label={`${caseLabels.actions.moreInformation}: ${caseData.name}`}
-                className="flex h-7 items-center gap-2 sm:h-8.5"
-                href={caseHref}
-              >
-                <span className="flex items-center gap-2">
-                  {caseLabels.actions.moreInformation}
-                  <ArrowRightIcon
-                    aria-hidden="true"
-                    className="size-3.75 shrink-0"
-                    focusable={false}
-                  />
-                </span>
-              </Button>
+        <CaseWindowSlot>
+          <RetroWindow
+            className="w-65 sm:w-95 md:w-132 lg:w-142 xl:w-160"
+            controlLabels={caseLabels.controlLabels}
+            objectsLabel={caseLabels.status.objects}
+            title={`${caseData.name}`}
+          >
+            <div className="flex flex-col items-start font-sans">
+              <h2 className="max-w-full text-2xl/7 font-bold text-white uppercase sm:text-[32px]/[34px]">
+                {caseData.name}
+              </h2>
+              <ProjectLink
+                ariaLabel={`${caseLabels.actions.projectLink}: ${caseData.name}`}
+                className="mt-2"
+                href={caseData.projectLink}
+                label={caseLabels.actions.projectLink}
+                privateLabel={caseLabels.actions.projectPrivate}
+              />
+              <p className="mt-6 mb-0 text-sm/5 font-bold text-white sm:text-base/6">
+                {caseData.shortDescription}
+              </p>
+              <div className="mt-5 w-full sm:w-51.25 md:w-66.25">
+                <Button
+                  aria-label={`${caseLabels.actions.moreInformation}: ${caseData.name}`}
+                  className="flex h-7 items-center gap-2 sm:h-8.5"
+                  href={caseHref}
+                >
+                  <span className="flex items-center gap-2">
+                    {caseLabels.actions.moreInformation}
+                    <ArrowRightIcon
+                      aria-hidden="true"
+                      className="size-3.75 shrink-0"
+                      focusable={false}
+                    />
+                  </span>
+                </Button>
+              </div>
             </div>
-          </div>
-        </RetroWindow>
+          </RetroWindow>
+        </CaseWindowSlot>
       </Reveal>
     </article>
   );

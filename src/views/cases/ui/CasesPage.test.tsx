@@ -68,7 +68,7 @@ describe("CasesPage", () => {
     );
     const [first, second] = screen
       .getAllByRole("region")
-      .map((region) => region.parentElement);
+      .map((region) => region.parentElement?.parentElement?.parentElement);
 
     expect(first).not.toHaveClass("[animation-play-state:paused]");
     expect(second).toHaveClass("[animation-play-state:paused]");
