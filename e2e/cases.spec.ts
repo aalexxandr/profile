@@ -118,7 +118,7 @@ for (const locale of locales) {
       expect(Math.abs(box!.height - (box!.width * 430) / 520)).toBeLessThan(1);
     });
 
-    test("a long short description is cut at 4 lines above a visible button", async ({
+    test("a long short description is shown whole above a visible button", async ({
       page,
     }) => {
       await page.goto(`/${locale}/cases`);
@@ -131,8 +131,9 @@ for (const locale of locales) {
         lineHeight: parseFloat(getComputedStyle(element).lineHeight),
       }));
 
-      expect(metrics.clipped).toBe(true);
-      expect(Math.abs(metrics.height - 4 * metrics.lineHeight)).toBeLessThan(1);
+      // The stub text is long on purpose: more than the old 4-line limit.
+      expect(metrics.clipped).toBe(false);
+      expect(metrics.height).toBeGreaterThan(4 * metrics.lineHeight + 1);
 
       const button = await window
         .getByRole("link", {

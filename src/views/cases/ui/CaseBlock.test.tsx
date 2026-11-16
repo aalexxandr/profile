@@ -55,14 +55,14 @@ describe("CaseBlock", () => {
     expect(screen.getByText("Short description")).toBeInTheDocument();
   });
 
-  it("cuts the short description at 4 lines on every screen size", () => {
+  it("shows the whole short description without cutting it", () => {
     renderCaseBlock("en");
     const description = screen.getByText("Short description");
-    const clampClasses = [...description.classList].filter((name) =>
-      name.includes("line-clamp"),
+    const clampClasses = [...description.classList].filter(
+      (name) => name.includes("line-clamp") || name.includes("truncate"),
     );
 
-    expect(clampClasses).toEqual(["line-clamp-4"]);
+    expect(clampClasses).toEqual([]);
   });
 
   it("lets the window content grow with the description", () => {

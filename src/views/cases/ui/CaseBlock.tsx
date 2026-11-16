@@ -75,7 +75,7 @@ export const CaseBlock = ({
               label={caseLabels.actions.projectLink}
               privateLabel={caseLabels.actions.projectPrivate}
             />
-            <p className="mt-6 mb-0 line-clamp-4 text-sm/5 font-bold text-white sm:text-base/6">
+            <p className="mt-6 mb-0 text-sm/5 font-bold text-white sm:text-base/6">
               {caseData.shortDescription}
             </p>
             <div className="mt-5 w-full sm:w-51.25 md:w-66.25">
