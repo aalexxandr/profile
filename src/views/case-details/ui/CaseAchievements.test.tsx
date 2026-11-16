@@ -1,5 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { locales, type Dictionary, type Locale } from "@/shared/i18n";
 import { en } from "@/shared/i18n-server/dictionaries/en";
@@ -127,4 +127,64 @@ describe("CaseAchievements", () => {
       expect(container).toBeEmptyDOMElement();
     },
   );
+});
+
+// Never reports an intersection, so sections waiting for the viewport stay paused.
+class NeverIntersectingObserver {
+  disconnect() {}
+  observe() {}
+  takeRecords() {
+    return [];
+  }
+  unobserve() {}
+}
+
+const PAUSED = "[animation-play-state:paused]";
+
+describe("CaseAchievements entrance animation", () => {
+  beforeEach(() => {
+    vi.stubGlobal("IntersectionObserver", NeverIntersectingObserver);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("slides the title in once it is scrolled into view", () => {
+    renderAchievements(achievements);
+    const title = screen.getByRole("heading", {
+      level: 2,
+      name: "Achievements",
+    }).parentElement;
+
+    expect(title).toHaveClass("animate-reveal-up", PAUSED);
+  });
+
+  it("brings the achievements in one after another, keeping the list", () => {
+    renderAchievements([
+      ...achievements,
+      { description: "Docs", metric: "12", title: "Guides" },
+    ]);
+    const list = screen.getByRole("list");
+    const items = within(list).getAllByRole("listitem");
+
+    expect(items.map((item) => item.parentElement)).toEqual([list, list, list]);
+    expect(items.map((item) => item.style.animationDelay)).toEqual([
+      "120ms",
+      "200ms",
+      "280ms",
+    ]);
+    for (const item of items) {
+      expect(item).toHaveClass("animate-reveal-up", PAUSED);
+    }
+  });
+
+  it("keeps the dashed divider on the moving item", () => {
+    renderAchievements(achievements);
+    const [, second] = within(screen.getByRole("list")).getAllByRole(
+      "listitem",
+    );
+
+    expect(second).toHaveClass("border-t", "border-dashed");
+  });
 });

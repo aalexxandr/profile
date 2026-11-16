@@ -143,4 +143,43 @@ describe("CaseHeader", () => {
 
     expect(container.querySelector("header")).not.toHaveClass("relative");
   });
+
+  it("brings in the back link, the name and the facts one after another on load", () => {
+    const { container } = renderHeader();
+    const backLink = screen.getByRole("link", {
+      name: en.pages.cases.detail.backToCases,
+    }).parentElement;
+    const title = screen.getByRole("heading", { level: 1 }).parentElement;
+    const facts = container.querySelector("dl")?.parentElement;
+
+    expect(backLink).toHaveClass("animate-reveal-down");
+    expect(backLink?.style.animationDelay).toBe("80ms");
+    expect(title).toHaveClass("animate-reveal-up");
+    expect(title).toContainElement(screen.getByText("FinTech / Web App"));
+    expect(title?.style.animationDelay).toBe("160ms");
+    expect(facts).toHaveClass("animate-reveal-up");
+    expect(facts?.style.animationDelay).toBe("260ms");
+    for (const block of [backLink, title, facts]) {
+      expect(block).not.toHaveClass("[animation-play-state:paused]");
+    }
+  });
+
+  it("does not move the header, so the background stays anchored to the page", () => {
+    const { container } = renderHeader();
+    const header = container.querySelector("header");
+    const animated = [...(header?.classList ?? [])].filter((name) =>
+      name.startsWith("animate-"),
+    );
+
+    expect(animated).toEqual([]);
+    expect(header?.firstElementChild).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("brings in the content without a background too", () => {
+    renderHeader({ backgroundBlurImage: null, backgroundImage: null });
+
+    expect(screen.getByRole("heading", { level: 1 }).parentElement).toHaveClass(
+      "animate-reveal-up",
+    );
+  });
 });

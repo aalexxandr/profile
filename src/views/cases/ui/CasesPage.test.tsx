@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { locales } from "@/shared/i18n";
 import { en } from "@/shared/i18n-server/dictionaries/en";
@@ -28,6 +28,10 @@ const item = (slug: string, name: string): CaseListItem => ({
 });
 
 describe("CasesPage", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it.each(locales)("shows one block per case in order in %s", (locale) => {
     render(
       <CasesPage
@@ -41,6 +45,33 @@ describe("CasesPage", () => {
       screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent),
     ).toEqual(["Spectre", "Orbit"]);
     expect(screen.getAllByRole("article")).toHaveLength(2);
+  });
+
+  it("plays the first block on load and holds the others until they are in view", () => {
+    vi.stubGlobal(
+      "IntersectionObserver",
+      class {
+        disconnect() {}
+        observe() {}
+        takeRecords() {
+          return [];
+        }
+        unobserve() {}
+      },
+    );
+    render(
+      <CasesPage
+        caseItems={[item("spectre", "Spectre"), item("orbit", "Orbit")]}
+        cases={en.pages.cases}
+        locale="en"
+      />,
+    );
+    const [first, second] = screen
+      .getAllByRole("region")
+      .map((region) => region.parentElement);
+
+    expect(first).not.toHaveClass("[animation-play-state:paused]");
+    expect(second).toHaveClass("[animation-play-state:paused]");
   });
 
   it("renders only the title when the list is empty", () => {

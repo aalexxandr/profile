@@ -8,7 +8,7 @@ import shelvesSrc from "./assets/shelves.svg";
 import tableSrc from "./assets/table.svg";
 import { DeviceBackgrounds } from "./DeviceBackgrounds";
 
-import { Reveal } from "@/shared/ui/Reveal";
+import { Reveal } from "@/shared/ui";
 import { IntroContent } from "./IntroContent";
 import type { Dictionary } from "@/shared/i18n";
 

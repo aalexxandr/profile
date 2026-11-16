@@ -1,6 +1,8 @@
 import type { Dictionary } from "@/shared/i18n";
+import { Reveal } from "@/shared/ui";
 
 import type { CaseDetail } from "../api/types";
+import { getStaggerDelay } from "../lib/getStaggerDelay";
 
 type CaseAchievementsProps = {
   achievements: CaseDetail["achievements"];
@@ -20,17 +22,22 @@ export const CaseAchievements = ({
       aria-labelledby="case-achievements-title"
       className="flex flex-col gap-5 lg:grid lg:grid-cols-[287px_1fr] lg:gap-8"
     >
-      <h2
-        className="m-0 font-vcr text-[24px] text-white uppercase sm:text-[32px]"
-        id="case-achievements-title"
-      >
-        {cases.detail.achievementsTitle}
-      </h2>
+      <Reveal trigger="visible">
+        <h2
+          className="m-0 font-vcr text-[24px] text-white uppercase sm:text-[32px]"
+          id="case-achievements-title"
+        >
+          {cases.detail.achievementsTitle}
+        </h2>
+      </Reveal>
       <ul className="m-0 flex list-none flex-col gap-6 p-0">
         {achievements.map(({ description, metric, title }, index) => (
-          <li
+          <Reveal
+            as="li"
             className="flex flex-col gap-2 border-t border-dashed border-white/20 pt-6 first:border-t-0 first:pt-0 sm:flex-row sm:gap-5"
+            delay={getStaggerDelay(index)}
             key={title}
+            trigger="visible"
           >
             <span
               aria-hidden="true"
@@ -47,7 +54,7 @@ export const CaseAchievements = ({
                 {metric}
               </span>
             </div>
-          </li>
+          </Reveal>
         ))}
       </ul>
     </section>

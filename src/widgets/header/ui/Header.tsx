@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { Reveal } from "@/shared/ui/Reveal";
+import { Reveal } from "@/shared/ui";
 import {
   getLocalizedPath,
   type Dictionary,

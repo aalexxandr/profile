@@ -23,8 +23,11 @@ const renderBackground = (
     />,
   );
 
-const getLayer = (container: HTMLElement) =>
-  container.querySelector("img")?.parentElement?.parentElement;
+// The positioned root, anchored to the page; it must never be animated.
+const getLayer = (container: HTMLElement) => container.firstElementChild;
+// The layers inside the root fade in together.
+const getFadeLayer = (container: HTMLElement) =>
+  getLayer(container)?.firstElementChild;
 
 describe("CaseBackground", () => {
   it("shows the decorative picture with a blur preview", () => {
@@ -74,9 +77,26 @@ describe("CaseBackground", () => {
 
   it("darkens the top under the menu with a separate scrim", () => {
     const { container } = renderBackground();
-    const scrim = getLayer(container)?.lastElementChild;
+    const scrim = getFadeLayer(container)?.lastElementChild;
 
     expect(scrim).toHaveClass("top-0", "bg-linear-to-b");
     expect(scrim).not.toContainElement(container.querySelector("img"));
+  });
+
+  it("fades the picture in without moving it", () => {
+    const { container } = renderBackground();
+    const fadeLayer = getFadeLayer(container);
+
+    expect(fadeLayer).toHaveClass("animate-reveal-fade", "absolute", "inset-0");
+    expect(fadeLayer).toContainElement(container.querySelector("img"));
+  });
+
+  it("does not animate the positioned layer itself", () => {
+    const { container } = renderBackground();
+    const animated = [...(getLayer(container)?.classList ?? [])].filter(
+      (name) => name.startsWith("animate-"),
+    );
+
+    expect(animated).toEqual([]);
   });
 });

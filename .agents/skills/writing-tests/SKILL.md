@@ -115,7 +115,7 @@ For `notFound()` mock it so it **throws** (the real one does) and assert with `r
 
 ## What not to test
 
-Thin route files that only compose (`src/app/[locale]/*/page.tsx`) beyond what E2E covers, decorative SVG/Lottie assets, `Reveal`/`Button` as isolated units (covered through the pages that use them), and third-party library internals.
+Thin route files that only compose (`src/app/[locale]/*/page.tsx`) beyond what E2E covers, decorative SVG/Lottie assets, `Button` as an isolated unit (covered through the pages that use them; `Reveal` has its own tests because its in-view trigger is behaviour), and third-party library internals.
 
 ## Definition of done
 
