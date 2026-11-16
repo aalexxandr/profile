@@ -51,6 +51,26 @@ describe("CaseBlock", () => {
     expect(screen.getByText("Short description")).toBeInTheDocument();
   });
 
+  it("cuts the short description at 4 lines on every screen size", () => {
+    renderCaseBlock("en");
+    const description = screen.getByText("Short description");
+    const clampClasses = [...description.classList].filter((name) =>
+      name.includes("line-clamp"),
+    );
+
+    expect(clampClasses).toEqual(["line-clamp-4"]);
+  });
+
+  it("lets the window content grow with the description", () => {
+    renderCaseBlock("en");
+    const content = screen.getByText("Short description").parentElement;
+    const heightClasses = [...(content?.classList ?? [])].filter((name) =>
+      /(^|:)h-/.test(name),
+    );
+
+    expect(heightClasses).toEqual([]);
+  });
+
   it.each(locales)("links to the case page in %s", (locale) => {
     renderCaseBlock(locale);
 

@@ -11,6 +11,8 @@ type ImageWithFallbackProps = Pick<
 };
 
 // Renders the picture, or the given text in the same box when there is none.
+// The box keeps 520:430 whatever the file's ratio, so nothing jumps on load;
+// the picture is shown whole inside it, never cropped or stretched.
 export const ImageWithFallback = ({
   alt,
   blurSrc,
@@ -37,7 +39,7 @@ export const ImageWithFallback = ({
       {...imageProps}
       alt={alt}
       blurDataURL={blurSrc ?? undefined}
-      className={className}
+      className={clsx("aspect-520/430 object-contain", className)}
       placeholder={blurSrc ? "blur" : undefined}
       src={src}
     />

@@ -6,15 +6,23 @@ import { ImageWithFallback } from "./ImageWithFallback";
 type MockImageProps = {
   alt: string;
   blurDataURL?: string;
+  className?: string;
   placeholder?: string;
   src: string;
 };
 
 vi.mock("next/image", () => ({
-  default: ({ alt, blurDataURL, placeholder, src }: MockImageProps) => (
+  default: ({
+    alt,
+    blurDataURL,
+    className,
+    placeholder,
+    src,
+  }: MockImageProps) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       alt={alt}
+      className={className}
       data-blur={blurDataURL}
       data-placeholder={placeholder}
       src={src}
@@ -65,6 +73,22 @@ describe("ImageWithFallback", () => {
     );
 
     expect(screen.getByRole("img")).not.toHaveAttribute("data-placeholder");
+  });
+
+  it("shows the whole picture inside a fixed 520:430 frame", () => {
+    render(<ImageWithFallback {...props} src="https://cdn.test/a.webp" />);
+
+    const image = screen.getByRole("img");
+
+    expect(image).toHaveClass("aspect-520/430", "object-contain");
+    expect(image).not.toHaveClass("object-cover");
+    expect(image).not.toHaveClass("object-top");
+  });
+
+  it("uses the same frame for the fallback text", () => {
+    render(<ImageWithFallback {...props} src={null} />);
+
+    expect(screen.getByText("No image")).toHaveClass("aspect-520/430");
   });
 
   it("shows the fallback text and no image when the source is null", () => {
