@@ -33,8 +33,12 @@ export default defineConfig({
       timeout: 30_000,
     },
     {
-      // CI builds in a dedicated step before running the tests.
-      command: isCI ? "pnpm start" : "pnpm build && pnpm start",
+      // CI builds in a dedicated step before running the tests. Locally the
+      // persistent fetch cache is dropped first: it would otherwise keep the
+      // responses of an older stub and bake stale case data into the build.
+      command: isCI
+        ? "pnpm start"
+        : "rm -rf .next/cache/fetch-cache && pnpm build && pnpm start",
       url: baseURL,
       env: { API_URL: STUB_API_URL, PORT: String(PORT) },
       reuseExistingServer: !isCI,
