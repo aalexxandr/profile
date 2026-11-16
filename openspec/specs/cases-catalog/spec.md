@@ -97,14 +97,14 @@ Each case picture in the list SHALL be shown in a frame with a fixed 520:430 wid
 
 ### Requirement: Short description length
 
-Each case block SHALL show the case short description on up to 4 lines on every screen size and SHALL cut longer text with an ellipsis. The block SHALL grow with its text up to that limit instead of having a fixed height, and its "More information" link SHALL stay fully visible below the description.
+Each case block SHALL show the whole case short description on every screen size, with no line limit and no ellipsis. The block SHALL grow with its text instead of having a fixed height, and its "More information" link SHALL stay fully visible below the description.
 
 #### Scenario: Long description
 
 - **WHEN** a case whose short description needs more than 4 lines is shown on `/en/cases` or `/ru/cases`, on a desktop or a mobile viewport
-- **THEN** the description takes exactly 4 lines, ends with an ellipsis, and the "More information" link is fully visible inside the case window below it
+- **THEN** the whole description is shown without being cut, and the "More information" link is fully visible inside the case window below it
 
 #### Scenario: Short description
 
 - **WHEN** a case whose short description fits on one line is shown
-- **THEN** the whole description is shown without an ellipsis and the "More information" link follows it directly, without empty space reserved for more lines
+- **THEN** the whole description is shown and the "More information" link follows it directly, without empty space reserved for more lines

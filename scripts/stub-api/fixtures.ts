@@ -80,7 +80,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ru: {
         name: "Orbit Booking",
         category: "Сервис бронирования",
-        // Long on purpose: the list must cut it to 4 lines at every width.
+        // Long on purpose (more than 4 lines): the list must show it whole.
         shortDescription:
           "Сценарий бронирования с понятными шагами: выбор даты и времени, данные гостя, проверка заказа и оплата. Валидация встроена в каждый шаг, сводка заказа всегда остаётся на экране, а черновик сохраняется, если пользователь уходит со страницы. Сервис работает на телефоне и на компьютере, поддерживает несколько языков и валют и отправляет подтверждение на почту сразу после оплаты.",
         description:
@@ -96,7 +96,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       en: {
         name: "Orbit Booking",
         category: "Booking service",
-        // Long on purpose: the list must cut it to 4 lines at every width.
+        // Long on purpose (more than 4 lines): the list must show it whole.
         shortDescription:
           "A booking journey with readable steps: picking a date and time, guest details, an order review and payment. Validation is built into every step, the order summary always stays on screen, and the draft is kept when the user leaves the page. The service works on phones and desktops, supports several languages and currencies, and sends a confirmation email right after payment.",
         description:

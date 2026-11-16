@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { locales, type Locale } from "@/shared/i18n";
 import { en } from "@/shared/i18n-server/dictionaries/en";
@@ -31,12 +31,16 @@ const caseData: CaseListItem = {
 
 const labelsByLocale = { en: en.pages.cases, ru: ru.pages.cases };
 
-const renderCaseBlock = (locale: Locale, data: CaseListItem = caseData) =>
+const renderCaseBlock = (
+  locale: Locale,
+  data: CaseListItem = caseData,
+  index = 0,
+) =>
   render(
     <CaseBlock
       caseData={data}
       caseLabels={labelsByLocale[locale]}
-      index={0}
+      index={index}
       locale={locale}
     />,
   );
@@ -51,14 +55,14 @@ describe("CaseBlock", () => {
     expect(screen.getByText("Short description")).toBeInTheDocument();
   });
 
-  it("cuts the short description at 4 lines on every screen size", () => {
+  it("shows the whole short description without cutting it", () => {
     renderCaseBlock("en");
     const description = screen.getByText("Short description");
-    const clampClasses = [...description.classList].filter((name) =>
-      name.includes("line-clamp"),
+    const clampClasses = [...description.classList].filter(
+      (name) => name.includes("line-clamp") || name.includes("truncate"),
     );
 
-    expect(clampClasses).toEqual(["line-clamp-4"]);
+    expect(clampClasses).toEqual([]);
   });
 
   it("lets the window content grow with the description", () => {
@@ -146,5 +150,70 @@ describe("CaseBlock status counter", () => {
     renderCaseBlock("en");
 
     expect(screen.getByText(/^\d{3} objects$/)).toBeInTheDocument();
+  });
+});
+
+// Never reports an intersection, so blocks waiting for the viewport stay paused.
+class NeverIntersectingObserver {
+  disconnect() {}
+  observe() {}
+  takeRecords() {
+    return [];
+  }
+  unobserve() {}
+}
+
+const PAUSED = "[animation-play-state:paused]";
+
+const pictureReveal = () =>
+  screen.getByRole("img", { name: "Spectre Explorer" }).parentElement;
+const windowReveal = () =>
+  screen.getByRole("region", { name: "Spectre Explorer" }).parentElement;
+
+describe("CaseBlock entrance animation", () => {
+  beforeEach(() => {
+    vi.stubGlobal("IntersectionObserver", NeverIntersectingObserver);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("slides the picture and the window in from opposite sides in an even block", () => {
+    renderCaseBlock("en", caseData, 0);
+
+    expect(pictureReveal()).toHaveClass("animate-reveal-left");
+    expect(windowReveal()).toHaveClass("animate-reveal-right");
+    expect(pictureReveal()?.style.animationDelay).toBe("");
+    expect(windowReveal()?.style.animationDelay).toBe("120ms");
+  });
+
+  it("swaps the sides in an odd block", () => {
+    renderCaseBlock("en", caseData, 1);
+
+    expect(pictureReveal()).toHaveClass("animate-reveal-right");
+    expect(windowReveal()).toHaveClass("animate-reveal-left");
+  });
+
+  it("plays the first block on load", () => {
+    renderCaseBlock("en", caseData, 0);
+
+    expect(pictureReveal()).not.toHaveClass(PAUSED);
+    expect(windowReveal()).not.toHaveClass(PAUSED);
+  });
+
+  it("waits for the viewport in later blocks", () => {
+    renderCaseBlock("en", caseData, 2);
+
+    expect(pictureReveal()).toHaveClass(PAUSED);
+    expect(windowReveal()).toHaveClass(PAUSED);
+  });
+
+  it("animates the no-image box like the picture", () => {
+    renderCaseBlock("en", { ...caseData, blurImage: null, image: null }, 0);
+
+    expect(screen.getByText(en.pages.cases.noImage).parentElement).toHaveClass(
+      "animate-reveal-left",
+    );
   });
 });

@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { Reveal } from "@/shared/ui/Reveal";
+import { Reveal } from "@/shared/ui";
 import computerSrc from "./assets/computer.svg";
 import mobileSrc from "./assets/mobile.svg";
 import tabletSrc from "./assets/tablet.svg";

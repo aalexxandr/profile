@@ -1,5 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { locales, type Dictionary, type Locale } from "@/shared/i18n";
 import { en } from "@/shared/i18n-server/dictionaries/en";
@@ -62,5 +62,36 @@ describe("CaseStack", () => {
     renderStack(["React"]);
 
     expect(screen.getByRole("list")).toHaveClass("bg-clip-padding");
+  });
+});
+
+// Never reports an intersection, so sections waiting for the viewport stay paused.
+class NeverIntersectingObserver {
+  disconnect() {}
+  observe() {}
+  takeRecords() {
+    return [];
+  }
+  unobserve() {}
+}
+
+const PAUSED = "[animation-play-state:paused]";
+
+describe("CaseStack entrance animation", () => {
+  beforeEach(() => {
+    vi.stubGlobal("IntersectionObserver", NeverIntersectingObserver);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("slides in once it is scrolled into view", () => {
+    renderStack(["React"]);
+    const reveal = screen.getByRole("region", {
+      name: en.pages.cases.detail.stackTitle,
+    }).parentElement;
+
+    expect(reveal).toHaveClass("animate-reveal-up", PAUSED);
   });
 });

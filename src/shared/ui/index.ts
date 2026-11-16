@@ -3,4 +3,4 @@ export { ExternalLink } from "./ExternalLink";
 export { ImageWithFallback } from "./ImageWithFallback";
 export { ProjectLink } from "./ProjectLink";
 export { RetroWindow } from "./retro-window";
-export { Reveal } from "./Reveal";
+export { Reveal } from "./reveal";
