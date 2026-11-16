@@ -23,7 +23,7 @@
 
 - [x] 4.1 Update `CLAUDE.md` (Commands, Automation, Verification) and `README.md` for the CI limits, the standalone e2e server, the retry/cache and the `list` reporter; verify no section still says `pnpm start` serves e2e in CI
 - [x] 4.2 Run `pnpm check`, `pnpm fsd:check` (report an `EMFILE` failure as an environment blocker) and `pnpm test:e2e`; verify all pass
-- [ ] 4.3 Push the branch and verify on GitHub: the CI run completes within the limits, the log shows per-test lines, and the e2e step ends on its own; if it stalls again, confirm the step fails at its limit, the report artifact is uploaded, and record the unfinished tests from the log for a follow-up
+- [x] 4.3 Push the branch and verify on GitHub: the CI run completes within the limits, the log shows per-test lines, and the e2e step ends on its own; if it stalls again, confirm the step fails at its limit, the report artifact is uploaded, and record the unfinished tests from the log for a follow-up
 
 ## Workflow follow-up
 
