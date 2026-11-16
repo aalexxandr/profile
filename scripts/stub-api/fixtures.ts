@@ -80,7 +80,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ru: {
         name: "Orbit Booking",
         category: "Сервис бронирования",
-        shortDescription: "Сценарий бронирования с понятными шагами.",
+        // Long on purpose: the list must cut it to 4 lines at every width.
+        shortDescription:
+          "Сценарий бронирования с понятными шагами: выбор даты и времени, данные гостя, проверка заказа и оплата. Валидация встроена в каждый шаг, сводка заказа всегда остаётся на экране, а черновик сохраняется, если пользователь уходит со страницы. Сервис работает на телефоне и на компьютере, поддерживает несколько языков и валют и отправляет подтверждение на почту сразу после оплаты.",
         description:
           "Сценарий бронирования, разбитый на шаги, со встроенной валидацией и сводкой.",
         achievements: [
@@ -94,7 +96,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       en: {
         name: "Orbit Booking",
         category: "Booking service",
-        shortDescription: "A booking journey with readable steps.",
+        // Long on purpose: the list must cut it to 4 lines at every width.
+        shortDescription:
+          "A booking journey with readable steps: picking a date and time, guest details, an order review and payment. Validation is built into every step, the order summary always stays on screen, and the draft is kept when the user leaves the page. The service works on phones and desktops, supports several languages and currencies, and sends a confirmation email right after payment.",
         description:
           "A booking journey split into steps with inline validation and a persistent summary.",
         achievements: [

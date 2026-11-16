@@ -53,7 +53,7 @@ export const CaseBlock = ({
         objectsLabel={caseLabels.status.objects}
         title={`${caseData.name}`}
       >
-        <div className="flex h-73 flex-col items-start font-sans sm:h-50">
+        <div className="flex flex-col items-start font-sans">
           <h2 className="max-w-full truncate text-2xl/7 font-bold text-white uppercase sm:text-[32px]/[34px]">
             {caseData.name}
           </h2>
@@ -64,7 +64,7 @@ export const CaseBlock = ({
             label={caseLabels.actions.projectLink}
             privateLabel={caseLabels.actions.projectPrivate}
           />
-          <p className="mt-6 mb-0 line-clamp-3 text-sm/5 font-bold text-white sm:text-base/6 xl:line-clamp-2">
+          <p className="mt-6 mb-0 line-clamp-4 text-sm/5 font-bold text-white sm:text-base/6">
             {caseData.shortDescription}
           </p>
           <div className="mt-5 w-full sm:w-51.25 md:w-66.25">

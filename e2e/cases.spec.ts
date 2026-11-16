@@ -93,6 +93,86 @@ for (const locale of locales) {
       await expect(page.getByText(labels[locale].noImage)).toHaveCount(1);
     });
 
+    test("a case picture keeps its 520:430 frame after it loads", async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}/cases`);
+
+      // The stubbed picture is 1x1, so a frame following the file's own
+      // ratio would turn square once it loads.
+      const picture = page
+        .getByRole("article")
+        .filter({ hasText: "Spectre Explorer" })
+        .getByRole("img", { name: "Spectre Explorer" });
+
+      await picture.scrollIntoViewIfNeeded();
+      // `complete` only: the mobile project reports `naturalWidth` 0 for the
+      // stub pixel even though the load has finished.
+      await expect
+        .poll(() => picture.evaluate((img: HTMLImageElement) => img.complete))
+        .toBe(true);
+
+      const box = await picture.boundingBox();
+
+      expect(box).not.toBeNull();
+      expect(Math.abs(box!.height - (box!.width * 430) / 520)).toBeLessThan(1);
+    });
+
+    test("a long short description is cut at 4 lines above a visible button", async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}/cases`);
+
+      const window = page.getByRole("region", { name: "Orbit Booking" });
+      const description = window.locator("h2 ~ p");
+      const metrics = await description.evaluate((element) => ({
+        clipped: element.scrollHeight > element.clientHeight,
+        height: element.getBoundingClientRect().height,
+        lineHeight: parseFloat(getComputedStyle(element).lineHeight),
+      }));
+
+      expect(metrics.clipped).toBe(true);
+      expect(Math.abs(metrics.height - 4 * metrics.lineHeight)).toBeLessThan(1);
+
+      const button = await window
+        .getByRole("link", {
+          name: `${labels[locale].moreInformation}: Orbit Booking`,
+        })
+        .boundingBox();
+      const windowBox = await window.boundingBox();
+
+      expect(button).not.toBeNull();
+      expect(windowBox).not.toBeNull();
+      expect(button!.y).toBeGreaterThanOrEqual(windowBox!.y);
+      expect(button!.y + button!.height).toBeLessThanOrEqual(
+        windowBox!.y + windowBox!.height,
+      );
+    });
+
+    test("a short description is shown whole and the card ends at its button", async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}/cases`);
+
+      const window = page.getByRole("region", { name: "Spectre Explorer" });
+      const metrics = await window.locator("h2 ~ p").evaluate((element) => ({
+        clipped: element.scrollHeight > element.clientHeight,
+        contentBottom: element.parentElement!.getBoundingClientRect().bottom,
+      }));
+      const button = await window
+        .getByRole("link", {
+          name: `${labels[locale].moreInformation}: Spectre Explorer`,
+        })
+        .boundingBox();
+
+      expect(metrics.clipped).toBe(false);
+      expect(button).not.toBeNull();
+      // No empty space kept below the button for lines the text does not use.
+      expect(
+        Math.abs(metrics.contentBottom - (button!.y + button!.height)),
+      ).toBeLessThan(1);
+    });
+
     test("an ongoing case reads as present and hides empty facts", async ({
       page,
     }) => {
