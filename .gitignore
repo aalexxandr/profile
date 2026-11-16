@@ -46,3 +46,7 @@ next-env.d.ts
 /delete
 !.env.example
 .claude/settings.local.json
+
+# python (skill scripts)
+__pycache__/
+*.pyc
