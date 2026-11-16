@@ -16,9 +16,9 @@ const caseItem: Pick<CaseDetail, "description" | "name" | "projectLink"> = {
   projectLink: "https://example.com/spectre",
 };
 
-const renderAbout = (locale: Locale = "en") =>
+const renderAbout = (locale: Locale = "en", item: typeof caseItem = caseItem) =>
   render(
-    <CaseAbout caseItem={caseItem} cases={dictionaries[locale].pages.cases} />,
+    <CaseAbout caseItem={item} cases={dictionaries[locale].pages.cases} />,
   );
 
 describe("CaseAbout", () => {
@@ -51,6 +51,23 @@ describe("CaseAbout", () => {
       expect(link).toHaveAttribute("target", "_blank");
       expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
       expect(link).toHaveTextContent(actions.projectLink);
+    },
+  );
+
+  it.each(locales)(
+    "shows the private project label instead of a link in %s",
+    (locale) => {
+      renderAbout(locale, { ...caseItem, projectLink: null });
+      const { actions, detail } = dictionaries[locale].pages.cases;
+      const section = screen.getByRole("region", { name: detail.aboutTitle });
+
+      expect(
+        within(section).getByText(actions.projectPrivate),
+      ).toBeInTheDocument();
+      expect(
+        within(section).getByText("A multi-feature service."),
+      ).toBeVisible();
+      expect(within(section).queryByRole("link")).toBeNull();
     },
   );
 

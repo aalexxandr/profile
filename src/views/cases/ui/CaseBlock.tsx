@@ -3,7 +3,7 @@ import clsx from "clsx";
 import type { Dictionary, Locale } from "@/shared/i18n";
 import {
   Button,
-  ExternalLink,
+  ProjectLink,
   ImageWithFallback,
   RetroWindow,
 } from "@/shared/ui";
@@ -57,13 +57,13 @@ export const CaseBlock = ({
           <h2 className="max-w-full truncate text-2xl/7 font-bold text-white uppercase sm:text-[32px]/[34px]">
             {caseData.name}
           </h2>
-          <ExternalLink
-            aria-label={`${caseLabels.actions.projectLink}: ${caseData.name}`}
+          <ProjectLink
+            ariaLabel={`${caseLabels.actions.projectLink}: ${caseData.name}`}
             className="mt-2"
             href={caseData.projectLink}
-          >
-            {caseLabels.actions.projectLink}
-          </ExternalLink>
+            label={caseLabels.actions.projectLink}
+            privateLabel={caseLabels.actions.projectPrivate}
+          />
           <p className="mt-6 mb-0 line-clamp-3 text-sm/5 font-bold text-white sm:text-base/6 xl:line-clamp-2">
             {caseData.shortDescription}
           </p>

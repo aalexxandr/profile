@@ -67,6 +67,7 @@ export const en = {
       actions: {
         moreInformation: "More information",
         projectLink: "Project link",
+        projectPrivate: "Private project",
       },
       controlLabels: {
         close: "Close window",
@@ -84,6 +85,7 @@ export const en = {
         roles: {
           FRONTEND: "Frontend developer",
           FULLSTACK: "Fullstack developer",
+          PRODUCT: "Product engineer",
         },
         stackTitle: "Stack",
         teamSizeLabel: "Team",

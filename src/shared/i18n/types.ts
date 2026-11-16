@@ -50,6 +50,7 @@ export type Dictionary = {
       actions: {
         moreInformation: string;
         projectLink: string;
+        projectPrivate: string;
       };
       controlLabels: {
         close: string;

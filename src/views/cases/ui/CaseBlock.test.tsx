@@ -75,6 +75,27 @@ describe("CaseBlock", () => {
     },
   );
 
+  it.each(locales)(
+    "shows the private project label instead of a project link in %s",
+    (locale) => {
+      renderCaseBlock(locale, { ...caseData, projectLink: null });
+
+      expect(
+        screen.getByText(labelsByLocale[locale].actions.projectPrivate),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole("link", {
+          name: `${labelsByLocale[locale].actions.projectLink}: Spectre Explorer`,
+        }),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole("link", {
+          name: `${labelsByLocale[locale].actions.moreInformation}: Spectre Explorer`,
+        }),
+      ).toHaveAttribute("href", `/${locale}/cases/spectre`);
+    },
+  );
+
   it("shows the picture with its blur preview", () => {
     renderCaseBlock("en");
     const image = screen.getByRole("img", { name: "Spectre Explorer" });

@@ -99,6 +99,12 @@ describe("CaseHeader", () => {
     expect(screen.getByText("Spectre Labs")).toBeInTheDocument();
   });
 
+  it.each(locales)("shows the product role label in %s", (locale) => {
+    renderHeader({ role: "PRODUCT" }, locale);
+
+    expect(screen.getByText("Product engineer")).toBeInTheDocument();
+  });
+
   it("has only the role and the period without a company and a team size", () => {
     const { container } = renderHeader({ company: null, teamSize: null });
 

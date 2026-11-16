@@ -67,6 +67,7 @@ export const ru = {
       actions: {
         moreInformation: "Подробнее",
         projectLink: "Ссылка на проект",
+        projectPrivate: "Закрытый проект",
       },
       controlLabels: {
         close: "Закрыть окно",
@@ -84,6 +85,7 @@ export const ru = {
         roles: {
           FRONTEND: "Frontend-разработчик",
           FULLSTACK: "Fullstack-разработчик",
+          PRODUCT: "Product engineer",
         },
         stackTitle: "Стек",
         teamSizeLabel: "Команда",

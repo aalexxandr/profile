@@ -7,6 +7,7 @@ const labels = {
     back: "Back to cases",
     achievements: "Achievements",
     noImage: "No image",
+    projectPrivate: "Private project",
     team: { label: "Team", value: "6 people" },
     present: "present",
     moreInformation: "More information",
@@ -21,6 +22,7 @@ const labels = {
     back: "Назад к кейсам",
     achievements: "Достижения",
     noImage: "Нет картинки",
+    projectPrivate: "Закрытый проект",
     team: { label: "Команда", value: "6 человек" },
     present: "по настоящее время",
     moreInformation: "Подробнее",
@@ -49,7 +51,38 @@ for (const locale of locales) {
           page.getByRole("heading", { level: 2, name }),
         ).toBeVisible();
       }
-      await expect(page.locator('main a[target="_blank"]')).toHaveCount(3);
+      await expect(page.locator('main a[target="_blank"]')).toHaveCount(2);
+    });
+
+    test("the list shows the private project label for a case without a project link", async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}/cases`);
+
+      await expect(page.getByText(labels[locale].projectPrivate)).toHaveCount(
+        1,
+      );
+      await expect(
+        page
+          .getByRole("article")
+          .filter({ hasText: "Nova Console" })
+          .getByRole("link", { name: /Nova Console$/ }),
+      ).toHaveCount(1);
+    });
+
+    test("the case page shows the private project label instead of the project link", async ({
+      page,
+      consoleErrors,
+    }) => {
+      await page.goto(`/${locale}/cases/nova`);
+
+      const about = page.getByRole("region", { name: labels[locale].about });
+
+      await expect(
+        about.getByText(labels[locale].projectPrivate),
+      ).toBeVisible();
+      await expect(about.getByRole("link")).toHaveCount(0);
+      expect(consoleErrors).toEqual([]);
     });
 
     test("the list shows the no-image text for a case without a picture", async ({
