@@ -28,7 +28,7 @@ pnpm fsd:check
 pnpm api:generate
 ```
 
-`pnpm check` запускает lint, проверку форматирования, typecheck, тесты (Vitest) и production build. Тесты лежат рядом с кодом (`*.test.ts(x)`); `pnpm test:coverage` считает покрытие и падает, если оно ниже порогов из `vitest.config.mts` (в CI запускается именно он, HTML-отчёт сохраняется артефактом `coverage-report`). E2E на Playwright (`e2e/`) запускаются отдельно через `pnpm test:e2e`: команда сама собирает и поднимает приложение на порту 3100; при первом запуске нужен `pnpm exec playwright install chromium`. `pnpm fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
+`pnpm check` запускает lint, проверку форматирования, typecheck, тесты (Vitest) и production build. Тесты лежат рядом с кодом (`*.test.ts(x)`); `pnpm test:coverage` считает покрытие и падает, если оно ниже порогов из `vitest.config.mts` (в CI запускается именно он, HTML-отчёт сохраняется артефактом `coverage-report`). E2E на Playwright (`e2e/`) запускаются отдельно через `pnpm test:e2e`: команда сама собирает приложение и поднимает его standalone-сервером (`.next/standalone/server.js`, `scripts/prepare-standalone.ts` копирует в него `public` и `.next/static`) на порту 3100 и останавливает серверы по SIGTERM; при первом запуске нужен `pnpm exec playwright install chromium`. `pnpm fsd:check` запускается отдельно (в CI тоже), потому что в локальном окружении Steiger может падать с `EMFILE: too many open files, watch`.
 
 `pnpm api:generate` читает OpenAPI-спецификацию бэкенда (`$API_URL/docs-json`, по умолчанию `http://localhost:3000`) и сразу записывает типы в `src/shared/api/generated/schema.d.ts` (закоммиченный файл и есть снапшот контракта). Если бэкенд недоступен, команда завершается с понятной ошибкой и не трогает файл. **TODO:** после деплоя бэкенда добавить `api:check` (перегенерировать и упасть при отличии от закоммиченного `schema.d.ts`) в CI.
 
@@ -48,7 +48,7 @@ pnpm api:generate
 ## Контроль качества
 
 - Pre-commit (husky + lint-staged): ESLint и Prettier по staged-файлам.
-- CI (`.github/workflows/ci.yml`): lint, format:check, typecheck, test, build, fsd:check, e2e (при падении сохраняется отчёт Playwright).
+- CI (`.github/workflows/ci.yml`): lint, format:check, typecheck, test, build, fsd:check, e2e. У job и у шагов установки браузера и e2e есть `timeout-minutes` (20 / 8 + 5 / 8), у Playwright в CI — `globalTimeout` 5 минут; установка зависимостей и браузера повторяется через `scripts/retry.sh`, браузер кэшируется; устаревшие запуски той же ветки отменяются (`concurrency`). В логе e2e есть построчный репортер `list`, отчёт Playwright сохраняется всегда (`if: always()`).
 - Dependabot обновляет npm-зависимости и GitHub Actions.
 
 ## Работа с Claude Code

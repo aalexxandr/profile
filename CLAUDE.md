@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Package manager is `pnpm` (Node 24, see `.nvmrc`). Tests: Vitest + React Testing Library (happy-dom), colocated as `src/**/*.test.ts(x)`; `pnpm test` (one run) / `pnpm test:watch` / `pnpm test:coverage` (V8 coverage with global thresholds in `vitest.config.mts`, HTML report in `coverage/`; CI runs this instead of plain `test`, so raise thresholds as coverage grows and never lower them to make a build pass). E2E: Playwright in `e2e/` (desktop + mobile Chromium), `pnpm test:e2e` builds and serves the app on port 3100 itself; it is not part of `check`, run it after routing/UI/proxy changes (needs `pnpm exec playwright install chromium` once). `?svgr` imports are stubbed in `vitest.config.mts`.
+Package manager is `pnpm` (Node 24, see `.nvmrc`). Tests: Vitest + React Testing Library (happy-dom), colocated as `src/**/*.test.ts(x)`; `pnpm test` (one run) / `pnpm test:watch` / `pnpm test:coverage` (V8 coverage with global thresholds in `vitest.config.mts`, HTML report in `coverage/`; CI runs this instead of plain `test`, so raise thresholds as coverage grows and never lower them to make a build pass). E2E: Playwright in `e2e/` (desktop + mobile Chromium), `pnpm test:e2e` builds the app and serves it with the standalone server (`exec node .next/standalone/server.js` after `scripts/prepare-standalone.ts`, never `next start`: it does not work with `output: "standalone"`) on port 3100 itself; every Playwright web server is started as a direct process (`exec ...`, no `pnpm` wrapper) with `gracefulShutdown` SIGTERM, otherwise teardown hangs until `globalTimeout` and leaves orphans; it is not part of `check`, run it after routing/UI/proxy changes (needs `pnpm exec playwright install chromium` once). `?svgr` imports are stubbed in `vitest.config.mts`.
 
 - `pnpm dev` — dev server; `pnpm build` / `pnpm start` — production build / serve
 - `pnpm lint` (`lint:fix` to autofix), `pnpm format:check` (`format` to write), `pnpm typecheck` (`next typegen` + `tsc --noEmit`; typegen creates the gitignored `next-env.d.ts` that CI lacks)
@@ -15,7 +15,7 @@ Package manager is `pnpm` (Node 24, see `.nvmrc`). Tests: Vitest + React Testing
 ## Automation
 
 - `.claude/settings.json` hooks: after every Edit/Write the file is formatted (Prettier) and fixed (ESLint) by `.claude/hooks/format-file.ts`; remaining ESLint errors are returned to you, fix them. On Stop, `typecheck` must pass (`.claude/hooks/typecheck-on-stop.ts`).
-- Pre-commit (husky + lint-staged) runs ESLint/Prettier on staged files. CI (`.github/workflows/ci.yml`) runs lint, format:check, typecheck, test, build, fsd:check and e2e.
+- Pre-commit (husky + lint-staged) runs ESLint/Prettier on staged files. CI (`.github/workflows/ci.yml`) runs lint, format:check, typecheck, test, build, fsd:check and e2e; the job and the Playwright install/e2e steps have `timeout-minutes`, Playwright has `timeout`/`expect.timeout`/CI-only `globalTimeout`, browser install goes through `scripts/retry.sh` with a cache, same-ref runs are cancelled (`concurrency`), and CI prints the `list` reporter so a stalled run shows its unfinished tests. `scripts/ci-config.test.ts` guards these limits: do not remove them.
 - Reading secret env files (`.env`, `.env.local`, `.env.{development,production,test}[.local]`) is denied in `.claude/settings.json`; `.env.example` is readable and lists the variables.
 
 ## Next.js version warning

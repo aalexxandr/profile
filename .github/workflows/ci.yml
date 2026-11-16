@@ -5,9 +5,14 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -39,12 +44,25 @@ jobs:
           # Required by getSiteUrl() in production builds. CI output is not deployed.
           NEXT_PUBLIC_SITE_URL: https://example.com
       - run: pnpm fsd:check
-      - run: pnpm exec playwright install --with-deps chromium
+      - name: Cache Playwright browser (~/.cache/ms-playwright)
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      # The apt mirrors of the runner are occasionally unreachable, so the
+      # system packages and the browser download are retried separately.
+      - name: Install Playwright system dependencies
+        run: sh scripts/retry.sh 3 15 pnpm exec playwright install-deps chromium
+        timeout-minutes: 8
+      - name: Install Playwright browser
+        run: sh scripts/retry.sh 3 15 pnpm exec playwright install chromium
+        timeout-minutes: 5
       - run: pnpm test:e2e
+        timeout-minutes: 8
         env:
           NEXT_PUBLIC_SITE_URL: https://example.com
       - uses: actions/upload-artifact@v7
-        if: failure()
+        if: always()
         with:
           name: playwright-report
           path: |
