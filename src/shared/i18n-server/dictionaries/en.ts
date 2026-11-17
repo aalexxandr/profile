@@ -101,6 +101,35 @@ export const en = {
       title: "cases",
     },
     contacts: {
+      form: {
+        emailLabel: "Your email",
+        errors: {
+          invalidEmail: "Enter a valid email address",
+          required: "This field is required",
+          tooLong: "No more than {max} characters",
+        },
+        messageLabel: "Your message",
+        methodLabel: "Preferred method of communication",
+        methods: {
+          email: "Email",
+          telegram: "Telegram",
+        },
+        nameLabel: "Your name / company",
+        send: "Send",
+        success: {
+          text: "Thank you! I will get back to you soon.",
+          title: "Message sent",
+        },
+        title: "start work",
+        usernameLabel: "Your number or username",
+      },
+      illustrationAlt: "Retro computer",
+      infoText:
+        "See an opportunity to create something interesting together? I'd be happy to connect, discuss your idea, and turn it into something bigger.",
+      links: {
+        linkedin: "Open LinkedIn profile",
+        telegram: "Write on Telegram",
+      },
       title: "contacts",
     },
   },

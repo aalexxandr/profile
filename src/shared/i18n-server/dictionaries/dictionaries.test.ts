@@ -120,3 +120,43 @@ describe("team size texts", () => {
     expect(teamSizeUnit.other).toBe("people");
   });
 });
+
+describe.each(locales)("%s contacts page texts", (locale) => {
+  const { form, illustrationAlt, infoText, links } =
+    dictionaries[locale].pages.contacts;
+
+  it("has the info text, the illustration alt and the social link labels", () => {
+    expect(infoText).toBeTruthy();
+    expect(illustrationAlt).toBeTruthy();
+    expect(links.telegram).toBeTruthy();
+    expect(links.linkedin).toBeTruthy();
+  });
+
+  it("has labels for the fields, the methods and the submit button", () => {
+    expect(form.title).toBeTruthy();
+    expect(form.nameLabel).toBeTruthy();
+    expect(form.emailLabel).toBeTruthy();
+    expect(form.methodLabel).toBeTruthy();
+    expect(form.methods.telegram).toBeTruthy();
+    expect(form.methods.email).toBeTruthy();
+    expect(form.usernameLabel).toBeTruthy();
+    expect(form.messageLabel).toBeTruthy();
+    expect(form.send).toBeTruthy();
+  });
+
+  it("has the validation errors and the success notice", () => {
+    expect(form.errors.required).toBeTruthy();
+    expect(form.errors.invalidEmail).toBeTruthy();
+    expect(form.errors.tooLong).toContain("{max}");
+    expect(form.success.title).toBeTruthy();
+    expect(form.success.text).toBeTruthy();
+  });
+
+  it("has no phone, WhatsApp or service texts", () => {
+    const texts = collectStrings(dictionaries[locale].pages.contacts)
+      .map(([, text]) => text.toLowerCase())
+      .join(" ");
+
+    expect(texts).not.toMatch(/whatsapp|телефон|phone|service|услуг/);
+  });
+});

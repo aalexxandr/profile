@@ -103,6 +103,35 @@ export const ru = {
       title: "кейсы",
     },
     contacts: {
+      form: {
+        emailLabel: "Ваш email",
+        errors: {
+          invalidEmail: "Введите корректный email",
+          required: "Обязательное поле",
+          tooLong: "Не более {max} символов",
+        },
+        messageLabel: "Ваше сообщение",
+        methodLabel: "Предпочтительный способ связи",
+        methods: {
+          email: "Email",
+          telegram: "Telegram",
+        },
+        nameLabel: "Ваше имя / компания",
+        send: "Отправить",
+        success: {
+          text: "Спасибо! Я скоро свяжусь с вами.",
+          title: "Сообщение отправлено",
+        },
+        title: "начать работу",
+        usernameLabel: "Ваш номер или username",
+      },
+      illustrationAlt: "Ретро-компьютер",
+      infoText:
+        "Увидели возможность создать что-то интересное вместе? \n Буду рад познакомиться, обсудить вашу задумку и превратить её во что-то большее.",
+      links: {
+        linkedin: "Открыть профиль в LinkedIn",
+        telegram: "Написать в Telegram",
+      },
       title: "контакты",
     },
   },
