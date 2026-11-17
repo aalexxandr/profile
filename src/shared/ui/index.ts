@@ -1,4 +1,5 @@
 export { Button } from "./Button";
+export { CursorGlow } from "./cursor-glow";
 export { ExternalLink } from "./ExternalLink";
 export { ImageWithFallback } from "./ImageWithFallback";
 export { ProjectLink } from "./ProjectLink";

@@ -1,6 +1,7 @@
 import { getLocalizedPath, type Dictionary, type Locale } from "@/shared/i18n";
 import { Reveal } from "@/shared/ui";
 import type { CaseDetail } from "@/views/case-details/api/types";
+import { CASE_HEADER_ID } from "@/views/case-details/config/caseHeaderId";
 import { getCaseFacts } from "@/views/case-details/lib/getCaseFacts";
 
 import { CaseBackground } from "./CaseBackground";
@@ -17,7 +18,7 @@ export const CaseHeader = ({ caseItem, cases, locale }: CaseHeaderProps) => {
   const { detail } = cases;
 
   return (
-    <header>
+    <header id={CASE_HEADER_ID}>
       <CaseBackground
         backgroundBlurImage={caseItem.backgroundBlurImage}
         backgroundImage={caseItem.backgroundImage}

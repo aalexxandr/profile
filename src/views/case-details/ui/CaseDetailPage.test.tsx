@@ -17,6 +17,13 @@ vi.mock("next/image", () => ({
   ),
 }));
 
+vi.mock("@/shared/ui", async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
+  CursorGlow: ({ boundaryId }: { boundaryId?: string }) => (
+    <div data-boundary={boundaryId} data-testid="cursor-glow" />
+  ),
+}));
+
 const dictionaries: Record<Locale, Dictionary> = { en, ru };
 
 const caseItem: CaseDetail = {
@@ -177,5 +184,23 @@ describe("CaseDetailPage", () => {
         name: en.pages.cases.detail.achievementsTitle,
       }),
     ).toBeNull();
+  });
+});
+
+describe("CaseDetailPage cursor glow", () => {
+  it.each(locales)("shows the cursor glow in %s", (locale) => {
+    renderPage({}, locale);
+
+    expect(screen.getByTestId("cursor-glow")).toBeInTheDocument();
+  });
+
+  it("keeps the glow below the case header", () => {
+    const { container } = renderPage();
+    const boundaryId = screen
+      .getByTestId("cursor-glow")
+      .getAttribute("data-boundary");
+
+    expect(boundaryId).toBeTruthy();
+    expect(container.querySelector("header")).toHaveAttribute("id", boundaryId);
   });
 });

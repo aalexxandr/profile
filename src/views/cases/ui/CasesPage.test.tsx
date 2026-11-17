@@ -13,6 +13,13 @@ vi.mock("next/image", () => ({
   default: ({ alt }: { alt: string }) => <img alt={alt} />,
 }));
 
+vi.mock("@/shared/ui", async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
+  CursorGlow: ({ boundaryId }: { boundaryId?: string }) => (
+    <div data-boundary={boundaryId} data-testid="cursor-glow" />
+  ),
+}));
+
 const labelsByLocale = { en: en.pages.cases, ru: ru.pages.cases };
 
 const item = (slug: string, name: string): CaseListItem => ({
@@ -68,7 +75,7 @@ describe("CasesPage", () => {
     );
     const [first, second] = screen
       .getAllByRole("region")
-      .map((region) => region.parentElement);
+      .map((region) => region.parentElement?.parentElement?.parentElement);
 
     expect(first).not.toHaveClass("[animation-play-state:paused]");
     expect(second).toHaveClass("[animation-play-state:paused]");
@@ -81,5 +88,27 @@ describe("CasesPage", () => {
       screen.getByRole("heading", { level: 1, name: en.pages.cases.title }),
     ).toBeInTheDocument();
     expect(screen.queryByRole("article")).not.toBeInTheDocument();
+  });
+});
+
+describe("CasesPage cursor glow", () => {
+  it.each(locales)("shows the cursor glow in %s", (locale) => {
+    render(
+      <CasesPage
+        caseItems={[item("spectre", "Spectre")]}
+        cases={labelsByLocale[locale]}
+        locale={locale}
+      />,
+    );
+
+    expect(screen.getByTestId("cursor-glow")).toBeInTheDocument();
+  });
+
+  it("has no boundary: the glow may cover the whole list", () => {
+    render(<CasesPage cases={en.pages.cases} locale="en" />);
+
+    expect(screen.getByTestId("cursor-glow")).not.toHaveAttribute(
+      "data-boundary",
+    );
   });
 });

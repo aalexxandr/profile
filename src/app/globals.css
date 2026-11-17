@@ -22,6 +22,18 @@
   --color-accent: #db00ff;
   --color-accent-active: #b102ce;
   --color-focus-ring: #ff5a8f;
+  --color-glow: #1100ff;
+
+  /* Soft spot following the cursor: a pre-painted falloff, no runtime blur. */
+  --background-image-glow-spot: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--color-glow) 75%, transparent) 0%,
+    color-mix(in srgb, var(--color-glow) 62%, transparent) 20%,
+    color-mix(in srgb, var(--color-glow) 40%, transparent) 40%,
+    color-mix(in srgb, var(--color-glow) 18%, transparent) 60%,
+    color-mix(in srgb, var(--color-glow) 5%, transparent) 80%,
+    transparent 100%
+  );
 
   --animate-reveal-down: reveal-down 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-reveal-fade: reveal-fade 700ms cubic-bezier(0.22, 1, 0.36, 1) both;

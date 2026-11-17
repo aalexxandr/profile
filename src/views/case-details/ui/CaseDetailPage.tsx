@@ -1,4 +1,6 @@
 import type { Dictionary, Locale } from "@/shared/i18n";
+import { CursorGlow } from "@/shared/ui";
+import { CASE_HEADER_ID } from "@/views/case-details/config/caseHeaderId";
 
 import type { CaseDetail } from "../api/types";
 import { CaseAbout } from "./CaseAbout";
@@ -18,6 +20,7 @@ export const CaseDetailPage = ({
   locale,
 }: CaseDetailPageProps) => (
   <div className="size-full min-h-0 overflow-y-auto pb-12">
+    <CursorGlow boundaryId={CASE_HEADER_ID} />
     <article>
       <CaseHeader caseItem={caseItem} cases={cases} locale={locale} />
       <div className="mx-auto flex w-full max-w-310 flex-col gap-10 px-4 pt-6 sm:px-6 lg:gap-14 lg:px-5">
