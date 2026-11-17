@@ -79,6 +79,24 @@ for (const { contacts, locale } of locales) {
       ).toBeChecked();
     });
 
+    test("Tab reaches both contact methods and Space selects one", async ({
+      page,
+    }) => {
+      const email = page.getByRole("radio", { name: form.methods.email });
+      const telegram = page.getByRole("radio", { name: form.methods.telegram });
+
+      await email.focus();
+      await page.keyboard.press("Tab");
+      await expect(telegram).toBeFocused();
+
+      await page.keyboard.press("Space");
+      await expect(telegram).toBeChecked();
+      await expect(email).not.toBeChecked();
+
+      await page.keyboard.press("Shift+Tab");
+      await expect(email).toBeFocused();
+    });
+
     test("shows localized errors on an empty submit", async ({ page }) => {
       await page.getByRole("button", { name: form.send }).click();
 
@@ -270,6 +288,7 @@ for (const { contacts, locale } of locales) {
         contacts.links.linkedin,
         new RegExp(form.nameLabel),
         form.methods.email,
+        form.methods.telegram,
         new RegExp(form.emailLabel),
         new RegExp(form.messageLabel),
         form.send,

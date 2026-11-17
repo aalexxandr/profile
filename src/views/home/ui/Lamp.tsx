@@ -39,20 +39,23 @@ export const Lamp: FC<LampProps> = ({ ariaLabel = "lamp", className }) => {
   };
 
   return (
-    <div
+    <button
+      aria-label={ariaLabel}
+      aria-pressed={isLampOn}
       className={clsx(
-        "relative flex w-fit cursor-pointer items-center justify-center",
+        "relative flex w-fit cursor-pointer items-center justify-center border-0 bg-transparent p-0",
         className,
       )}
       onClick={toggleLamp}
+      type="button"
     >
-      <LampIcon role="img" aria-label={ariaLabel} style={lampColorVars} />
+      <LampIcon aria-hidden="true" style={lampColorVars} />
       <div
         className={clsx(
           "absolute -top-10 left-35 z-[-1] size-81 transform-[translate3d(0,0,0)_translateX(-50%)] transition-opacity duration-700 ease-out will-change-[filter,opacity] [-webkit-filter:url(#lamp-light-blur-filter)] [background:linear-gradient(94.84deg,#ff6b00_51.74%,#232323_56.65%)] motion-reduce:transition-none",
           isLampOn ? "opacity-90" : "opacity-0",
         )}
       />
-    </div>
+    </button>
   );
 };

@@ -32,7 +32,7 @@ const RETRO_WINDOW_INNER_SHADOW =
   "shadow-[inset_1px_1px_0_0_#b8adb7,inset_-1px_-1px_0_0_#867883]";
 
 const RETRO_WINDOW_BUTTON_CLASS_NAME = clsx(
-  "flex size-4 cursor-pointer appearance-none items-center justify-center border-0 bg-[#3f3d42] p-1 text-white outline-none hover:bg-[#56525a] focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-focus-ring active:bg-[#2f2b33] active:shadow-[inset_1px_1px_0_0_#050409,inset_-1px_-1px_0_0_#d8cbd4,inset_2px_2px_0_0_#867883,inset_-2px_-2px_0_0_#b8adb7]",
+  "flex size-4 cursor-pointer appearance-none items-center justify-center border-0 bg-[#3f3d42] p-1 text-white hover:bg-[#56525a] active:bg-[#2f2b33] active:shadow-[inset_1px_1px_0_0_#050409,inset_-1px_-1px_0_0_#d8cbd4,inset_2px_2px_0_0_#867883,inset_-2px_-2px_0_0_#b8adb7]",
   RETRO_WINDOW_OUTER_SHADOW,
 );
 

@@ -67,7 +67,7 @@ export const Header = ({
                   key={page}
                   aria-current={isActive ? "page" : undefined}
                   className={clsx(
-                    "relative z-10 px-1 pt-1 pb-2 no-underline transition-colors outline-none hover:text-accent focus-visible:text-accent active:text-accent-active",
+                    "relative z-10 px-1 pt-1 pb-2 no-underline transition-colors hover:text-accent focus-visible:text-accent active:text-accent-active",
                     "after:absolute after:bottom-0 after:left-1/2 after:h-0.75 after:w-full after:-translate-x-1/2 after:bg-accent after:transition-opacity",
                     isActive && !isIndicatorMeasured
                       ? "after:opacity-100"

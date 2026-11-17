@@ -36,7 +36,7 @@ const disabledClassName = clsx(
 );
 
 const buttonClassName = clsx(
-  "flex h-[35px] w-full cursor-pointer items-center justify-center gap-1 border-0 bg-control px-4 py-1.5 font-vcr text-[12px] text-control-fg uppercase no-underline transition-none outline-none hover:bg-accent hover:text-white focus-visible:border focus-visible:border-focus-ring focus-visible:shadow-none active:bg-accent-active",
+  "flex h-[35px] w-full cursor-pointer items-center justify-center gap-1 border-0 bg-control px-4 py-1.5 font-vcr text-[12px] text-control-fg uppercase no-underline transition-none hover:bg-accent hover:text-white active:bg-accent-active",
   retroShadow,
 );
 
