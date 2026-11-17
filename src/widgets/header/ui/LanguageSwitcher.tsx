@@ -36,7 +36,7 @@ export const LanguageSwitcher = ({
             aria-current={isActive ? "true" : undefined}
             aria-label={localeCopy.title}
             className={clsx(
-              "flex h-full flex-1 items-center justify-center px-1 pt-0.5 no-underline transition-[background-color,color,box-shadow] duration-200 outline-none focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-focus-ring motion-reduce:transition-none",
+              "flex h-full flex-1 items-center justify-center px-1 pt-0.5 no-underline transition-[background-color,color,box-shadow] duration-200 motion-reduce:transition-none",
               isActive
                 ? "bg-accent text-white shadow-[0_0_14px_rgba(219,0,255,0.55),inset_-1px_-1px_0_0_rgba(0,0,0,0.55),inset_1px_1px_0_0_rgba(255,255,255,0.35)]"
                 : "text-white/55 hover:text-white active:text-accent-active",

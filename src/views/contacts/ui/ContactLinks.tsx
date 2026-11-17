@@ -16,7 +16,7 @@ type ContactLinksProps = {
 };
 
 const linkClassName = clsx(
-  "inline-flex min-h-11 items-center gap-2 font-vcr text-[14px] text-white no-underline transition-colors outline-none hover:text-accent focus-visible:text-accent active:text-accent-active motion-reduce:transition-none",
+  "inline-flex min-h-11 items-center gap-2 font-vcr text-[14px] text-white no-underline transition-colors hover:text-accent focus-visible:text-accent active:text-accent-active motion-reduce:transition-none",
 );
 
 const iconClassName = "size-6 shrink-0";

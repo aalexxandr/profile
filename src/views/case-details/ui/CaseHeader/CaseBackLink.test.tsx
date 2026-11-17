@@ -33,7 +33,7 @@ describe("CaseBackLink", () => {
     expect(screen.getByRole("link")).toHaveClass(
       "text-accent",
       "hover:text-white",
-      "focus-visible:text-focus-ring",
+      "focus-visible:text-white",
     );
   });
 });

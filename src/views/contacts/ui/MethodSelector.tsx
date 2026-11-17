@@ -18,7 +18,10 @@ type MethodSelectorProps = {
 };
 
 export const MethodSelector = ({ legend, options }: MethodSelectorProps) => {
-  const groupName = useId();
+  // Not one shared `name`: browsers give a native radio group a single Tab
+  // stop (the checked one, the rest via arrow keys), so the other method would
+  // be skipped by Tab. The value is controlled by the form anyway.
+  const idPrefix = useId();
   const { clearErrors } = useFormContext<ContactFormValues>();
   const { field } = useController<ContactFormValues, "method">({
     name: "method",
@@ -42,7 +45,7 @@ export const MethodSelector = ({ legend, options }: MethodSelectorProps) => {
             checked={field.value === option.value}
             key={option.value}
             label={option.label}
-            name={groupName}
+            name={`${idPrefix}-${option.value}`}
             onChange={() => select(option.value)}
             type="radio"
           />
