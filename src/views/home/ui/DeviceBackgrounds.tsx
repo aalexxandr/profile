@@ -7,7 +7,7 @@ import tabletSrc from "./assets/tablet.svg";
 export const DeviceBackgrounds = ({ children }: PropsWithChildren) => (
   <div className="absolute bottom-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 lg:bottom-40 lg:translate-y-0">
     <Reveal delay={360}>
-      <div className="relative h-129 w-82 md:w-108 lg:h-127 lg:w-149 lg:p-10">
+      <div className="relative h-138 w-88 md:w-108 lg:h-127 lg:w-149 lg:p-10">
         <picture className="absolute inset-0 block">
           <source media="(min-width: 1024px)" srcSet={computerSrc.src} />
           <source media="(min-width: 768px)" srcSet={tabletSrc.src} />
