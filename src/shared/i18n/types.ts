@@ -79,6 +79,35 @@ export type Dictionary = {
       title: string;
     };
     contacts: {
+      form: {
+        emailLabel: string;
+        errors: {
+          invalidEmail: string;
+          required: string;
+          // Contains the {max} placeholder for the character limit.
+          tooLong: string;
+        };
+        messageLabel: string;
+        methodLabel: string;
+        methods: {
+          email: string;
+          telegram: string;
+        };
+        nameLabel: string;
+        send: string;
+        success: {
+          text: string;
+          title: string;
+        };
+        title: string;
+        usernameLabel: string;
+      };
+      illustrationAlt: string;
+      infoText: string;
+      links: {
+        linkedin: string;
+        telegram: string;
+      };
       title: string;
     };
   };
