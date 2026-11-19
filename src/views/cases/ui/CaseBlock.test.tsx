@@ -6,14 +6,20 @@ import { en } from "@/shared/i18n-server/dictionaries/en";
 import { ru } from "@/shared/i18n-server/dictionaries/ru";
 
 import type { CaseListItem } from "../api/types";
+import { CASE_IMAGE_SIZES } from "../config";
 import { CaseBlock } from "./CaseBlock";
 
-type MockImageProps = { alt: string; blurDataURL?: string; src: string };
+type MockImageProps = {
+  alt: string;
+  blurDataURL?: string;
+  sizes?: string;
+  src: string;
+};
 
 vi.mock("next/image", () => ({
-  default: ({ alt, blurDataURL, src }: MockImageProps) => (
+  default: ({ alt, blurDataURL, sizes, src }: MockImageProps) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img alt={alt} data-blur={blurDataURL} src={src} />
+    <img alt={alt} data-blur={blurDataURL} data-sizes={sizes} src={src} />
   ),
 }));
 
@@ -126,6 +132,14 @@ describe("CaseBlock", () => {
 
     expect(image).toHaveAttribute("src", "https://cdn.test/spectre.webp");
     expect(image).toHaveAttribute("data-blur", "data:image/png;base64,AAAA");
+  });
+
+  it("tells the browser the rendered width of the picture", () => {
+    renderCaseBlock("en");
+
+    expect(
+      screen.getByRole("img", { name: "Spectre Explorer" }),
+    ).toHaveAttribute("data-sizes", CASE_IMAGE_SIZES);
   });
 
   it.each(locales)("shows the no-image text in %s", (locale) => {

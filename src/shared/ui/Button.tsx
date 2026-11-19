@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import Link, { type LinkProps } from "next/link";
 import type { ComponentProps, PropsWithChildren } from "react";

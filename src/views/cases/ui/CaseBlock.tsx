@@ -9,6 +9,7 @@ import {
   Reveal,
 } from "@/shared/ui";
 
+import { CASE_IMAGE_SIZES } from "../config";
 import { getCaseBlockReveal } from "../lib/getCaseBlockReveal";
 
 import type { CaseListItem } from "../api/types";
@@ -50,6 +51,7 @@ export const CaseBlock = ({
           fallback={caseLabels.noImage}
           height={430}
           loading="lazy"
+          sizes={CASE_IMAGE_SIZES}
           src={caseData.image}
           width={520}
         />
