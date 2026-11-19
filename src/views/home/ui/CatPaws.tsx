@@ -1,6 +1,6 @@
 "use client";
 
-import { Lottie } from "lottie-react";
+import { LazyLottie } from "./LazyLottie";
 import type { FC } from "react";
 import { useAlternatingDirection } from "../lib/useAlternatingDirection";
 import paws from "./assets/lottie-animations/cat-paws.json";
@@ -13,7 +13,7 @@ export const CatPaws: FC<CatPawsProps> = ({ className }) => {
   const { lottieRef, subscriptions } = useAlternatingDirection();
 
   return (
-    <Lottie
+    <LazyLottie
       src={paws}
       loop={false}
       autoplay

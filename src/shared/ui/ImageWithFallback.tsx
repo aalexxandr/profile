@@ -3,7 +3,7 @@ import Image, { type ImageProps } from "next/image";
 
 type ImageWithFallbackProps = Pick<
   ImageProps,
-  "alt" | "className" | "height" | "loading" | "width"
+  "alt" | "className" | "height" | "loading" | "sizes" | "width"
 > & {
   blurSrc?: string | null;
   fallback: string;

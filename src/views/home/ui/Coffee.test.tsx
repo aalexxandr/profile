@@ -8,7 +8,7 @@ const { Lottie } = vi.hoisted(() => ({
   Lottie: vi.fn<(props: Record<string, unknown>) => null>(() => null),
 }));
 
-vi.mock("lottie-react", () => ({ Lottie }));
+vi.mock("./LazyLottie", () => ({ LazyLottie: Lottie }));
 
 const lastProps = () => Lottie.mock.lastCall?.[0];
 

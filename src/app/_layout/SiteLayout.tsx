@@ -5,42 +5,19 @@ import type { ReactNode } from "react";
 import { Header } from "@/widgets/header";
 import type { Dictionary, Locale } from "@/shared/i18n";
 
+// Only the regular (400) and bold (700) upright faces are used; Tailwind's
+// `font-light`/`italic` are not applied anywhere, so those files are not shipped.
 const helvetica = localFont({
   src: [
-    {
-      path: "../fonts/HelveticaNeue-thin.ttf",
-      weight: "200",
-      style: "thin",
-    },
-    {
-      path: "../fonts/HelveticaNeue-Light.woff2",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../fonts/HelveticaNeue-LightItalic.woff2",
-      weight: "300",
-      style: "italic",
-    },
     {
       path: "../fonts/HelveticaNeue.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../fonts/HelveticaNeue-Italic.woff2",
-      weight: "400",
-      style: "italic",
-    },
-    {
       path: "../fonts/HelveticaNeue-Bold.woff2",
       weight: "700",
       style: "normal",
-    },
-    {
-      path: "../fonts/HelveticaNeue-BoldItalic.woff2",
-      weight: "700",
-      style: "italic",
     },
   ],
   variable: "--font-helvetica",
@@ -49,7 +26,7 @@ const helvetica = localFont({
 const betterVCR = localFont({
   src: [
     {
-      path: "../fonts/BetterVCR.ttf",
+      path: "../fonts/BetterVCR.woff2",
       weight: "400",
       style: "normal",
     },

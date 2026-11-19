@@ -4,12 +4,12 @@ import { Lamp } from "./Lamp";
 import { CatPaws } from "./CatPaws";
 import { Coffee } from "./Coffee";
 import paintingSrc from "./assets/painting.svg";
-import shelvesSrc from "./assets/shelves.svg";
 import tableSrc from "./assets/table.svg";
 import { DeviceBackgrounds } from "./DeviceBackgrounds";
 
 import { Reveal } from "@/shared/ui";
 import { IntroContent } from "./IntroContent";
+import { ShelvesImage } from "./ShelvesImage";
 import type { Dictionary } from "@/shared/i18n";
 
 type HomePageProps = {
@@ -33,7 +33,7 @@ export const HomePage = ({ ctaHref, home }: HomePageProps) => {
           delay={180}
           direction="right"
         >
-          <Image src={shelvesSrc} alt={home.imageAlts.shelves} />
+          <ShelvesImage alt={home.imageAlts.shelves} />
         </Reveal>
         <div className="hidden lg:absolute lg:bottom-0 lg:left-1/2 lg:block lg:-translate-x-1/2">
           <Reveal className="relative" delay={260}>

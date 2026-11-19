@@ -8,6 +8,7 @@ type MockImageProps = {
   blurDataURL?: string;
   className?: string;
   placeholder?: string;
+  sizes?: string;
   src: string;
 };
 
@@ -17,6 +18,7 @@ vi.mock("next/image", () => ({
     blurDataURL,
     className,
     placeholder,
+    sizes,
     src,
   }: MockImageProps) => (
     // eslint-disable-next-line @next/next/no-img-element
@@ -25,6 +27,7 @@ vi.mock("next/image", () => ({
       className={className}
       data-blur={blurDataURL}
       data-placeholder={placeholder}
+      data-sizes={sizes}
       src={src}
     />
   ),
@@ -38,6 +41,21 @@ const props = {
 };
 
 describe("ImageWithFallback", () => {
+  it("hands the sizes hint to the image so the browser picks a fitting file", () => {
+    render(
+      <ImageWithFallback
+        {...props}
+        sizes="(min-width: 1024px) 432px, 260px"
+        src="https://cdn.test/a.webp"
+      />,
+    );
+
+    expect(screen.getByRole("img")).toHaveAttribute(
+      "data-sizes",
+      "(min-width: 1024px) 432px, 260px",
+    );
+  });
+
   it("shows the picture with its alternative text", () => {
     render(<ImageWithFallback {...props} src="https://cdn.test/a.webp" />);
 
