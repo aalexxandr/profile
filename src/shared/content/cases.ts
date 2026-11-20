@@ -36,9 +36,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://skygen.ai",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/skygen/3ed0d10ae9f1f033.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/skygen/0b5e9cde15318a66.webp",
       blurImage:
-        "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAABwAgCdASoUAAsAA4BaJQApgAejWKqvqRt3YXBAAP73BYPywROtVV/ezKYroxsZ/xHCD7eXxeQ/sVPs2xLyGAAA",
+        "data:image/webp;base64,UklGRioBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKQAAAANgFvbtqpqX8Hd3SHVPogowFqiCBogIqIFCnB3ty/34VJCREyALJ7LukDwVNRK1R+CtHy9veA1U+uU4q+4nQq8ltThqO4iMscL3tHFwmrCLBLevSiMGkLl+Cq5vHchIMA/JQDIwwUgeKx7TYTg5f8flROg7HXrFJzJ6eXvT6xPBhslqOz/DTa7SSMX++l0pYx4ZZLoN/pw+u1qftkPWz/ekIGLX1ZQOCBgAAAA8AMAnQEqFAAMAD7tYqpNqaWkIjAIATAdiWUAwNwi6sQnf6N/Aoy2AAD+41ok8Pc3Z3kdcqJ/4oG6vy8ioTWL8daeFHg/OhlFgP9aWBcW0Jg5LMXykvmPoHcf6iuQsIAA",
       backgroundImage: null,
       backgroundBlurImage: null,
       role: "PRODUCT",
@@ -139,9 +139,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://thespectre.io",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/spectre/fda669aa78c38ce1.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/spectre/67bcf7425e245943.webp",
       blurImage:
-        "data:image/webp;base64,UklGRoAAAABXRUJQVlA4WAoAAAAQAAAAEwAAFQAAQUxQSCQAAAABH3D//4iIhYJGkpr9qgsJHWxhDlcIiOh/JnAFKHwcQD1rrQdWUDggNgAAABADAJ0BKhQAFgA+7XCwUimmJKKoCAEwHYlnAMcwFqcUAAD+7t1LbYz8Ng5NxijO/oClFMAAAA==",
+        "data:image/webp;base64,UklGRiYBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSL8AAAANuS5E9D8At7Zt1co+9353/0BGaCnUTgFuNRC5O1fOPRuvIWICJsAlMCs2JdvOAMHPB7surFtyS6kDoqEG/lw0E13asMUpHmQj8DeJsQVeAFV1rwhI/JbdG6o4kTleElSQgN/Nq3PeqQqAKvg3KRAEQOJfIAwBgAASIAiABIBQBTkEGXk1hRIADgA8OVchAMSHd9lIVNeQBARGvatoeTVgDHy4EQ2YgEwUqYaZgSDwCqO6gifLKhRVVCROW9+7AgBWUDggQAAAAFADAJ0BKhQADAA+7WSqTamlpCIwCAEwHYlnAL84LQeE7eAAAP7tp53BKQyw9ybZl+WcahR62xpaXbGDiKhJEAA=",
       backgroundImage:
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/spectre/background/5693130a083e7259.webp",
       backgroundBlurImage:
@@ -242,9 +242,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://atgraphite.com",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/atgraphite/e7c828f6d621659a.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/atgraphite/c721302fe94589a2.webp",
       blurImage:
-        "data:image/webp;base64,UklGRvIAAABXRUJQVlA4WAoAAAAQAAAAEwAADQAAQUxQSH8AAAABcGMBAKnE1RhtY+oEOoS1NfaafAH7Gtqb3KzRtvlzHSEiJgChzt+Ar2t2IhhtKAHfNx00KMZU+aEVVbJ/W+ST3t/Oq07zNwC4nv5xu/zl+pcLwVL96XqW2XLd3pez44vc4PH5/B9DqfYLg8Pn8wUfpdb8FThvQN/DVdkzsBsCAFZQOCBMAAAA0AMAnQEqFAAOAD7tYqpOKaWkIjAIATAdiWcAvzgh34FY0uTfsB+AAP7udbNcWT0WOcFgaURZqURiXFbuzV72BBV4+DR0CRrEW9wAAA==",
+        "data:image/webp;base64,UklGRh4BAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSLgAAAABgGNt2/EoXkA6q7ed1KmyCI4rYwlWa9dmadu2J9b3vv94thARE8DWNl6TH4GQ924bk8lkGHInwgD4HSDc7xHJJbzWmXuC1I+I4fHqwqri3NsYUr8ihlfGZg+2FglSf4nsbT1BJv6v7WfIJv619YzZRIogIv4S3tv+tvgAf4Cn1dUnzMaLBveuX8JJoCDx9jDbO/lN5i1vHdm8T2HmbnGwLNB2D8kXDlfiLh86jUPyqNunMNZcQeQcVlA4IEAAAABQAwCdASoUAAwAPu1kqk4ppaQiMAgBMB2JZwC/ODBR5oNkUAD+7law1SaqRRdVE97dg9MNz/dwxXLTstBT0AAA",
       backgroundImage:
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/atgraphite/background/785bfac295500950.webp",
       backgroundBlurImage:
@@ -346,9 +346,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://bridge.atgraphite.com",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/bridge-graphite/a0ea039c9aea9423.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/bridge-graphite/f8efecbc519f4098.webp",
       blurImage:
-        "data:image/webp;base64,UklGRg4BAABXRUJQVlA4WAoAAAAQAAAAEwAADQAAQUxQSI8AAAANgBzbtmlrrWfbfq/78g/GNr6t1Tj4KUTEBIBBwhnNZkL4fHgMlRtpGxHJJAN4mU7ig2EJNITfj89ffG5nkVozDefHz9+f+PkWCAYphyQRFPwJQDa6rKLxXwGQDw2T8pBBlN/u3mxEMBoiKMbXo6sNSFYKYSiaPK1mj5QtGI0GEG2Xdy9vv4L94/r4i3Q1DgBWUDggWAAAABAEAJ0BKhQADgA+7WKpTamlpCIwCAEwHYlnAABd9Px/BLkWVCDfesiAAP7uo6Znmv0PwSxpqNHpnUH2Te545tbtcA8QomxOBfqrxmfyPI35614PvgDAAAA=",
+        "data:image/webp;base64,UklGRgIBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSJ8AAAANcBvbtqqc83DP3CPrxiGjMeqgBYpwd3e+4VJCREyAIG/xcilI4u26WqkFzXp5t5Hx2RL0IG0xXjr15RfGaMqTo1DG9TlvH4QjHIgpmpAO5xs+U2/CXwng9gPxyhtuIIAbAKrKjYAs06i7Ea+3/WAMgLuJ6jKbTJSk62U/HW2PeoFda2ryup3ivJuNVjeneWkyqNdFX/L7rVQOw4HkNBAAVlA4IDwAAACQAwCdASoUAAwAPu1krU6ppaSiMAgBMB2JZwAAUqac0Ziy7iYAAP67DUM2xZWBL+lElKAmixYdGch/0AA=",
       backgroundImage:
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/bridge-graphite/background/5e3551946134e27b.webp",
       backgroundBlurImage:
@@ -449,9 +449,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://phonebook.atgraphite.com",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/phonebook/78ca19da5bad4eda.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/phonebook/752e10c257c0448f.webp",
       blurImage:
-        "data:image/webp;base64,UklGRn4AAABXRUJQVlA4WAoAAAAQAAAAEwAACQAAQUxQSCgAAAABP6CgbRuGP+beHRARkXkGyAQsdNBFEFn0/3YpENH/CYhwpura1NAAVlA4IDAAAACwAgCdASoUAAoAPu1iqU2ppaOiMAgBMB2JaQAAeyAA/u/pspz1zv2vP3MiV04FAAA=",
+        "data:image/webp;base64,UklGRggBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKIAAAANgF3bdoLoxnB3d7datAC6ogQaoAg+KcB95s89CQ4tRMQEiFqvGwYBgAPeh/3RAYeG+fXtgNvMauVa9j6eFG4fXJmkWavmxwH3eEsJA2UBjbstbiuoOJD7QHAAIYcHAAJISgCQewCM425CcP3wL7kgwCAcdhgFN1L9+ydflMcHYPgu7cGgxyLU+/P+3ZkPcPW/m2xpIOk3s8PHdqFjCTv//wFWUDggQAAAAJADAJ0BKhQADAA+7WaqTimlo6IwCAEwHYlnAABb6Li4kSetAAAA/ujiwogbDUD9+enkP6JOepBccj6/NzoDwAA=",
       backgroundImage:
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/phonebook/background/ec41a73cf0392a45.webp",
       backgroundBlurImage:
@@ -546,9 +546,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: null,
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/ube/8966cc8deeaec4fd.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/ube/9396376b9a424dc5.webp",
       blurImage:
-        "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAACQAwCdASoUAAkAPu1kq04ppaQiMAgBMB2JZQBUQofMIlaqEquQAP7t54saTVCUVgHXaDD+gqugBM7ojcZTFw8yEsi4AAAA",
+        "data:image/webp;base64,UklGRhgBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKAAAAANcBvbtqqc8/7HLXSNGMpxiKiMNqiBHtzdHb7hUkJETIAgb4lSMUzi7bpSroYsJnW7U/DZGvYyZTOfu7X17ZMllvRmJOjj+py3D8IVDcQ1Qyj78w2fKVt4wz+J2y/E+xtAADcA1NUXVaVZuhGvt31/DEDsJprbZrZSUa6X/WS0O5gEdq2pxet1i/N2NlrBY1laTPp10VcCATu1Q3+kuGUCVlA4IFIAAADwAwCdASoUAAwAPu1iqk2ppaQiMAgBMB2JZwAAXotmSbGkljSVH00IAMtMWwNVYOUppfOCOhpbIT7GLRXm4yXzkfyBiLnwl/LQi4/gUvttQEAA",
       backgroundImage: null,
       backgroundBlurImage: null,
       role: "FULLSTACK",
@@ -641,9 +641,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://silavetra.com/travel",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/silavetra/fe7da28c47905118.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/silavetra/f340fa2cdda92782.webp",
       blurImage:
-        "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACQAwCdASoUAAsAPu1oqk6ppiQiMAgBMB2JaQAAXDNGIZvf/dEQAP7xz+TJSpB4xgCDJKC905gKd3HWifqUdzi1ctDRLYY/Bf2DUbZLAAA=",
+        "data:image/webp;base64,UklGRh4BAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKEAAAANgFXbtrJsH9zd3eGJQRQrYJ1oQAHLwCsF3N3ll3txqRAREyCOZzN2vLxiXyvWgWtCutnhQ6FKJeKssJvyT7RBr/zKkqcrPrwaYx4xiSxXfKzQyyGU4Gu6AvQVCPgXEgB6daUrAWi4jIS3V/YvEhNQctnVMrFIIrj8/bE1NxoBlA9cY7EYVGK2m032mpBVxNmwOSCr16IQXA+DzsXl0YjYDwBWUDggVgAAAPADAJ0BKhQADAA+7WSpTamlpCIwCAEwHYlnAABe9U7mkZejzlzo/AAA/unaI1o6MtA/y+8GDejzeCQ5oQs4Oo9wCiYnI7SFazp4TRGSJyCpfBi5AAAA",
       backgroundImage: null,
       backgroundBlurImage: null,
       role: "FULLSTACK",
@@ -737,9 +737,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://intecweb.ru/websites_bitrix/universe",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/universe/44926048f69979c5.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/universe/158556a3a4a3a632.webp",
       blurImage:
-        "data:image/webp;base64,UklGRrwAAABXRUJQVlA4WAoAAAAQAAAAEwAACgAAQUxQSEoAAAANcFzbttJcXEbuzogh7VEUpUAh7iQz96SAiJiAPLXx+FQV5QlAwDNPEGu33igM9QRESSBwXPB8kIUElvoFLdGBw/QCSZMATi/8bVZQOCBMAAAAsAMAnQEqFAALAD7taKpOqaYkIjAIATAdiWUAxvQj/9SFv4NhsAAA/u2hK+flOWRAWzPGS3rqNGqxyijxsrKaScIpWdiikJHDGGAAAA==",
+        "data:image/webp;base64,UklGRhQBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKAAAAANcF3btunsc1/MP9tqxvhKY6kjPaQH23aeYpQQERPAiG7RcslNhLfraqXmUiuF7Y7HZ43bipROde7WV7dPam/SkmOQxvU53T4wk8cREGTG7883fCaFBv8l3H6hG97eAAJwA0CSCIB4nlNyN8Lrbd+fvOwnolmjVhPPXy/76Wh7UDLsWlO1zWJi5+1svLqZNEu1Urou+rzToSPhMBjyJiUBVlA4IE4AAADQAwCdASoUAAwAPu1iqk4ppaQiMAgBMB2JZQAAUSzXfxLbHjEMKDAA8qOriLuo3F57r6ZkljQAOmfwanQQeJRqmI2ctMMDNGDoo7L4/AA=",
       backgroundImage: null,
       backgroundBlurImage: null,
       role: "FULLSTACK",
@@ -828,9 +828,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://intecweb.ru/websites_bitrix/intec.prom",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/prom/b74be191ffc8e2c5.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/prom/b808a93cd0caf80e.webp",
       blurImage:
-        "data:image/webp;base64,UklGRtIAAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSEQAAAAFcBvZttrcGsQcKsMO1RDVwdgBhQqZJduh44iYAFtl8XUPnBRvRRO/HbGfA1gGwlK+nXXZAuhr/IJlWgB01W+fm+y/AFZQOCBoAAAAEAQAnQEqFAAMAD7tYqlNqaWjojAIATAdiUAIQBggHr/gKB/8hkBWDEwA/uUCD5wLzE81rpr+O730OyGJYmCGDtCzFI6KCe+Nr4XvRZOt1jJp7yPWpehJujRafUpd4rxXPgf+k3wAAAA=",
+        "data:image/webp;base64,UklGRhwBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKAAAAANgFTb2rLsPt+Hu7vLUIMwIgCLUlSgABkowNjd3eH9HuDXCBExAepMuRQA4VtuVOsn4oJ2u2P8LBnMOhaVw+yJnxV9LG1lLp4YvzEmUybIToHfssZmIpLxr8S/YwIBT4kA0BcGCF+bATsRfnwKaAiohf1mrVpWS/x4KLujxaMC6kdhcbvtJo1yWsyX2kREBWXYGsIb8RjVfBx3rsGURWYBVlA4IFYAAADwAwCdASoUAAwAPu1krU2ppaSiMAgBMB2JZQDCgCHgC8KHfOIwB3YAAP7oxprHs7ljlN7n7x5K9dJX4RO/Sxf5Qaxff8ZrvIqEdVHaRDW8yVz64wAAAA==",
       backgroundImage: null,
       backgroundBlurImage: null,
       role: "FULLSTACK",
