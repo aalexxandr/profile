@@ -11,6 +11,3 @@ export const GLOW_MAX_FRAME_MS = 100;
 
 // Closer than this (px) the glow lands on the target and the loop idles.
 export const GLOW_SNAP_DISTANCE = 0.5;
-
-// Length (px) of the soft edge below a boundary.
-export const GLOW_EDGE_FADE = 100;

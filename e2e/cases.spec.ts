@@ -184,13 +184,14 @@ for (const locale of locales) {
       await expect(page.locator("dt")).toHaveCount(2);
     });
 
-    test("the case page shows the background but not the case picture", async ({
-      page,
-    }) => {
+    test("the case page shows no picture of the case", async ({ page }) => {
       await page.goto(`/${locale}/cases/spectre`);
 
-      await expect(page.locator('img[src*="7c4e9a1b2d3f5068"]')).toHaveCount(1);
-      await expect(page.locator('img[src*="3f9a1c2b7d4e5f60"]')).toHaveCount(0);
+      await expect(
+        page.getByRole("heading", { level: 1, name: "Spectre Explorer" }),
+      ).toBeVisible();
+      await expect(page.locator("main img")).toHaveCount(0);
+      await expect(page.getByText(labels[locale].noImage)).toHaveCount(0);
     });
 
     test("a finished case shows the company, team size and the project link", async ({
@@ -242,18 +243,6 @@ for (const locale of locales) {
         name: labels[locale].achievements,
       });
       await expect(achievements.getByText("-40%")).toBeVisible();
-    });
-
-    test("a case without a background still shows its header", async ({
-      page,
-      consoleErrors,
-    }) => {
-      await page.goto(`/${locale}/cases/orbit`);
-
-      await expect(
-        page.getByRole("heading", { level: 1, name: "Orbit Booking" }),
-      ).toBeVisible();
-      expect(consoleErrors).toEqual([]);
     });
   });
 }

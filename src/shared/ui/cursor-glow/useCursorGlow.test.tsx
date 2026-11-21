@@ -7,14 +7,12 @@ import { FakeAnimationFrame } from "./testing/FakeAnimationFrame";
 import { FakeMatchMedia } from "./testing/FakeMatchMedia";
 import { useCursorGlow } from "./useCursorGlow";
 
-const Probe = ({ boundaryId }: { boundaryId?: string }) => {
-  const { glowRef, isEnabled, layerRef } = useCursorGlow(boundaryId);
+const Probe = () => {
+  const { glowRef, mode } = useCursorGlow();
 
-  return isEnabled ? (
-    <div data-testid="layer" ref={layerRef}>
-      <div data-testid="glow" ref={glowRef} />
-    </div>
-  ) : null;
+  return mode === "off" ? null : (
+    <div data-mode={mode} data-testid="glow" ref={glowRef} />
+  );
 };
 
 const glow = () => screen.getByTestId("glow");
@@ -62,17 +60,34 @@ describe("useCursorGlow", () => {
   });
 
   describe("gating", () => {
-    it("is enabled for a hovering fine pointer", () => {
+    it("follows a hovering fine pointer", () => {
       render(<Probe />);
 
-      expect(screen.getByTestId("glow")).toBeInTheDocument();
+      expect(glow()).toHaveAttribute("data-mode", "follow");
     });
 
-    it.each([
-      ["a coarse pointer or no hover", FINE_HOVER_QUERY, false],
-      ["reduced motion", REDUCED_MOTION_QUERY, true],
-    ])("renders nothing and runs nothing for %s", (_name, query, value) => {
-      media.set(query, value);
+    it.each([false, true])(
+      "stays static and runs nothing without a hovering pointer (reduced motion: %s)",
+      (reducedMotion) => {
+        media.set(FINE_HOVER_QUERY, false);
+        media.set(REDUCED_MOTION_QUERY, reducedMotion);
+        const addListener = vi.spyOn(window, "addEventListener");
+
+        render(<Probe />);
+
+        expect(glow()).toHaveAttribute("data-mode", "static");
+        expect(glow().style.transform).toBe("");
+        expect(frames.pending).toBe(0);
+        expect(addListener).not.toHaveBeenCalledWith(
+          "mousemove",
+          expect.anything(),
+          expect.anything(),
+        );
+      },
+    );
+
+    it("renders nothing and runs nothing for a mouse with reduced motion", () => {
+      media.set(REDUCED_MOTION_QUERY, true);
       const addListener = vi.spyOn(window, "addEventListener");
 
       render(<Probe />);
@@ -95,13 +110,14 @@ describe("useCursorGlow", () => {
       expect(frames.pending).toBe(0);
     });
 
-    it("shows the glow when the pointer becomes a hovering one", () => {
+    it("starts following when the pointer becomes a hovering one", () => {
       media.set(FINE_HOVER_QUERY, false);
       render(<Probe />);
 
       act(() => media.set(FINE_HOVER_QUERY, true));
 
-      expect(screen.getByTestId("glow")).toBeInTheDocument();
+      expect(glow()).toHaveAttribute("data-mode", "follow");
+      expect(frames.pending).toBe(1);
     });
   });
 
@@ -157,143 +173,47 @@ describe("useCursorGlow", () => {
     });
   });
 
-  describe("boundary", () => {
-    const addBoundary = (bottom: () => number) => {
-      const element = document.createElement("header");
-      element.id = "boundary";
-      vi.spyOn(element, "getBoundingClientRect").mockImplementation(
-        () => ({ bottom: bottom() }) as DOMRect,
-      );
-      document.body.append(element);
-    };
+  describe("anywhere on the page", () => {
+    it("reaches a pointer at the very top of the viewport", () => {
+      render(<Probe />);
 
-    it("holds the glow centre at the boundary edge", () => {
-      addBoundary(() => 200);
-      render(<Probe boundaryId="boundary" />);
-
-      move(500, 50);
+      move(500, 10);
       act(() => frames.flush(300));
 
-      expect(readCentre()).toEqual({ x: 500, y: 200 });
+      expect(readCentre()).toEqual({ x: 500, y: 10 });
     });
 
-    it("lets the glow reach content just below the boundary", () => {
-      addBoundary(() => 200);
-      render(<Probe boundaryId="boundary" />);
-
-      move(500, 330);
-      act(() => frames.flush(300));
-
-      expect(readCentre()).toEqual({ x: 500, y: 330 });
-    });
-
-    it("lets the glow follow the pointer below the boundary", () => {
-      addBoundary(() => 200);
-      render(<Probe boundaryId="boundary" />);
-
-      move(500, 780);
-      act(() => frames.flush(300));
-
-      expect(readCentre()).toEqual({ x: 500, y: 780 });
-    });
-
-    it("re-reads the boundary each frame and wakes when a container scrolls", () => {
-      let bottom = 200;
-      addBoundary(() => bottom);
-      render(<Probe boundaryId="boundary" />);
-      move(500, 50);
-      act(() => frames.flush(300));
-
-      bottom = -400;
-      const scroller = document.createElement("div");
-      document.body.append(scroller);
-      act(() => {
-        // scroll events do not bubble: the hook listens in the capture phase
-        fireEvent.scroll(scroller);
-      });
-      act(() => frames.flush(300));
-
-      expect(readCentre()).toEqual({ x: 500, y: 50 });
-    });
-
-    it("ignores an unknown boundary id", () => {
-      render(<Probe boundaryId="missing" />);
-
-      move(500, 50);
-      act(() => frames.flush(300));
-
-      expect(readCentre()).toEqual({ x: 500, y: 50 });
-    });
-  });
-
-  describe("edge mask", () => {
-    const layer = () => screen.getByTestId("layer");
-    const maskWrites = (setProperty: { mock: { calls: unknown[][] } }) =>
-      setProperty.mock.calls.filter(([name]) => name === "mask-image");
-
-    const addBoundary = (bottom: () => number) => {
-      const element = document.createElement("header");
-      element.id = "boundary";
-      vi.spyOn(element, "getBoundingClientRect").mockImplementation(
-        () => ({ bottom: bottom() }) as DOMRect,
-      );
-      document.body.append(element);
-    };
-
-    it("cuts the layer at the boundary edge with a soft fade below it", () => {
-      const setProperty = vi.spyOn(
-        CSSStyleDeclaration.prototype,
-        "setProperty",
-      );
-      addBoundary(() => 200);
-      render(<Probe boundaryId="boundary" />);
-
-      move(500, 330);
-      act(() => frames.flush(5));
-
-      expect(maskWrites(setProperty)).toContainEqual([
-        "mask-image",
-        "linear-gradient(to bottom, transparent 200px, #000 300px)",
-      ]);
-    });
-
-    it("rewrites the mask only when the edge moves, not on every frame", () => {
-      let bottom = 200;
-      const setProperty = vi.spyOn(
-        CSSStyleDeclaration.prototype,
-        "setProperty",
-      );
-      addBoundary(() => bottom);
-      render(<Probe boundaryId="boundary" />);
-      move(500, 330);
-      act(() => frames.flush(300));
-
-      expect(maskWrites(setProperty)).toHaveLength(1);
-
-      bottom = 120;
-      act(() => {
-        fireEvent.scroll(window);
-      });
-      act(() => frames.flush(3));
-
-      expect(maskWrites(setProperty)).toHaveLength(2);
-      expect(maskWrites(setProperty).at(-1)).toEqual([
-        "mask-image",
-        "linear-gradient(to bottom, transparent 120px, #000 220px)",
-      ]);
-    });
-
-    it("has no mask without a boundary", () => {
+    it("never masks any part of the glow", () => {
       const setProperty = vi.spyOn(
         CSSStyleDeclaration.prototype,
         "setProperty",
       );
       render(<Probe />);
-      move(500, 50);
+
+      move(500, 10);
       act(() => frames.flush(300));
 
-      expect(maskWrites(setProperty)).toHaveLength(0);
-      expect(layer().style.getPropertyValue("mask-image")).toBe("");
+      expect(
+        setProperty.mock.calls.filter(([name]) => name === "mask-image"),
+      ).toEqual([]);
+    });
+
+    it("does not wake on scroll or resize once settled", () => {
+      render(<Probe />);
+      move(500, 300);
+      act(() => frames.flush(300));
+
+      expect(frames.pending).toBe(0);
+
+      const scroller = document.createElement("div");
+      document.body.append(scroller);
+      act(() => {
+        fireEvent.scroll(scroller);
+        fireEvent.scroll(window);
+        fireEvent(window, new Event("resize"));
+      });
+
+      expect(frames.pending).toBe(0);
     });
   });
 
@@ -341,15 +261,6 @@ describe("useCursorGlow", () => {
       expect(frames.pending).toBe(0);
       expect(removeListener).toHaveBeenCalledWith(
         "mousemove",
-        expect.any(Function),
-      );
-      expect(removeListener).toHaveBeenCalledWith(
-        "scroll",
-        expect.any(Function),
-        expect.anything(),
-      );
-      expect(removeListener).toHaveBeenCalledWith(
-        "resize",
         expect.any(Function),
       );
     });

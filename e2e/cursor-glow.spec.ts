@@ -15,14 +15,35 @@ const centreOf = async (locator: Locator) => {
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 };
 
-const bottomOf = async (locator: Locator) => {
-  const box = await locator.boundingBox();
+// Hue (0-360) of the first colour in a computed CSS value. Chrome
+// serialises mixed colours as `color(srgb r g b / a)` with 0-1 channels.
+const hueOf = (value: string) => {
+  const match =
+    /(rgba?\(|color\(srgb)\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)/.exec(value);
 
-  if (!box) {
-    throw new Error("the element has no box");
+  if (!match) {
+    throw new Error(`no colour in "${value}"`);
   }
 
-  return box.y + box.height;
+  const scale = match[1] === "color(srgb" ? 1 : 255;
+  const red = Number(match[2]) / scale;
+  const green = Number(match[3]) / scale;
+  const blue = Number(match[4]) / scale;
+  const max = Math.max(red, green, blue);
+  const delta = max - Math.min(red, green, blue);
+
+  if (delta === 0) {
+    return 0;
+  }
+
+  const sector =
+    max === red
+      ? ((green - blue) / delta) % 6
+      : max === green
+        ? (blue - red) / delta + 2
+        : (red - green) / delta + 4;
+
+  return (sector * 60 + 360) % 360;
 };
 
 const scrollPageContent = (page: Page, delta: number) =>
@@ -61,6 +82,21 @@ test.describe("cursor glow with a mouse", () => {
     }
   }
 
+  test("has the hue of the site's purple accent", async ({ page }) => {
+    await page.goto("/en/cases/spectre");
+    await expect(glowOf(page)).toHaveCount(1);
+
+    const backLink = page.getByRole("link", { name: /back to cases/i });
+    const accent = await backLink.evaluate(
+      (link) => getComputedStyle(link).color,
+    );
+    const glow = await glowOf(page).evaluate(
+      (element) => getComputedStyle(element).backgroundImage,
+    );
+
+    expect(Math.abs(hueOf(glow) - hueOf(accent))).toBeLessThan(5);
+  });
+
   test("does not block clicks and is hidden from assistive technology", async ({
     page,
   }) => {
@@ -77,76 +113,44 @@ test.describe("cursor glow with a mouse", () => {
     );
   });
 
-  test("is cut at the case header edge and follows it when the page scrolls", async ({
+  for (const locale of locales) {
+    test(`reaches the mouse over the case header on /${locale}/cases/spectre`, async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}/cases/spectre`);
+      const glow = glowOf(page);
+      const title = page.getByRole("heading", { level: 1 });
+
+      await expect(glow).toHaveCount(1);
+      const target = await centreOf(title);
+      await page.mouse.move(target.x, target.y);
+
+      await expect
+        .poll(
+          async () => {
+            const centre = await centreOf(glow);
+
+            return Math.hypot(centre.x - target.x, centre.y - target.y);
+          },
+          { timeout: 5_000 },
+        )
+        .toBeLessThan(1);
+      await expect(glow.locator("xpath=..")).toHaveCSS("mask-image", "none");
+    });
+  }
+
+  test("reaches the top of the viewport after the case page is scrolled", async ({
     page,
   }) => {
     await page.goto("/en/cases/spectre");
     const glow = glowOf(page);
-    const layer = glow.locator("xpath=..");
-    const header = page.locator("#case-header");
 
     await expect(glow).toHaveCount(1);
-    await page.mouse.move(600, 40);
-
-    const edge = async () => Math.round(await bottomOf(header));
-    const centreAboveEdge = async () =>
-      (await centreOf(glow)).y - (await edge());
-    const maskOf = () =>
-      layer.evaluate((element) =>
-        (element as HTMLElement).style.getPropertyValue("mask-image"),
-      );
-
-    // Over the header the glow rests on the header's bottom edge...
-    await expect.poll(centreAboveEdge, { timeout: 5_000 }).toBeCloseTo(0, 0);
-    // ...and everything above that edge is masked out.
-    await expect.poll(async () => maskOf()).toContain(`${await edge()}px`);
-
-    const before = await edge();
-
     await scrollPageContent(page, 150);
-    await expect.poll(edge).toBeLessThan(before);
-    await expect.poll(centreAboveEdge, { timeout: 5_000 }).toBeCloseTo(0, 0);
-    await expect.poll(async () => maskOf()).toContain(`${await edge()}px`);
-  });
-
-  test("reaches the About case block on the first screen", async ({ page }) => {
-    await page.goto("/en/cases/spectre");
-    const glow = glowOf(page);
-    const header = page.locator("#case-header");
-    const about = page.getByRole("heading", { name: "About case" });
-
-    await expect(glow).toHaveCount(1);
-    const aboutBox = await about.boundingBox();
-    const headerEdge = await bottomOf(header);
-
-    if (!aboutBox) {
-      throw new Error("the About case heading has no box");
-    }
-
-    const pointerY = aboutBox.y + aboutBox.height / 2;
-
-    expect(pointerY).toBeGreaterThan(headerEdge);
-    await page.mouse.move(600, pointerY);
-    // The glow centre goes all the way to the pointer over the block (it was
-    // held far below, off the first screen, before).
-    await expect
-      .poll(async () => Math.abs((await centreOf(glow)).y - pointerY), {
-        timeout: 5_000,
-      })
-      .toBeLessThan(1);
-  });
-
-  test("follows the mouse below the case header", async ({ page }) => {
-    await page.goto("/en/cases/spectre");
-    const glow = glowOf(page);
-    const viewportHeight = page.viewportSize()?.height ?? 0;
-
-    await expect(glow).toHaveCount(1);
-    await scrollPageContent(page, 200);
-    await page.mouse.move(600, viewportHeight - 10);
+    await page.mouse.move(600, 20);
     await expect
       .poll(() => centreOf(glow), { timeout: 5_000 })
-      .toEqual({ x: 600, y: viewportHeight - 10 });
+      .toEqual({ x: 600, y: 20 });
   });
 
   test("is not on the home page", async ({ page }) => {
@@ -167,12 +171,30 @@ test.describe("cursor glow with a mouse", () => {
 });
 
 test.describe("cursor glow without a hovering mouse", () => {
-  test("is not rendered on a touch device", async ({ isMobile, page }) => {
+  test("stays in the centre of the screen on a touch device", async ({
+    isMobile,
+    page,
+  }) => {
     test.skip(!isMobile, "mobile project only");
+    const viewport = page.viewportSize();
 
-    for (const path of ["/en/cases", "/en/cases/spectre", "/en/contacts"]) {
+    if (!viewport) {
+      throw new Error("no viewport");
+    }
+
+    const centre = { x: viewport.width / 2, y: viewport.height / 2 };
+
+    for (const path of ["/en/cases", "/ru/cases/spectre", "/en/contacts"]) {
       await page.goto(path);
-      await expect(glowOf(page)).toHaveCount(0);
+      const glow = glowOf(page);
+
+      await expect(glow).toHaveCount(1);
+      await expect.poll(() => centreOf(glow)).toEqual(centre);
+      await expect(glow).toHaveCSS("opacity", "1");
+
+      await scrollPageContent(page, 300);
+      await page.touchscreen.tap(40, 40);
+      await expect.poll(() => centreOf(glow)).toEqual(centre);
     }
   });
 

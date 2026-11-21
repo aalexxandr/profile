@@ -2,13 +2,13 @@
 
 ## Purpose
 
-Defines the decorative blue glow that smoothly follows the mouse pointer on the cases list, case detail and contacts pages, and the conditions under which it is shown.
+Defines the decorative purple glow (in the hue of the site accent) that smoothly follows the mouse pointer (or stays in the viewport centre on touch screens) on the cases list, case detail and contacts pages, and the conditions under which it is shown.
 
 ## Requirements
 
 ### Requirement: Glow follows the pointer
 
-On `/ru|en/cases`, `/ru|en/cases/[slug]` and `/ru|en/contacts` a blurred blue circle SHALL be shown behind the page content, fixed to the viewport. It SHALL start at the viewport centre, fade in, and move smoothly towards the pointer, lagging behind it instead of jumping.
+On `/ru|en/cases`, `/ru|en/cases/[slug]` and `/ru|en/contacts` a blurred purple circle in the hue of the site accent SHALL be shown behind the page content, fixed to the viewport. It SHALL start at the viewport centre, fade in, and move smoothly towards the pointer, lagging behind it instead of jumping.
 
 #### Scenario: Pointer moves on the contacts page
 
@@ -29,6 +29,11 @@ On `/ru|en/cases`, `/ru|en/cases/[slug]` and `/ru|en/contacts` a blurred blue ci
 
 - **WHEN** `/ru/cases` and `/en/cases` are opened
 - **THEN** both show the same glow
+
+#### Scenario: Glow colour matches the accent
+
+- **WHEN** the glow is shown on a case page
+- **THEN** its colour has the hue of the site's accent (the colour of the "Back to cases" link) and is darker than the accent, so accent-coloured links stay readable over it
 
 ### Requirement: Glow is purely decorative
 
@@ -73,23 +78,23 @@ On `/ru|en/cases/[slug]` nothing of the glow SHALL be drawn over the case header
 - **WHEN** a case with no `backgroundImage` is opened
 - **THEN** the same edge applies and the glow does not appear over the plain header
 
-### Requirement: Glow only for a hovering fine pointer
+### Requirement: Glow mode depends on the pointer
 
-The glow SHALL be rendered only when the device supports hover with a fine pointer (`(hover: hover) and (pointer: fine)`) and the user has not requested reduced motion. In every other case no glow element SHALL be in the page.
+The glow SHALL follow the pointer only when the device supports hover with a fine pointer (`(hover: hover) and (pointer: fine)`) and the user has not requested reduced motion. Without a hovering fine pointer (touch screens) the same glow SHALL be shown still, centred in the viewport, with no animation loop or pointer listeners; this also applies with reduced motion, since it does not move. With a hovering fine pointer and reduced motion no glow element SHALL be in the page.
 
 #### Scenario: Touch device
 
 - **WHEN** a page is opened on a touch device with a coarse pointer and no hover
-- **THEN** no glow is rendered
+- **THEN** the glow is centred in the viewport and stays there when the page is scrolled or tapped
 
-#### Scenario: Reduced motion
+#### Scenario: Reduced motion with a mouse
 
-- **WHEN** a page is opened with the reduced-motion preference on
+- **WHEN** a page is opened with a mouse and the reduced-motion preference on
 - **THEN** no glow is rendered
 
 #### Scenario: Preference changes while open
 
-- **WHEN** the reduced-motion preference is turned on while the page is open
+- **WHEN** the reduced-motion preference is turned on while the page is open with a mouse
 - **THEN** the glow is removed without a reload
 
 ### Requirement: Glow stops with the page

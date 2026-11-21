@@ -1,17 +1,13 @@
 "use client";
 
+import clsx from "clsx";
+
 import { useCursorGlow } from "./useCursorGlow";
 
-type CursorGlowProps = {
-  // Id of an element the glow must not cover: it is cut at that element's
-  // bottom edge (see getGlowTarget and getGlowEdgeMask).
-  boundaryId?: string;
-};
+export const CursorGlow = () => {
+  const { glowRef, mode } = useCursorGlow();
 
-export const CursorGlow = ({ boundaryId }: CursorGlowProps) => {
-  const { glowRef, isEnabled, layerRef } = useCursorGlow(boundaryId);
-
-  if (!isEnabled) {
+  if (mode === "off") {
     return null;
   }
 
@@ -19,10 +15,14 @@ export const CursorGlow = ({ boundaryId }: CursorGlowProps) => {
     <div
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 -z-1 overflow-hidden"
-      ref={layerRef}
     >
       <div
-        className="absolute top-0 left-0 size-175 rounded-full bg-glow-spot opacity-0 transition-opacity duration-700 will-change-transform"
+        className={clsx(
+          "absolute size-175 rounded-full bg-glow-spot",
+          mode === "static"
+            ? "top-1/2 left-1/2 -translate-1/2 animate-reveal-fade"
+            : "top-0 left-0 opacity-0 transition-opacity duration-700 will-change-transform",
+        )}
         data-testid="cursor-glow"
         ref={glowRef}
       />

@@ -3,34 +3,24 @@
 import { useEffect, useRef } from "react";
 
 import { GLOW_SIZE } from "./constants";
-import { getGlowEdgeMask } from "./getGlowEdgeMask";
 import { getGlowStep } from "./getGlowStep";
-import { getGlowTarget } from "./getGlowTarget";
-import { useGlowEnabled } from "./useGlowEnabled";
+import { useGlowMode } from "./useGlowMode";
 
 // Assumed length of the first frame after the loop has been idle.
 const FIRST_FRAME_MS = 1000 / 60;
 
-const getBoundaryBottom = (boundaryId: string | undefined) => {
-  const boundary = boundaryId ? document.getElementById(boundaryId) : null;
-
-  return boundary ? boundary.getBoundingClientRect().bottom : null;
-};
-
-// Drives the glow: the element lags behind the pointer and, with a boundary,
-// its centre stays at or below that element's bottom edge while the layer is
-// cut at that edge. The element only gets a transform each frame; the mask
-// is written only when the edge moves; the frame loop idles once settled.
-export const useCursorGlow = (boundaryId?: string) => {
+// Drives the glow in "follow" mode: the element lags behind the pointer and only gets a
+// transform each frame; the frame loop idles once settled. The layer is
+// fixed and the target is the pointer's viewport position, so only a mouse
+// move can change it (scroll and resize cannot).
+export const useCursorGlow = () => {
   const glowRef = useRef<HTMLDivElement>(null);
-  const layerRef = useRef<HTMLDivElement>(null);
-  const isEnabled = useGlowEnabled();
+  const mode = useGlowMode();
 
   useEffect(() => {
     const element = glowRef.current;
-    const layer = layerRef.current;
 
-    if (!isEnabled || !element || !layer) {
+    if (mode !== "follow" || !element) {
       return;
     }
 
@@ -38,72 +28,41 @@ export const useCursorGlow = (boundaryId?: string) => {
     const position = { ...pointer };
     let frame = 0;
     let lastTime: number | null = null;
-    let lastMask: string | null = null;
-
-    const writeMask = (boundaryBottom: number | null) => {
-      const mask = getGlowEdgeMask(boundaryBottom);
-
-      if (mask === lastMask) {
-        return;
-      }
-
-      lastMask = mask;
-
-      if (mask === null) {
-        layer.style.removeProperty("mask-image");
-      } else {
-        layer.style.setProperty("mask-image", mask);
-      }
-    };
 
     const tick = (time: number) => {
       frame = 0;
       const frameMs = lastTime === null ? FIRST_FRAME_MS : time - lastTime;
       lastTime = time;
-      const boundaryBottom = getBoundaryBottom(boundaryId);
-      const target = getGlowTarget(pointer, boundaryBottom);
 
-      position.x = getGlowStep(position.x, target.x, frameMs);
-      position.y = getGlowStep(position.y, target.y, frameMs);
-      writeMask(boundaryBottom);
+      position.x = getGlowStep(position.x, pointer.x, frameMs);
+      position.y = getGlowStep(position.y, pointer.y, frameMs);
       element.style.transform = `translate3d(${position.x - GLOW_SIZE / 2}px, ${position.y - GLOW_SIZE / 2}px, 0)`;
       element.style.opacity = "1";
 
-      if (position.x !== target.x || position.y !== target.y) {
+      if (position.x !== pointer.x || position.y !== pointer.y) {
         frame = requestAnimationFrame(tick);
       } else {
         lastTime = null;
       }
     };
 
-    const wake = () => {
+    const handleMove = (event: MouseEvent) => {
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+
       if (frame === 0) {
         frame = requestAnimationFrame(tick);
       }
     };
 
-    const handleMove = (event: MouseEvent) => {
-      pointer.x = event.clientX;
-      pointer.y = event.clientY;
-      wake();
-    };
-
-    // Scroll does not bubble and the pages scroll inside their own container,
-    // so it is caught on the way down; the boundary may have moved.
-    const scrollOptions = { capture: true, passive: true };
-
     window.addEventListener("mousemove", handleMove);
-    window.addEventListener("scroll", wake, scrollOptions);
-    window.addEventListener("resize", wake);
-    wake();
+    frame = requestAnimationFrame(tick);
 
     return () => {
       window.removeEventListener("mousemove", handleMove);
-      window.removeEventListener("scroll", wake, scrollOptions);
-      window.removeEventListener("resize", wake);
       cancelAnimationFrame(frame);
     };
-  }, [boundaryId, isEnabled]);
+  }, [mode]);
 
-  return { glowRef, isEnabled, layerRef };
+  return { glowRef, mode };
 };

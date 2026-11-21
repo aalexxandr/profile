@@ -13,7 +13,7 @@ const BLUR =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==";
 
 // Each case differs in the values the pages must handle: nullable picture and
-// blur and background, optional company / team size, an open end date and both roles.
+// blur, optional company / team size, an open end date and every role.
 const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
   {
     shared: {
@@ -21,8 +21,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       stack: ["React", "TypeScript"],
       image: `${STORAGE}/cases/spectre/3f9a1c2b7d4e5f60.webp`,
       blurImage: BLUR,
-      backgroundImage: `${STORAGE}/cases/spectre/background/7c4e9a1b2d3f5068.webp`,
-      backgroundBlurImage: BLUR,
       role: "FRONTEND",
       projectLink: "https://example.com/spectre",
       company: "Spectre Labs",
@@ -67,8 +65,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       stack: ["Next.js", "NestJS", "PostgreSQL"],
       image: null,
       blurImage: null,
-      backgroundImage: null,
-      backgroundBlurImage: null,
       role: "FULLSTACK",
       projectLink: "https://example.com/orbit",
       company: null,
@@ -117,8 +113,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       stack: ["React", "TanStack Table"],
       image: `${STORAGE}/cases/nova/8a1b2c3d4e5f6071.webp`,
       blurImage: null,
-      backgroundImage: null,
-      backgroundBlurImage: null,
       role: "PRODUCT",
       projectLink: null,
       company: "Nova Systems",

@@ -39,8 +39,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/skygen/0b5e9cde15318a66.webp",
       blurImage:
         "data:image/webp;base64,UklGRioBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKQAAAANgFvbtqpqX8Hd3SHVPogowFqiCBogIqIFCnB3ty/34VJCREyALJ7LukDwVNRK1R+CtHy9veA1U+uU4q+4nQq8ltThqO4iMscL3tHFwmrCLBLevSiMGkLl+Cq5vHchIMA/JQDIwwUgeKx7TYTg5f8flROg7HXrFJzJ6eXvT6xPBhslqOz/DTa7SSMX++l0pYx4ZZLoN/pw+u1qftkPWz/ekIGLX1ZQOCBgAAAA8AMAnQEqFAAMAD7tYqpNqaWkIjAIATAdiWUAwNwi6sQnf6N/Aoy2AAD+41ok8Pc3Z3kdcqJ/4oG6vy8ioTWL8daeFHg/OhlFgP9aWBcW0Jg5LMXykvmPoHcf6iuQsIAA",
-      backgroundImage: null,
-      backgroundBlurImage: null,
       role: "PRODUCT",
       company: "AIPeople",
       teamSize: 9,
@@ -142,10 +140,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/spectre/67bcf7425e245943.webp",
       blurImage:
         "data:image/webp;base64,UklGRiYBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSL8AAAANuS5E9D8At7Zt1co+9353/0BGaCnUTgFuNRC5O1fOPRuvIWICJsAlMCs2JdvOAMHPB7surFtyS6kDoqEG/lw0E13asMUpHmQj8DeJsQVeAFV1rwhI/JbdG6o4kTleElSQgN/Nq3PeqQqAKvg3KRAEQOJfIAwBgAASIAiABIBQBTkEGXk1hRIADgA8OVchAMSHd9lIVNeQBARGvatoeTVgDHy4EQ2YgEwUqYaZgSDwCqO6gifLKhRVVCROW9+7AgBWUDggQAAAAFADAJ0BKhQADAA+7WSqTamlpCIwCAEwHYlnAL84LQeE7eAAAP7tp53BKQyw9ybZl+WcahR62xpaXbGDiKhJEAA=",
-      backgroundImage:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/spectre/background/5693130a083e7259.webp",
-      backgroundBlurImage:
-        "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAwCdASoUAAkAPu1iqk2ppaQiMAgBMB2JYgCsAB8nQum6PlSaiAD+7sKudjVen7Y2TCrjKUuM8t9kAR3zs2qhx9WqXm9EAAA=",
       role: "FRONTEND",
       company: "AIPeople",
       teamSize: 22,
@@ -245,10 +239,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/atgraphite/c721302fe94589a2.webp",
       blurImage:
         "data:image/webp;base64,UklGRh4BAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSLgAAAABgGNt2/EoXkA6q7ed1KmyCI4rYwlWa9dmadu2J9b3vv94thARE8DWNl6TH4GQ924bk8lkGHInwgD4HSDc7xHJJbzWmXuC1I+I4fHqwqri3NsYUr8ihlfGZg+2FglSf4nsbT1BJv6v7WfIJv619YzZRIogIv4S3tv+tvgAf4Cn1dUnzMaLBveuX8JJoCDx9jDbO/lN5i1vHdm8T2HmbnGwLNB2D8kXDlfiLh86jUPyqNunMNZcQeQcVlA4IEAAAABQAwCdASoUAAwAPu1kqk4ppaQiMAgBMB2JZwC/ODBR5oNkUAD+7law1SaqRRdVE97dg9MNz/dwxXLTstBT0AAA",
-      backgroundImage:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/atgraphite/background/785bfac295500950.webp",
-      backgroundBlurImage:
-        "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAACwAwCdASoUAAgAPu1iqU2ppaOiMAgBMB2JQBOmUABp1yE15I3sAAD+8NRca1UFJwycbjrY1qU/B8gAAAA=",
       role: "FULLSTACK",
       company: "AIPeople",
       teamSize: 22,
@@ -349,10 +339,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/bridge-graphite/f8efecbc519f4098.webp",
       blurImage:
         "data:image/webp;base64,UklGRgIBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSJ8AAAANcBvbtqqc83DP3CPrxiGjMeqgBYpwd3e+4VJCREyAIG/xcilI4u26WqkFzXp5t5Hx2RL0IG0xXjr15RfGaMqTo1DG9TlvH4QjHIgpmpAO5xs+U2/CXwng9gPxyhtuIIAbAKrKjYAs06i7Ea+3/WAMgLuJ6jKbTJSk62U/HW2PeoFda2ryup3ivJuNVjeneWkyqNdFX/L7rVQOw4HkNBAAVlA4IDwAAACQAwCdASoUAAwAPu1krU6ppaSiMAgBMB2JZwAAUqac0Ziy7iYAAP67DUM2xZWBL+lElKAmixYdGch/0AA=",
-      backgroundImage:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/bridge-graphite/background/5e3551946134e27b.webp",
-      backgroundBlurImage:
-        "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAACQAwCdASoUAAkALrV2u12jqampiYC0SyAF2ZQANFQJPbRG0GKAAP74TpWD6znG5AN3U7Z8FRIYs9th0jMTF87wwAA=",
       role: "FULLSTACK",
       company: "AIPeople",
       teamSize: 22,
@@ -452,10 +438,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/phonebook/752e10c257c0448f.webp",
       blurImage:
         "data:image/webp;base64,UklGRggBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKIAAAANgF3bdoLoxnB3d7datAC6ogQaoAg+KcB95s89CQ4tRMQEiFqvGwYBgAPeh/3RAYeG+fXtgNvMauVa9j6eFG4fXJmkWavmxwH3eEsJA2UBjbstbiuoOJD7QHAAIYcHAAJISgCQewCM425CcP3wL7kgwCAcdhgFN1L9+ydflMcHYPgu7cGgxyLU+/P+3ZkPcPW/m2xpIOk3s8PHdqFjCTv//wFWUDggQAAAAJADAJ0BKhQADAA+7WaqTimlo6IwCAEwHYlnAABb6Li4kSetAAAA/ujiwogbDUD9+enkP6JOepBccj6/NzoDwAA=",
-      backgroundImage:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/phonebook/background/ec41a73cf0392a45.webp",
-      backgroundBlurImage:
-        "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACQAwCdASoUAAkAPu1iqk2ppaQiMAgBMB2JYgCdABgepYe3794AAP7w36RIQp7EjV6ivmbbvisuQQ2SXIVsbE7/9aJQO/d4AAA=",
       role: "FULLSTACK",
       company: "AIPeople",
       teamSize: 22,
@@ -549,8 +531,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/ube/9396376b9a424dc5.webp",
       blurImage:
         "data:image/webp;base64,UklGRhgBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKAAAAANcBvbtqqc8/7HLXSNGMpxiKiMNqiBHtzdHb7hUkJETIAgb4lSMUzi7bpSroYsJnW7U/DZGvYyZTOfu7X17ZMllvRmJOjj+py3D8IVDcQ1Qyj78w2fKVt4wz+J2y/E+xtAADcA1NUXVaVZuhGvt31/DEDsJprbZrZSUa6X/WS0O5gEdq2pxet1i/N2NlrBY1laTPp10VcCATu1Q3+kuGUCVlA4IFIAAADwAwCdASoUAAwAPu1iqk2ppaQiMAgBMB2JZwAAXotmSbGkljSVH00IAMtMWwNVYOUppfOCOhpbIT7GLRXm4yXzkfyBiLnwl/LQi4/gUvttQEAA",
-      backgroundImage: null,
-      backgroundBlurImage: null,
       role: "FULLSTACK",
       company: "Bask Digital Agency",
       teamSize: 15,
@@ -644,8 +624,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/silavetra/f340fa2cdda92782.webp",
       blurImage:
         "data:image/webp;base64,UklGRh4BAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKEAAAANgFXbtrJsH9zd3eGJQRQrYJ1oQAHLwCsF3N3ll3txqRAREyCOZzN2vLxiXyvWgWtCutnhQ6FKJeKssJvyT7RBr/zKkqcrPrwaYx4xiSxXfKzQyyGU4Gu6AvQVCPgXEgB6daUrAWi4jIS3V/YvEhNQctnVMrFIIrj8/bE1NxoBlA9cY7EYVGK2m032mpBVxNmwOSCr16IQXA+DzsXl0YjYDwBWUDggVgAAAPADAJ0BKhQADAA+7WSpTamlpCIwCAEwHYlnAABe9U7mkZejzlzo/AAA/unaI1o6MtA/y+8GDejzeCQ5oQs4Oo9wCiYnI7SFazp4TRGSJyCpfBi5AAAA",
-      backgroundImage: null,
-      backgroundBlurImage: null,
       role: "FULLSTACK",
       company: "Bask Digital Agency",
       teamSize: 15,
@@ -740,8 +718,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/universe/158556a3a4a3a632.webp",
       blurImage:
         "data:image/webp;base64,UklGRhQBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKAAAAANcF3btunsc1/MP9tqxvhKY6kjPaQH23aeYpQQERPAiG7RcslNhLfraqXmUiuF7Y7HZ43bipROde7WV7dPam/SkmOQxvU53T4wk8cREGTG7883fCaFBv8l3H6hG97eAAJwA0CSCIB4nlNyN8Lrbd+fvOwnolmjVhPPXy/76Wh7UDLsWlO1zWJi5+1svLqZNEu1Urou+rzToSPhMBjyJiUBVlA4IE4AAADQAwCdASoUAAwAPu1iqk4ppaQiMAgBMB2JZQAAUSzXfxLbHjEMKDAA8qOriLuo3F57r6ZkljQAOmfwanQQeJRqmI2ctMMDNGDoo7L4/AA=",
-      backgroundImage: null,
-      backgroundBlurImage: null,
       role: "FULLSTACK",
       company: "Intec",
       teamSize: 10,
@@ -831,8 +807,6 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/prom/b808a93cd0caf80e.webp",
       blurImage:
         "data:image/webp;base64,UklGRhwBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKAAAAANgFTb2rLsPt+Hu7vLUIMwIgCLUlSgABkowNjd3eH9HuDXCBExAepMuRQA4VtuVOsn4oJ2u2P8LBnMOhaVw+yJnxV9LG1lLp4YvzEmUybIToHfssZmIpLxr8S/YwIBT4kA0BcGCF+bATsRfnwKaAiohf1mrVpWS/x4KLujxaMC6kdhcbvtJo1yWsyX2kREBWXYGsIb8RjVfBx3rsGURWYBVlA4IFYAAADwAwCdASoUAAwAPu1krU2ppaSiMAgBMB2JZQDCgCHgC8KHfOIwB3YAAP7oxprHs7ljlN7n7x5K9dJX4RO/Sxf5Qaxff8ZrvIqEdVHaRDW8yVz64wAAAA==",
-      backgroundImage: null,
-      backgroundBlurImage: null,
       role: "FULLSTACK",
       company: "Intec",
       teamSize: 10,

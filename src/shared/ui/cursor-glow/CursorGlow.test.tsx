@@ -21,14 +21,16 @@ describe("CursorGlow", () => {
     vi.unstubAllGlobals();
   });
 
-  it("renders nothing without a hovering fine pointer", () => {
+  it("centres a still glow in the viewport without a hovering fine pointer", () => {
     media.set(FINE_HOVER_QUERY, false);
-    const { container } = render(<CursorGlow />);
+    const { getByTestId } = render(<CursorGlow />);
+    const glow = getByTestId("cursor-glow");
 
-    expect(container).toBeEmptyDOMElement();
+    expect(glow).toHaveClass("top-1/2", "left-1/2", "-translate-1/2");
+    expect(glow).not.toHaveClass("opacity-0", "will-change-transform");
   });
 
-  it("renders nothing for reduced motion", () => {
+  it("renders nothing for a mouse with reduced motion", () => {
     media.set(REDUCED_MOTION_QUERY, true);
     const { container } = render(<CursorGlow />);
 
@@ -54,9 +56,11 @@ describe("CursorGlow", () => {
     });
   });
 
-  it("accepts a boundary id", () => {
-    const { container } = render(<CursorGlow boundaryId="case-header" />);
+  it("does not mask any part of the layer", () => {
+    const { container } = render(<CursorGlow />);
+    const layer = container.firstElementChild as HTMLElement;
 
-    expect(container.firstElementChild).toBeInTheDocument();
+    expect(layer.style.getPropertyValue("mask-image")).toBe("");
+    expect(layer.className).not.toMatch(/mask/);
   });
 });
