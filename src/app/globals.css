@@ -30,7 +30,9 @@
   --color-accent: #db00ff;
   --color-accent-active: #b102ce;
   --color-focus-ring: #ff5a8f;
-  --color-glow: #1100ff;
+  /* The accent's hue, darkened so accent links and white/60 text stay at least
+     as readable over the glow's centre as they were over the old blue one. */
+  --color-glow: color-mix(in srgb, var(--color-accent) 60%, black);
   --color-field: #090909;
   --color-field-border: #907695;
   --color-field-label: #afafaf;

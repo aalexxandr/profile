@@ -2,13 +2,13 @@
 
 ## Purpose
 
-Defines the decorative blue glow that smoothly follows the mouse pointer on the cases list, case detail and contacts pages, and the conditions under which it is shown.
+Defines the decorative purple glow (in the hue of the site accent) that smoothly follows the mouse pointer on the cases list, case detail and contacts pages, and the conditions under which it is shown.
 
 ## Requirements
 
 ### Requirement: Glow follows the pointer
 
-On `/ru|en/cases`, `/ru|en/cases/[slug]` and `/ru|en/contacts` a blurred blue circle SHALL be shown behind the page content, fixed to the viewport. It SHALL start at the viewport centre, fade in, and move smoothly towards the pointer, lagging behind it instead of jumping.
+On `/ru|en/cases`, `/ru|en/cases/[slug]` and `/ru|en/contacts` a blurred purple circle in the hue of the site accent SHALL be shown behind the page content, fixed to the viewport. It SHALL start at the viewport centre, fade in, and move smoothly towards the pointer, lagging behind it instead of jumping.
 
 #### Scenario: Pointer moves on the contacts page
 
@@ -29,6 +29,11 @@ On `/ru|en/cases`, `/ru|en/cases/[slug]` and `/ru|en/contacts` a blurred blue ci
 
 - **WHEN** `/ru/cases` and `/en/cases` are opened
 - **THEN** both show the same glow
+
+#### Scenario: Glow colour matches the accent
+
+- **WHEN** the glow is shown on a case page
+- **THEN** its colour has the hue of the site's accent (the colour of the "Back to cases" link) and is darker than the accent, so accent-coloured links stay readable over it
 
 ### Requirement: Glow is purely decorative
 

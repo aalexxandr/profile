@@ -15,6 +15,37 @@ const centreOf = async (locator: Locator) => {
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 };
 
+// Hue (0-360) of the first colour in a computed CSS value. Chrome
+// serialises mixed colours as `color(srgb r g b / a)` with 0-1 channels.
+const hueOf = (value: string) => {
+  const match =
+    /(rgba?\(|color\(srgb)\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)/.exec(value);
+
+  if (!match) {
+    throw new Error(`no colour in "${value}"`);
+  }
+
+  const scale = match[1] === "color(srgb" ? 1 : 255;
+  const red = Number(match[2]) / scale;
+  const green = Number(match[3]) / scale;
+  const blue = Number(match[4]) / scale;
+  const max = Math.max(red, green, blue);
+  const delta = max - Math.min(red, green, blue);
+
+  if (delta === 0) {
+    return 0;
+  }
+
+  const sector =
+    max === red
+      ? ((green - blue) / delta) % 6
+      : max === green
+        ? (blue - red) / delta + 2
+        : (red - green) / delta + 4;
+
+  return (sector * 60 + 360) % 360;
+};
+
 const scrollPageContent = (page: Page, delta: number) =>
   page.evaluate((by) => {
     const container = [...document.querySelectorAll("main *")].find(
@@ -50,6 +81,21 @@ test.describe("cursor glow with a mouse", () => {
       });
     }
   }
+
+  test("has the hue of the site's purple accent", async ({ page }) => {
+    await page.goto("/en/cases/spectre");
+    await expect(glowOf(page)).toHaveCount(1);
+
+    const backLink = page.getByRole("link", { name: /back to cases/i });
+    const accent = await backLink.evaluate(
+      (link) => getComputedStyle(link).color,
+    );
+    const glow = await glowOf(page).evaluate(
+      (element) => getComputedStyle(element).backgroundImage,
+    );
+
+    expect(Math.abs(hueOf(glow) - hueOf(accent))).toBeLessThan(5);
+  });
 
   test("does not block clicks and is hidden from assistive technology", async ({
     page,
