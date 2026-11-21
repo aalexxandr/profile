@@ -54,9 +54,11 @@ describe("CursorGlow", () => {
     });
   });
 
-  it("accepts a boundary id", () => {
-    const { container } = render(<CursorGlow boundaryId="case-header" />);
+  it("does not mask any part of the layer", () => {
+    const { container } = render(<CursorGlow />);
+    const layer = container.firstElementChild as HTMLElement;
 
-    expect(container.firstElementChild).toBeInTheDocument();
+    expect(layer.style.getPropertyValue("mask-image")).toBe("");
+    expect(layer.className).not.toMatch(/mask/);
   });
 });

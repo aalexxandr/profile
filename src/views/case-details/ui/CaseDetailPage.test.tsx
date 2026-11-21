@@ -8,19 +8,10 @@ import { ru } from "@/shared/i18n-server/dictionaries/ru";
 import type { CaseDetail } from "../api/types";
 import { CaseDetailPage } from "./CaseDetailPage";
 
-type MockImageProps = { alt: string; blurDataURL?: string; src: string };
-
-vi.mock("next/image", () => ({
-  default: ({ alt, blurDataURL, src }: MockImageProps) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img alt={alt} data-blur={blurDataURL} src={src} />
-  ),
-}));
-
 vi.mock("@/shared/ui", async (importOriginal) => ({
   ...(await importOriginal<Record<string, unknown>>()),
-  CursorGlow: ({ boundaryId }: { boundaryId?: string }) => (
-    <div data-boundary={boundaryId} data-testid="cursor-glow" />
+  CursorGlow: (props: object) => (
+    <div data-props={JSON.stringify(props)} data-testid="cursor-glow" />
   ),
 }));
 
@@ -31,8 +22,6 @@ const caseItem: CaseDetail = {
     { description: "Faster reviews", metric: "-40%", title: "Reporting" },
     { description: "Reusable states", metric: "30+", title: "UI states" },
   ],
-  backgroundBlurImage: null,
-  backgroundImage: "https://cdn.test/spectre-background.webp",
   blurImage: "data:image/png;base64,AAAA",
   category: "FinTech / Web App",
   company: "Spectre Labs",
@@ -98,17 +87,14 @@ describe("CaseDetailPage", () => {
     },
   );
 
-  it("does not render or request the case picture", () => {
-    const { container } = renderPage();
-    const sources = [...container.querySelectorAll("img")].map((image) =>
-      image.getAttribute("src"),
-    );
+  it.each(locales)(
+    "renders no picture of a case that has one in %s",
+    (locale) => {
+      const { container } = renderPage({}, locale);
 
-    expect(sources).toEqual(["https://cdn.test/spectre-background.webp"]);
-    expect(
-      screen.queryByRole("img", { name: "Spectre Explorer" }),
-    ).not.toBeInTheDocument();
-  });
+      expect(container.querySelector("img")).toBeNull();
+    },
+  );
 
   it.each(locales)("has no retro window controls in %s", (locale) => {
     renderPage({}, locale);
@@ -161,8 +147,6 @@ describe("CaseDetailPage", () => {
     (locale) => {
       renderPage(
         {
-          backgroundBlurImage: null,
-          backgroundImage: null,
           blurImage: null,
           image: null,
         },
@@ -194,13 +178,13 @@ describe("CaseDetailPage cursor glow", () => {
     expect(screen.getByTestId("cursor-glow")).toBeInTheDocument();
   });
 
-  it("keeps the glow below the case header", () => {
+  it("lets the glow cover the whole page, header included", () => {
     const { container } = renderPage();
-    const boundaryId = screen
-      .getByTestId("cursor-glow")
-      .getAttribute("data-boundary");
 
-    expect(boundaryId).toBeTruthy();
-    expect(container.querySelector("header")).toHaveAttribute("id", boundaryId);
+    expect(screen.getByTestId("cursor-glow")).toHaveAttribute(
+      "data-props",
+      "{}",
+    );
+    expect(container.querySelector("header")).not.toHaveAttribute("id");
   });
 });

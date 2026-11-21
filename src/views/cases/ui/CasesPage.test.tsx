@@ -15,9 +15,7 @@ vi.mock("next/image", () => ({
 
 vi.mock("@/shared/ui", async (importOriginal) => ({
   ...(await importOriginal<Record<string, unknown>>()),
-  CursorGlow: ({ boundaryId }: { boundaryId?: string }) => (
-    <div data-boundary={boundaryId} data-testid="cursor-glow" />
-  ),
+  CursorGlow: () => <div data-testid="cursor-glow" />,
 }));
 
 const labelsByLocale = { en: en.pages.cases, ru: ru.pages.cases };
@@ -102,13 +100,5 @@ describe("CasesPage cursor glow", () => {
     );
 
     expect(screen.getByTestId("cursor-glow")).toBeInTheDocument();
-  });
-
-  it("has no boundary: the glow may cover the whole list", () => {
-    render(<CasesPage cases={en.pages.cases} locale="en" />);
-
-    expect(screen.getByTestId("cursor-glow")).not.toHaveAttribute(
-      "data-boundary",
-    );
   });
 });

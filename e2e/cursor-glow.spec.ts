@@ -15,16 +15,6 @@ const centreOf = async (locator: Locator) => {
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 };
 
-const bottomOf = async (locator: Locator) => {
-  const box = await locator.boundingBox();
-
-  if (!box) {
-    throw new Error("the element has no box");
-  }
-
-  return box.y + box.height;
-};
-
 const scrollPageContent = (page: Page, delta: number) =>
   page.evaluate((by) => {
     const container = [...document.querySelectorAll("main *")].find(
@@ -77,76 +67,44 @@ test.describe("cursor glow with a mouse", () => {
     );
   });
 
-  test("is cut at the case header edge and follows it when the page scrolls", async ({
+  for (const locale of locales) {
+    test(`reaches the mouse over the case header on /${locale}/cases/spectre`, async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}/cases/spectre`);
+      const glow = glowOf(page);
+      const title = page.getByRole("heading", { level: 1 });
+
+      await expect(glow).toHaveCount(1);
+      const target = await centreOf(title);
+      await page.mouse.move(target.x, target.y);
+
+      await expect
+        .poll(
+          async () => {
+            const centre = await centreOf(glow);
+
+            return Math.hypot(centre.x - target.x, centre.y - target.y);
+          },
+          { timeout: 5_000 },
+        )
+        .toBeLessThan(1);
+      await expect(glow.locator("xpath=..")).toHaveCSS("mask-image", "none");
+    });
+  }
+
+  test("reaches the top of the viewport after the case page is scrolled", async ({
     page,
   }) => {
     await page.goto("/en/cases/spectre");
     const glow = glowOf(page);
-    const layer = glow.locator("xpath=..");
-    const header = page.locator("#case-header");
 
     await expect(glow).toHaveCount(1);
-    await page.mouse.move(600, 40);
-
-    const edge = async () => Math.round(await bottomOf(header));
-    const centreAboveEdge = async () =>
-      (await centreOf(glow)).y - (await edge());
-    const maskOf = () =>
-      layer.evaluate((element) =>
-        (element as HTMLElement).style.getPropertyValue("mask-image"),
-      );
-
-    // Over the header the glow rests on the header's bottom edge...
-    await expect.poll(centreAboveEdge, { timeout: 5_000 }).toBeCloseTo(0, 0);
-    // ...and everything above that edge is masked out.
-    await expect.poll(async () => maskOf()).toContain(`${await edge()}px`);
-
-    const before = await edge();
-
     await scrollPageContent(page, 150);
-    await expect.poll(edge).toBeLessThan(before);
-    await expect.poll(centreAboveEdge, { timeout: 5_000 }).toBeCloseTo(0, 0);
-    await expect.poll(async () => maskOf()).toContain(`${await edge()}px`);
-  });
-
-  test("reaches the About case block on the first screen", async ({ page }) => {
-    await page.goto("/en/cases/spectre");
-    const glow = glowOf(page);
-    const header = page.locator("#case-header");
-    const about = page.getByRole("heading", { name: "About case" });
-
-    await expect(glow).toHaveCount(1);
-    const aboutBox = await about.boundingBox();
-    const headerEdge = await bottomOf(header);
-
-    if (!aboutBox) {
-      throw new Error("the About case heading has no box");
-    }
-
-    const pointerY = aboutBox.y + aboutBox.height / 2;
-
-    expect(pointerY).toBeGreaterThan(headerEdge);
-    await page.mouse.move(600, pointerY);
-    // The glow centre goes all the way to the pointer over the block (it was
-    // held far below, off the first screen, before).
-    await expect
-      .poll(async () => Math.abs((await centreOf(glow)).y - pointerY), {
-        timeout: 5_000,
-      })
-      .toBeLessThan(1);
-  });
-
-  test("follows the mouse below the case header", async ({ page }) => {
-    await page.goto("/en/cases/spectre");
-    const glow = glowOf(page);
-    const viewportHeight = page.viewportSize()?.height ?? 0;
-
-    await expect(glow).toHaveCount(1);
-    await scrollPageContent(page, 200);
-    await page.mouse.move(600, viewportHeight - 10);
+    await page.mouse.move(600, 20);
     await expect
       .poll(() => centreOf(glow), { timeout: 5_000 })
-      .toEqual({ x: 600, y: viewportHeight - 10 });
+      .toEqual({ x: 600, y: 20 });
   });
 
   test("is not on the home page", async ({ page }) => {

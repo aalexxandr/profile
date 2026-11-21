@@ -56,6 +56,15 @@ describe("stub API", () => {
     expect(typeof body.timestamp).toBe("string");
   });
 
+  it("serves no background picture fields", async () => {
+    for (const slug of caseSlugs) {
+      const body: object = await (await get(`/cases/${slug}?lang=en`)).json();
+
+      expect(body).not.toHaveProperty("backgroundImage");
+      expect(body).not.toHaveProperty("backgroundBlurImage");
+    }
+  });
+
   it("answers other paths with 404", async () => {
     expect((await get("/unknown")).status).toBe(404);
   });
@@ -70,16 +79,6 @@ describe("stub API", () => {
     expect(details.some(({ image }) => image === null)).toBe(true);
     expect(details.some(({ image }) => image !== null)).toBe(true);
     expect(details.some(({ blurImage }) => blurImage === null)).toBe(true);
-    expect(
-      details.some(({ backgroundImage }) => backgroundImage === null),
-    ).toBe(true);
-    expect(
-      details.some(
-        ({ backgroundImage, backgroundBlurImage }) =>
-          typeof backgroundImage === "string" &&
-          typeof backgroundBlurImage === "string",
-      ),
-    ).toBe(true);
     expect(details.some(({ projectLink }) => projectLink === null)).toBe(true);
     expect(
       details.some(({ projectLink }) => typeof projectLink === "string"),

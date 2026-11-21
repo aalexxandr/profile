@@ -1,10 +1,8 @@
 import { getLocalizedPath, type Dictionary, type Locale } from "@/shared/i18n";
 import { Reveal } from "@/shared/ui";
 import type { CaseDetail } from "@/views/case-details/api/types";
-import { CASE_HEADER_ID } from "@/views/case-details/config/caseHeaderId";
 import { getCaseFacts } from "@/views/case-details/lib/getCaseFacts";
 
-import { CaseBackground } from "./CaseBackground";
 import { CaseBackLink } from "./CaseBackLink";
 import { CaseFacts } from "./CaseFacts";
 
@@ -18,18 +16,14 @@ export const CaseHeader = ({ caseItem, cases, locale }: CaseHeaderProps) => {
   const { detail } = cases;
 
   return (
-    <header id={CASE_HEADER_ID}>
-      <CaseBackground
-        backgroundBlurImage={caseItem.backgroundBlurImage}
-        backgroundImage={caseItem.backgroundImage}
-      />
-      <div className="mx-auto flex min-h-85 w-full max-w-310 flex-col gap-8 px-4 py-8 sm:px-6 md:min-h-100 lg:px-5">
+    <header>
+      <div className="mx-auto flex w-full max-w-310 flex-col gap-8 px-4 py-8 sm:px-6 lg:px-5">
         <Reveal delay={80} direction="down">
           <CaseBackLink href={getLocalizedPath("cases", locale)}>
             {detail.backToCases}
           </CaseBackLink>
         </Reveal>
-        <div className="mt-auto flex flex-col gap-3">
+        <div className="flex flex-col gap-3">
           <Reveal className="flex flex-col gap-3" delay={160}>
             <p className="m-0 font-vcr text-[12px] text-white/60 uppercase">
               {caseItem.category}

@@ -153,25 +153,17 @@ const labels = {
 
 for (const locale of locales) {
   test.describe(`case page animations in ${locale}`, () => {
-    test("the header animates in on load and the background stays at the page top", async ({
-      consoleErrors,
-      page,
-    }) => {
+    test("the header animates in on load", async ({ consoleErrors, page }) => {
       await page.goto(`/${locale}/cases/spectre`);
       const header = page.locator("main header").first();
       const reveals = header.locator('[class*="animate-reveal"]');
 
-      // Background fade, back link, category with name, facts.
-      await expect(reveals).toHaveCount(4);
+      // Back link, category with name, facts.
+      await expect(reveals).toHaveCount(3);
       for (const reveal of await reveals.all()) {
         await expectFullyShown(reveal);
       }
 
-      const background = header.locator(':scope > div[aria-hidden="true"]');
-      const top = await background.evaluate(
-        (element) => element.getBoundingClientRect().top + window.scrollY,
-      );
-      expect(top).toBe(0);
       expect(consoleErrors).toEqual([]);
     });
 

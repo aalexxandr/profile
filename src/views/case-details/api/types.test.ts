@@ -8,16 +8,15 @@ describe("case detail contract types", () => {
   it("allows null for the picture, project link and optional fact fields", () => {
     expectTypeOf<CaseDetail["image"]>().toEqualTypeOf<string | null>();
     expectTypeOf<CaseDetail["blurImage"]>().toEqualTypeOf<string | null>();
-    expectTypeOf<CaseDetail["backgroundImage"]>().toEqualTypeOf<
-      string | null
-    >();
-    expectTypeOf<CaseDetail["backgroundBlurImage"]>().toEqualTypeOf<
-      string | null
-    >();
     expectTypeOf<CaseDetail["projectLink"]>().toEqualTypeOf<string | null>();
     expectTypeOf<CaseDetail["company"]>().toEqualTypeOf<string | null>();
     expectTypeOf<CaseDetail["teamSize"]>().toEqualTypeOf<number | null>();
     expectTypeOf<CaseDetail["endedAt"]>().toEqualTypeOf<string | null>();
+  });
+
+  it("has no background picture", () => {
+    expectTypeOf<CaseDetail>().not.toHaveProperty("backgroundImage");
+    expectTypeOf<CaseDetail>().not.toHaveProperty("backgroundBlurImage");
   });
 
   it("accepts only the declared roles", () => {
