@@ -171,12 +171,30 @@ test.describe("cursor glow with a mouse", () => {
 });
 
 test.describe("cursor glow without a hovering mouse", () => {
-  test("is not rendered on a touch device", async ({ isMobile, page }) => {
+  test("stays in the centre of the screen on a touch device", async ({
+    isMobile,
+    page,
+  }) => {
     test.skip(!isMobile, "mobile project only");
+    const viewport = page.viewportSize();
 
-    for (const path of ["/en/cases", "/en/cases/spectre", "/en/contacts"]) {
+    if (!viewport) {
+      throw new Error("no viewport");
+    }
+
+    const centre = { x: viewport.width / 2, y: viewport.height / 2 };
+
+    for (const path of ["/en/cases", "/ru/cases/spectre", "/en/contacts"]) {
       await page.goto(path);
-      await expect(glowOf(page)).toHaveCount(0);
+      const glow = glowOf(page);
+
+      await expect(glow).toHaveCount(1);
+      await expect.poll(() => centreOf(glow)).toEqual(centre);
+      await expect(glow).toHaveCSS("opacity", "1");
+
+      await scrollPageContent(page, 300);
+      await page.touchscreen.tap(40, 40);
+      await expect.poll(() => centreOf(glow)).toEqual(centre);
     }
   });
 

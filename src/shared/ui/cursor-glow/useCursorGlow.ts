@@ -4,23 +4,23 @@ import { useEffect, useRef } from "react";
 
 import { GLOW_SIZE } from "./constants";
 import { getGlowStep } from "./getGlowStep";
-import { useGlowEnabled } from "./useGlowEnabled";
+import { useGlowMode } from "./useGlowMode";
 
 // Assumed length of the first frame after the loop has been idle.
 const FIRST_FRAME_MS = 1000 / 60;
 
-// Drives the glow: the element lags behind the pointer and only gets a
+// Drives the glow in "follow" mode: the element lags behind the pointer and only gets a
 // transform each frame; the frame loop idles once settled. The layer is
 // fixed and the target is the pointer's viewport position, so only a mouse
 // move can change it (scroll and resize cannot).
 export const useCursorGlow = () => {
   const glowRef = useRef<HTMLDivElement>(null);
-  const isEnabled = useGlowEnabled();
+  const mode = useGlowMode();
 
   useEffect(() => {
     const element = glowRef.current;
 
-    if (!isEnabled || !element) {
+    if (mode !== "follow" || !element) {
       return;
     }
 
@@ -62,7 +62,7 @@ export const useCursorGlow = () => {
       window.removeEventListener("mousemove", handleMove);
       cancelAnimationFrame(frame);
     };
-  }, [isEnabled]);
+  }, [mode]);
 
-  return { glowRef, isEnabled };
+  return { glowRef, mode };
 };

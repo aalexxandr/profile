@@ -8,9 +8,11 @@ import { FakeMatchMedia } from "./testing/FakeMatchMedia";
 import { useCursorGlow } from "./useCursorGlow";
 
 const Probe = () => {
-  const { glowRef, isEnabled } = useCursorGlow();
+  const { glowRef, mode } = useCursorGlow();
 
-  return isEnabled ? <div data-testid="glow" ref={glowRef} /> : null;
+  return mode === "off" ? null : (
+    <div data-mode={mode} data-testid="glow" ref={glowRef} />
+  );
 };
 
 const glow = () => screen.getByTestId("glow");
@@ -58,17 +60,34 @@ describe("useCursorGlow", () => {
   });
 
   describe("gating", () => {
-    it("is enabled for a hovering fine pointer", () => {
+    it("follows a hovering fine pointer", () => {
       render(<Probe />);
 
-      expect(screen.getByTestId("glow")).toBeInTheDocument();
+      expect(glow()).toHaveAttribute("data-mode", "follow");
     });
 
-    it.each([
-      ["a coarse pointer or no hover", FINE_HOVER_QUERY, false],
-      ["reduced motion", REDUCED_MOTION_QUERY, true],
-    ])("renders nothing and runs nothing for %s", (_name, query, value) => {
-      media.set(query, value);
+    it.each([false, true])(
+      "stays static and runs nothing without a hovering pointer (reduced motion: %s)",
+      (reducedMotion) => {
+        media.set(FINE_HOVER_QUERY, false);
+        media.set(REDUCED_MOTION_QUERY, reducedMotion);
+        const addListener = vi.spyOn(window, "addEventListener");
+
+        render(<Probe />);
+
+        expect(glow()).toHaveAttribute("data-mode", "static");
+        expect(glow().style.transform).toBe("");
+        expect(frames.pending).toBe(0);
+        expect(addListener).not.toHaveBeenCalledWith(
+          "mousemove",
+          expect.anything(),
+          expect.anything(),
+        );
+      },
+    );
+
+    it("renders nothing and runs nothing for a mouse with reduced motion", () => {
+      media.set(REDUCED_MOTION_QUERY, true);
       const addListener = vi.spyOn(window, "addEventListener");
 
       render(<Probe />);
@@ -91,13 +110,14 @@ describe("useCursorGlow", () => {
       expect(frames.pending).toBe(0);
     });
 
-    it("shows the glow when the pointer becomes a hovering one", () => {
+    it("starts following when the pointer becomes a hovering one", () => {
       media.set(FINE_HOVER_QUERY, false);
       render(<Probe />);
 
       act(() => media.set(FINE_HOVER_QUERY, true));
 
-      expect(screen.getByTestId("glow")).toBeInTheDocument();
+      expect(glow()).toHaveAttribute("data-mode", "follow");
+      expect(frames.pending).toBe(1);
     });
   });
 
