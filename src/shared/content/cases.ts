@@ -804,9 +804,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ],
       projectLink: "https://intecweb.ru/websites_bitrix/intec.prom",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/prom/b808a93cd0caf80e.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/prom/2e18a38f6cc9c965.webp",
       blurImage:
-        "data:image/webp;base64,UklGRhwBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKAAAAANgFTb2rLsPt+Hu7vLUIMwIgCLUlSgABkowNjd3eH9HuDXCBExAepMuRQA4VtuVOsn4oJ2u2P8LBnMOhaVw+yJnxV9LG1lLp4YvzEmUybIToHfssZmIpLxr8S/YwIBT4kA0BcGCF+bATsRfnwKaAiohf1mrVpWS/x4KLujxaMC6kdhcbvtJo1yWsyX2kREBWXYGsIb8RjVfBx3rsGURWYBVlA4IFYAAADwAwCdASoUAAwAPu1krU2ppaSiMAgBMB2JZQDCgCHgC8KHfOIwB3YAAP7oxprHs7ljlN7n7x5K9dJX4RO/Sxf5Qaxff8ZrvIqEdVHaRDW8yVz64wAAAA==",
+        "data:image/webp;base64,UklGRiABAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKIAAAANgBzbtqroPMPd3V1D0QiIigiIAIJgyty9e+b+3schhYiYAFHpdkK4esDbsDcCDnXD6xvuZGYLV//dj2d1jyMdM2iy8XnAnQdPISYI82m42+Q0gevwMDmAkgcOBAQHSQkAcu1AcDmOuAhuHqRkguDQDwetRsF1VPv7+39RbjcOGHxIm8/vMgv19vz8Zs/4uPrbTTbUH/cZqfa5XahIzMb/vgFWUDggWAAAANADAJ0BKhQADAA+7WarTimlpCIwCAEwHYlnAABb7Lq0sEXDSWjywAD+6NMW3mLHW9O+WchQlNAbeAPlg8/v6nHW559TihRm1bfP1FRqEOWPkA8KPSIAAAA=",
       role: "FULLSTACK",
       company: "Intec",
       teamSize: 10,
