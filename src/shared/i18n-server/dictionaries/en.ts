@@ -6,17 +6,17 @@ export const en = {
   },
   metadata: {
     home: {
-      title: "Sasha - Web Developer",
+      title: "Alex - Web Developer",
       description:
         "Portfolio: web interfaces, animated landing pages, services, fintech, mobile apps, and backend work.",
     },
     cases: {
       title: "Cases",
-      description: "Selected projects, interfaces, and product cases by Sasha.",
+      description: "Selected projects, interfaces, and product cases by Alex.",
     },
     contacts: {
       title: "Contacts",
-      description: "Contact Sasha to discuss web projects and interfaces.",
+      description: "Contact Alex to discuss web projects and interfaces.",
     },
   },
   navigation: {
@@ -42,7 +42,7 @@ export const en = {
   },
   home: {
     introText:
-      "Hi, I'm Sasha. I have been building for the web for 6\u00a0years.\n\nDuring that time I have built animated and 3D\u00a0landing pages, booking services, fintech interfaces with large datasets, Chrome widgets, mobile apps, and backend systems.\n\nIn pixels, code, and chaos I look for order, meaning, and joy. I love the feeling of adventure and interfaces that pull people in.",
+      "Hi, I'm Alex. I've spent over six years exploring the world of software development.\n\nI love working on things that, not long ago, existed only in someone's imagination. Listening, asking questions, experimenting, making mistakes, creating. At some point, an idea stops being just a conversation and becomes part of someone's life.\n\nAnd every time, I find myself wanting to do it all over again.",
     typewriterTexts: [
       "Never lost, always exploring.",
       "Open mind. Clean code.",
