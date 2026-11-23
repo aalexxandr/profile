@@ -38,7 +38,7 @@ pnpm api:generate
 
 Код приложения находится в `src`:
 
-- `src/app` — маршруты, layouts, metadata, sitemap, robots, global styles.
+- `src/app` — маршруты, layouts, metadata, sitemap, robots, global styles и иконки сайта: `icon.svg` (исходник), сгенерированные из него `favicon.ico` (32×32) и `apple-icon.png` (180×180, увеличение ×5 без сглаживания, прозрачный фон); при изменении `icon.svg` их нужно перегенерировать.
 - `src/views` — крупные страницы и экранные композиции.
 - `src/widgets` — самостоятельные блоки страницы.
 - `src/features` — пользовательские сценарии, когда появятся.
