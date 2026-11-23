@@ -2,7 +2,7 @@
 
 ## Context
 
-Source of the effect: carbontec-site `InteractiveGradient` (a fixed layer with a 350 px blue circle blurred by an SVG `feGaussianBlur`, `--x`/`--y` custom properties written from a `requestAnimationFrame` loop that moves 15% of the distance to the pointer per frame, plus a 0.4 s CSS transition on `top`/`left`). In carbontec it is mounted once globally and has page-specific branches (home, playground) that do not apply here. See proposal.md for scope.
+The effect: a fixed decorative layer with a soft blue circle that follows the pointer, moved from a `requestAnimationFrame` loop. See proposal.md for scope.
 
 Constraints in this repo:
 
@@ -27,7 +27,7 @@ Constraints in this repo:
 
 ## Decisions
 
-**1. Mount per page, not in the layout.** `CasesPage`, `CaseDetailPage` and the new `ContactsPage` render `<CursorGlow />`. Alternative: global mount filtered by `usePathname` like carbontec; rejected because it makes the layout know about routes and the locale-prefixed paths, and renders (then hides) the layer on the home page.
+**1. Mount per page, not in the layout.** `CasesPage`, `CaseDetailPage` and the new `ContactsPage` render `<CursorGlow />`. Alternative: global mount filtered by `usePathname`; rejected because it makes the layout know about routes and the locale-prefixed paths, and renders (then hides) the layer on the home page.
 
 **2. Layering.** The layer is `fixed inset-0 overflow-hidden pointer-events-none` with `aria-hidden`, at `z-index: -1`, like the original. It is deliberately above the case header's `-z-10` background; that is why the boundary in decision 4 is needed instead of relying on stacking. Content (windows, text, images) is in normal flow and paints above it.
 
@@ -49,13 +49,13 @@ The clamp applies to the target, so the easing glides the glow to the edge inste
 Alternative: fixed per-frame factor like the original; rejected as refresh-rate dependent.
 
 **6. No runtime blur: a radial gradient instead of an SVG filter.** The glow is one element of about 700x700 px painted with a multi-stop `radial-gradient` (glow colour at the centre easing out to transparent, stops tuned to approximate a Gaussian falloff) and `border-radius: 50%`, with `will-change: transform`. It is rasterized once and then only composited. This replaces the original `feGaussianBlur` (`stdDeviation` 110 on a filter region of about 1400x1400 px), whose cost is GPU-heavy and may be paid on every frame while the glow moves. A blurred 350 px disc is visually a soft spot of roughly this size, so the look is preserved. No SVG, no filter id and no `useId` are needed. Fallback if the gradient looks too different in the visual check: CSS `filter: blur()` on a static disc, accepted only if the performance trace in the UI check stays clean.
-Alternatives: SVG `feGaussianBlur` as in carbontec (fidelity, but expensive); a pre-rendered blurred PNG (cheap, but a binary asset and a fixed colour/size).
+Alternatives: SVG `feGaussianBlur` (soft, but expensive); a pre-rendered blurred PNG (cheap, but a binary asset and a fixed colour/size).
 
 **7. Gating.** The hook subscribes to `matchMedia("(hover: hover) and (pointer: fine)")` and `matchMedia("(prefers-reduced-motion: reduce)")` through `useSyncExternalStore` (server snapshot `false`), so SSR and the first client render match (no glow) and later changes apply without a reload. When gated off the component renders `null` and the listener/rAF effect is not started.
 
 **8. Lifecycle.** The effect adds `mousemove`, `resize` and a capture-phase `scroll` listener on `window` and starts the rAF loop; cleanup removes them and calls `cancelAnimationFrame`. Because the loop idles when settled, scroll and resize wake it: the page scrolls inside its own container (scroll does not bubble, hence capture) and the boundary may have moved without any pointer movement. The original loop never stops. The loop starts at the viewport centre and the layer fades in on the first frame, as before.
 
-**9. Colour.** `--color-glow: #1100ff` in `globals.css` `@theme`, used as `bg-glow`. It is outside the pixel/retro accent palette on purpose (it matches the carbontec glow); a token keeps it in one place.
+**9. Colour.** `--color-glow: #1100ff` in `globals.css` `@theme`, used as `bg-glow`. It is outside the pixel/retro accent palette on purpose (a cold blue glow); a token keeps it in one place.
 
 **10. Contacts slice.** New `views/contacts` with `ContactsPage` (title from the dictionary, as the route renders now, plus the glow) and an `index.ts` public API; `src/app/[locale]/contacts/page.tsx` stays a thin route that passes the dictionary slice. Same shape as `views/cases`.
 
@@ -63,7 +63,7 @@ Alternatives: SVG `feGaussianBlur` as in carbontec (fidelity, but expensive); a 
 
 - [A mask on the wrapper adds an offscreen surface on the case page] → written only when the edge moves, checked in the performance trace; hard clip as fallback.
 - [Cost of the glow on weak devices] → no filter at all: a gradient painted once and moved by the compositor, a single element with `will-change: transform`, the loop idles when settled, nothing rendered on touch/reduced motion; confirmed with a DevTools performance trace on the three pages.
-- [The gradient may not match carbontec's blurred circle exactly] → tune the stops in the visual check; fall back to a static `blur()` disc only if the trace stays clean.
+- [The gradient may look harder than a blurred circle] → tune the stops in the visual check; fall back to a static `blur()` disc only if the trace stays clean.
 - [A permanent rAF loop costs battery] → stop the loop when the glow has settled within the threshold and restart on the next `mousemove`.
 - [Glow above the header background on pages without a boundary] → only the case page has a header background; the list and contacts pages have none that the glow could cover. Verified visually in the UI check.
 - [Soft edge: a faint glow right under the header edge] → intended; the fade length is a constant tuned in the visual check.

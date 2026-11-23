@@ -2,7 +2,7 @@
 
 ## 1. Assets and dictionary
 
-- [x] 1.1 Copy `code-border.png` from `carbontec-site/apps/front/public/` to `public/code-border.png`; verify `file public/code-border.png` reports a 166 x 168 PNG
+- [x] 1.1 Add `public/code-border.png`; verify `file public/code-border.png` reports a 166 x 168 PNG
 - [x] 1.2 Add `aboutTitle`, `challengesTitle` and `stackTitle` to the `Dictionary` type and to both `ru` and `en`, and remove `achievementsTitle`, `categoryLabel` and `stackLabel` (their only users are in `CaseDetailPage`, which tasks 2-5 rewrite); verify `bun run typecheck` fails only inside `CaseDetailPage` until group 5 lands, and that the dictionary tests still pass
 
 ## 2. Header
