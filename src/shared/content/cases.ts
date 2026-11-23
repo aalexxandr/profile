@@ -33,6 +33,8 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "Product Design",
         "Technical Planning",
         "AI-assisted Development",
+        "Context Engineering",
+        "Harness Engineering",
       ],
       projectLink: "https://skygen.ai",
       image:
@@ -134,6 +136,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "Husky",
         "CSS",
         "HTML",
+        "AI-assisted Development",
+        "Context Engineering",
+        "Harness Engineering",
       ],
       projectLink: "https://thespectre.io",
       image:
@@ -172,7 +177,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
               "Ускорен запуск новых проектов и распространение обновлений",
           },
         ],
-        category: "FinTech / Web-приложение",
+        category: "FinTech / Web3-приложение",
         description:
           "Spectre - блокчейн-эксплорер с уникальными возможностями для изучения и анализа данных Ethereum и других блокчейн-сетей. Сервис собирает и показывает информацию о транзакциях, блоках, адресах и токенах, делая данные полностью прозрачными и доступными для каждого пользователя. Также Spectre предоставляет API, с которым удобно работать с этими данными.",
         name: "The Spectre Explorer",
@@ -203,7 +208,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
               "Accelerated new product launches and update delivery across all three projects",
           },
         ],
-        category: "FinTech / Web App",
+        category: "FinTech / Web3 App",
         description:
           "Spectre is a Blockchain Explorer that provides unique capabilities for exploring and analyzing data from Ethereum and other blockchain networks. Spectre gathers and displays information about transactions, blocks, addresses, and tokens across these networks, ensuring full transparency and accessibility of data for users, as well as offering an API for convenient data manipulation.",
         name: "The Spectre Explorer",
@@ -271,7 +276,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
               "Объединение сложного процесса покупки цифровых активов в единый интерфейс",
           },
         ],
-        category: "Веб-приложение",
+        category: "FinTech / Web3-приложение",
         description:
           "Разработка и развитие веб-платформы Graphite Network, объединяющей информационные и интерактивные инструменты для пользователей блокчейн-экосистемы. Помимо презентации технологии и её возможностей, платформа предоставляет функциональность личного кабинета, управления аккаунтом, участия в Market Staking и получения вознаграждений за торговую активность. Также проект включал механики вовлечения пользователей через систему квестов и другие интерактивные сценарии. Платформа интегрирована с блокчейн-инфраструктурой и внешними Web3-сервисами, обеспечивая взаимодействие пользователей с финансовыми инструментами экосистемы",
         name: "Atgraphite",
@@ -303,7 +308,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
               "Unified a complex digital asset purchasing process into a single, streamlined interface",
           },
         ],
-        category: "Web Application",
+        category: "FinTech / Web3 App",
         description:
           "Developed and maintained the Graphite Network web platform, combining informational content with interactive tools for blockchain ecosystem users. In addition to presenting the technology and its capabilities, the platform provides account management features, access to Market Staking, and rewards for trading activity. It also includes user engagement features such as a quest system and other interactive workflows. The platform integrates with blockchain infrastructure and external Web3 services, enabling users to interact with the ecosystem's financial tools.",
         name: "Atgraphite",
@@ -371,7 +376,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
               "История переводов и информация о состоянии операций доступны непосредственно в интерфейсе моста",
           },
         ],
-        category: "Web3-приложение",
+        category: "FinTech / Web3-приложение",
         description:
           "Разработка и развитие веб-приложения для межсетевого перевода токенов Graphite. Bridge Graphite позволяет перемещать активы между Graphite Network, Ethereum, BNB Chain, Solana, Polygon и Arbitrum, используя привычные криптокошельки. Приложение объединяет подключение кошелька, выбор сетей и выполнение переводов в единый пользовательский сценарий. В основе решения лежит модульная архитектура обработки кроссчейн-транзакций, обеспечивающая подготовку, проверку и подтверждение переводов между сетями. Система также предусматривает прозрачную модель комиссий, включающую сетевые расходы и комиссию сервиса.",
         name: "Bridge Graphite",
@@ -404,7 +409,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
               "Transfer history and transaction status information available directly within the bridge interface",
           },
         ],
-        category: "Web3 Application",
+        category: "FinTech / Web3 App",
         description:
           "Developed and maintained a web application for cross-chain transfers of Graphite tokens. Bridge Graphite enables users to move assets between Graphite Network, Ethereum, BNB Chain, Solana, Polygon, and Arbitrum using their existing crypto wallets. The application combines wallet connectivity, network selection, and transfer execution into a unified user experience. Its underlying solution relies on a modular architecture for cross-chain transaction processing, handling transfer preparation, verification, and confirmation across networks. The platform also provides a transparent fee structure covering network costs and service fees",
         name: "Bridge Graphite",
@@ -470,7 +475,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
               "Автоматизированная регистрация, верификация и выдача токенов для голосования",
           },
         ],
-        category: "Web3-приложение",
+        category: "FinTech / Web3-приложение",
         description:
           "Спроектировал и самостоятельно разработал fullstack-приложение Phonebook - децентрализованную систему репутации телефонных номеров. Платформа позволяет пользователям находить номера, оценивать их надёжность и формировать коллективную репутацию на основе положительных и отрицательных голосов. Реализовал взаимодействие с блокчейн-смарт-контрактами для хранения данных и управления репутацией, интеграцию с криптокошельками и подтверждение телефонных номеров. В основе системы лежит алгоритм динамического взвешивания пользовательских оценок, учитывающий историю голосований и актуальность отзывов",
         name: "Phonebook",
@@ -502,7 +507,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
               "Automated user registration, phone verification, and voting token issuance",
           },
         ],
-        category: "Web3 Application",
+        category: "FinTech / Web3 App",
         description:
           "Designed and independently developed Phonebook, a fullstack decentralized phone number reputation platform. The application allows users to look up phone numbers, assess their trustworthiness, and build collective reputations through positive and negative votes. Implemented blockchain smart contract integrations for data storage and reputation management, crypto wallet connectivity, and phone number verification. At the core of the platform is a dynamic reputation algorithm that adjusts the weight of user votes based on voting history and rating recency",
         name: "Phonebook",
@@ -525,6 +530,9 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
         "MobX",
         "Material UI",
         "Jest",
+        "Vitest",
+        "REST API",
+        "Strapi",
       ],
       projectLink: null,
       image:
@@ -562,7 +570,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
             metric: "Сократил объём дублирующегося кода в приложении на 20–25%",
           },
         ],
-        category: "Веб-приложение",
+        category: "Enterprise Marketing-Tech Web-Platform",
         description:
           "Разработка и развитие комплексной административной платформы для управления сотнями рекламных сайтов международных брендов, включая Philip Morris International, Mars и Canon. UBE Admin объединяет инструменты управления контентом, визуального создания рекламных лендингов и аналитики пользовательского поведения. Платформа позволяет централизованно управлять сайтами и маркетинговыми кампаниями, отслеживать действия посетителей, анализировать пользовательские сценарии и контролировать состояние рекламных страниц. В рамках команды из 15 специалистов участвовал в развитии ключевых frontend и backend компонентов системы, включая конструктор лендингов и аналитические инструменты",
         name: "UBE Admin",
@@ -594,7 +602,7 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
             metric: "Reduced duplicated code across the application by 20–25%",
           },
         ],
-        category: "Web Application",
+        category: "Enterprise Marketing-Tech Platform / Web App",
         description:
           "Developed and maintained a comprehensive administration platform for managing hundreds of advertising websites for international brands, including Philip Morris International, Mars, and Canon. UBE Admin combines content management, visual landing page creation, and user behavior analytics. The platform enables centralized management of websites and marketing campaigns, visitor activity tracking, user journey analysis, and advertising page monitoring. As part of a 15-person development team, contributed to key frontend and backend components, including the landing page builder and analytics tools",
         name: "UBE Admin",

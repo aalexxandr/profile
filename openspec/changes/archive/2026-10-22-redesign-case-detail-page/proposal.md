@@ -2,7 +2,7 @@
 
 ## Why
 
-The case page is a single `RetroWindow` with the picture beside it and every fact in one dense block. It does not use the new `backgroundImage` / `backgroundBlurImage` fields the backend already returns, and it gives the stack, the description and the achievements no visual structure. The carbontec case page has a clearer layout (hero header, "About case", highlighted blocks) that fits our case structure.
+The case page is a single `RetroWindow` with the picture beside it and every fact in one dense block. It does not use the new `backgroundImage` / `backgroundBlurImage` fields the backend already returns, and it gives the stack, the description and the achievements no visual structure. A clearer layout (hero header, "About case", highlighted blocks) fits our case structure.
 
 ## What Changes
 
@@ -11,7 +11,7 @@ The case page is a single `RetroWindow` with the picture beside it and every fac
   - **About case**: the `description` and the project link button only.
   - **Stack**: the technologies as a "code" card framed with `code-border.png`.
   - **Achievements**: the `achievements`, each as title, description and result (the `metric`).
-- Add `public/code-border.png` (copied from carbontec-site).
+- Add `public/code-border.png`.
 - Add dictionary keys (`ru` and `en`) for the new section titles; drop keys that no longer have a use.
 - Stop using `RetroWindow` on the case page (it stays on the list page).
 - Stop showing the case picture `image` on the case page (**BREAKING** for the "Case without a picture" requirement, which is removed); the picture stays in the cases list.
@@ -30,7 +30,7 @@ Out of scope:
 - The cases list page (including its use of the case picture) and `RetroWindow` itself.
 - Any other use of `image` / `blurImage` on the case page: the page does not show or request them.
 - Backend and API contract changes (`backgroundImage` and `backgroundBlurImage` are already in `schema.d.ts` and the stub fixtures).
-- Other carbontec sections (team, services, articles, related cases, playground, GitHub link, CMS content blocks).
+- Other sections (team, services, articles, related cases, playground, GitHub link, CMS content blocks).
 - Case metadata, routing, slugs and the build-time backend requirement.
 - Turning `react/no-multi-comp` into an error and refactoring the other components of the slice (they are already small).
 

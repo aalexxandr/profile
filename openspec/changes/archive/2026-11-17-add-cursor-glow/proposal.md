@@ -1,18 +1,18 @@
 ## Why
 
-The carbontec-site contacts page has a soft blue glow that smoothly follows the cursor. It gives the dark pages depth and a "living" feel. The cases pages and the contacts page of this site are flat dark canvases, so the same effect should be brought over for visual consistency across the two sites.
+A soft glow that smoothly follows the cursor gives the dark pages depth and a "living" feel. The cases pages and the contacts page of this site are flat dark canvases, so they get this effect.
 
 ## What Changes
 
-- Add a decorative cursor glow: a blurred blue circle that lags smoothly behind the mouse pointer, ported from carbontec-site's `InteractiveGradient`.
+- Add a decorative cursor glow: a blurred blue circle that lags smoothly behind the mouse pointer.
 - Show it on `/{locale}/cases`, `/{locale}/cases/[slug]` and `/{locale}/contacts`.
-- On the case detail page nothing of the glow is drawn over the case header (it is cut at the header's bottom edge with a short soft edge) but it does reach the content right below it, including the "About case" block, the same idea as the carbontec-site home page where the glow stays under the first (3D model) block. The header bottom is measured, because its height varies and the page scrolls inside an inner container.
+- On the case detail page nothing of the glow is drawn over the case header (it is cut at the header's bottom edge with a short soft edge) but it does reach the content right below it, including the "About case" block. The header bottom is measured, because its height varies and the page scrolls inside an inner container.
 - Render the glow only for a fine hovering pointer (`(hover: hover) and (pointer: fine)`) and not when the user prefers reduced motion.
 - Turn the contacts route from an inline title into a `views/contacts` slice with a `ContactsPage`, like the other pages.
 - The glow lags behind the pointer a little (time-based easing, about 220 ms, the same on any refresh rate).
 - Improve on the original for performance: replace the runtime SVG blur with a pre-painted radial gradient moved only by `transform`, stop the animation loop when the glow has settled and cancel it on unmount, take the colour from a design token.
 
-Out of scope: the home page, the site layout (no global mounting), the glow on touch devices, any change to the case header content or background image, changing carbontec-site itself, new dictionary strings (the glow is decorative and `aria-hidden`).
+Out of scope: the home page, the site layout (no global mounting), the glow on touch devices, any change to the case header content or background image, new dictionary strings (the glow is decorative and `aria-hidden`).
 
 ## Capabilities
 

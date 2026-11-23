@@ -5,7 +5,7 @@
 - [x] 1.1 Red: extend `ContactsPage.test.tsx` (and add a dictionary parity test if none exists) to expect the new `pages.contacts` keys in `ru` and `en`; verify `pnpm test` fails for the missing keys
 - [x] 1.2 Extend the `Dictionary` type and fill `ru` and `en` (`title`, `infoText`, `illustrationAlt`, `links`, `form` labels, method labels, `send`, `errors`, `success`); verify `pnpm typecheck` passes and the tests from 1.1 go green
 - [x] 1.3 Add `views/contacts/config` (email, Telegram and LinkedIn URLs, field limits 100/1000, notice display time); verify it is imported only through the slice and `pnpm lint` passes
-- [x] 1.4 Copy `bg-contacts-page.svg` from carbontec to `public/`; verify the file exists and renders via `next/image`
+- [x] 1.4 Add `bg-contacts-page.svg` to `public/`; verify the file exists and renders via `next/image`
 
 ## 2. Form logic (TDD)
 

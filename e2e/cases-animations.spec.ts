@@ -236,7 +236,11 @@ for (const locale of locales) {
         page,
       }) => {
         await page.goto(`/${locale}/cases/spectre`);
-        const reveals = page.locator('main [class*="animate-reveal"]');
+        // Only the page's `Reveal` blocks: the decorative cursor glow layer
+        // (`aria-hidden`) mounts after hydration with its own 1 ms fade.
+        const reveals = page.locator(
+          'main [class*="animate-reveal"]:not([aria-hidden="true"] *)',
+        );
 
         await expect(reveals).not.toHaveCount(0);
         for (const reveal of await reveals.all()) {

@@ -3,7 +3,7 @@
 ## Context
 
 - `src/views/contacts` holds a placeholder (title + `CursorGlow`); `src/app/[locale]/contacts/page.tsx` already passes `dictionary.pages.contacts` (currently `{ title }`) to it. Page metadata comes from the separate `metadata.contacts` dictionary entry, which stays unchanged.
-- Source: `carbontec-site/apps/front/src/components/{ContactsPage,ContactsForm}` (SCSS modules, Strapi data, `react-select`, Telegram bot submit). Layout reference only; nothing is copied verbatim.
+- Layout reference: a header with contact links, an illustrated info block and a message form.
 - Project constraints (see `CLAUDE.md`): FSD (`views` slice with `ui/lib/model/config`), components visually clean (one component per file, logic in hooks/helpers), every string in both dictionaries, Tailwind 4 tokens, TDD, UI work through `ui-ux-pro-max` and a Playwright MCP check.
 - See proposal.md for motivation and scope.
 
@@ -11,7 +11,7 @@
 
 **Goals:**
 
-- Visually close to carbontec (layout, hierarchy, retro feel) but built on this project's tokens and components.
+- Retro layout and hierarchy built on this project's tokens and components.
 - Form logic isolated in a testable hook; page and components stay declarative.
 
 **Non-Goals:**

@@ -58,7 +58,13 @@ test.describe("locale redirects from the proxy", () => {
 });
 
 test.describe("requests the proxy must not touch", () => {
-  for (const path of ["/robots.txt", "/sitemap.xml", "/favicon.ico"]) {
+  for (const path of [
+    "/robots.txt",
+    "/sitemap.xml",
+    "/favicon.ico",
+    "/icon.svg",
+    "/apple-icon.png",
+  ]) {
     test(`${path} is served without a redirect`, async ({ request }) => {
       const response = await request.get(path, { maxRedirects: 0 });
 

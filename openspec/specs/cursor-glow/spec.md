@@ -8,7 +8,7 @@ Defines the decorative purple glow (in the hue of the site accent) that smoothly
 
 ### Requirement: Glow follows the pointer
 
-On `/ru|en/cases`, `/ru|en/cases/[slug]` and `/ru|en/contacts` a blurred purple circle in the hue of the site accent SHALL be shown behind the page content, fixed to the viewport. It SHALL start at the viewport centre, fade in, and move smoothly towards the pointer, lagging behind it instead of jumping.
+On `/ru|en/cases`, `/ru|en/cases/[slug]`, `/ru|en/contacts`, the 404 page and the error screen a blurred purple circle in the hue of the site accent SHALL be shown behind the page content, fixed to the viewport. It SHALL start at the viewport centre, fade in, and move smoothly towards the pointer, lagging behind it instead of jumping.
 
 #### Scenario: Pointer moves on the contacts page
 
@@ -34,6 +34,11 @@ On `/ru|en/cases`, `/ru|en/cases/[slug]` and `/ru|en/contacts` a blurred purple 
 
 - **WHEN** the glow is shown on a case page
 - **THEN** its colour has the hue of the site's accent (the colour of the "Back to cases" link) and is darker than the accent, so accent-coloured links stay readable over it
+
+#### Scenario: Error pages
+
+- **WHEN** a user with a mouse moves the pointer across `/en/unknown-page` (the 404 page) or across the error screen of a page that failed to render
+- **THEN** the glow is shown behind the page content and follows the pointer as on the other pages
 
 ### Requirement: Glow is purely decorative
 

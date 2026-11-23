@@ -133,4 +133,18 @@ export const en = {
       title: "contacts",
     },
   },
+  errors: {
+    notFound: {
+      metaTitle: "Page not found",
+      title: "Nothing is here",
+      description: "Some things just don’t exist... Try to return to homepage.",
+      home: "Back to homepage",
+    },
+    serverError: {
+      title: "Something went wrong",
+      description: "Try again in a moment or go back to the homepage.",
+      retry: "Try again",
+      home: "Back to homepage",
+    },
+  },
 } satisfies Dictionary;

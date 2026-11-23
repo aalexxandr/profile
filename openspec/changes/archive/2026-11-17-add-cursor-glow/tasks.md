@@ -22,7 +22,7 @@
 ## 4. E2E and visual check
 
 - [x] 4.1 Add `e2e/cursor-glow.spec.ts` (desktop project): on `/en/cases`, `/ru/cases` and `/en/contacts` the glow moves towards a moved mouse; on a case page it stays below the header (its bounding box centre is never above the header bottom + half size) and the boundary follows after scrolling the inner container; the home page has no glow; with `reducedMotion: "reduce"` no glow is rendered; the mobile project has none. Verify: `pnpm test:e2e` passes for the new spec
-- [x] 4.2 Invoke the `ui-ux-pro-max` skill, then check the three pages with the Playwright MCP on desktop and mobile viewports: glow follows smoothly, does not cover the case header, no clipped content, links and windows remain clickable, no console errors. Record a Performance trace (Chrome DevTools MCP) while moving the mouse over `/en/cases`, check there is no per-frame main-thread paint or layout from the glow and the frame time stays within budget; tune the gradient stops if the look differs from carbontec. Verify: screenshots reviewed, trace shows no paint/layout from the glow, no console errors reported
+- [x] 4.2 Invoke the `ui-ux-pro-max` skill, then check the three pages with the Playwright MCP on desktop and mobile viewports: glow follows smoothly, does not cover the case header, no clipped content, links and windows remain clickable, no console errors. Record a Performance trace (Chrome DevTools MCP) while moving the mouse over `/en/cases`, check there is no per-frame main-thread paint or layout from the glow and the frame time stays within budget; tune the gradient stops if the glow looks too hard or too faint. Verify: screenshots reviewed, trace shows no paint/layout from the glow, no console errors reported
 
 ## 5. Docs and final checks
 
