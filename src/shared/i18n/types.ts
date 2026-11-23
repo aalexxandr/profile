@@ -111,4 +111,18 @@ export type Dictionary = {
       title: string;
     };
   };
+  errors: {
+    notFound: {
+      metaTitle: string;
+      title: string;
+      description: string;
+      home: string;
+    };
+    serverError: {
+      title: string;
+      description: string;
+      retry: string;
+      home: string;
+    };
+  };
 };

@@ -63,7 +63,7 @@ test.describe("cursor glow with a mouse", () => {
   test.skip(({ isMobile }) => isMobile, "needs a hovering fine pointer");
 
   for (const locale of locales) {
-    for (const suffix of ["/cases", "/contacts"]) {
+    for (const suffix of ["/cases", "/contacts", "/unknown-page"]) {
       test(`follows the mouse on /${locale}${suffix}`, async ({ page }) => {
         await page.goto(`/${locale}${suffix}`);
         const glow = glowOf(page);
@@ -184,7 +184,12 @@ test.describe("cursor glow without a hovering mouse", () => {
 
     const centre = { x: viewport.width / 2, y: viewport.height / 2 };
 
-    for (const path of ["/en/cases", "/ru/cases/spectre", "/en/contacts"]) {
+    for (const path of [
+      "/en/cases",
+      "/ru/cases/spectre",
+      "/en/contacts",
+      "/ru/unknown-page",
+    ]) {
       await page.goto(path);
       const glow = glowOf(page);
 
@@ -204,7 +209,12 @@ test.describe("cursor glow without a hovering mouse", () => {
     test("is not rendered", async ({ isMobile, page }) => {
       test.skip(isMobile, "desktop project only");
 
-      for (const path of ["/en/cases", "/en/cases/spectre", "/ru/contacts"]) {
+      for (const path of [
+        "/en/cases",
+        "/en/cases/spectre",
+        "/ru/contacts",
+        "/en/unknown-page",
+      ]) {
         await page.goto(path);
         await page.mouse.move(300, 300);
         await expect(glowOf(page)).toHaveCount(0);

@@ -1,6 +1,7 @@
 import "../globals.css";
 
 import { SiteLayout } from "../_layout/SiteLayout";
+import { PageErrorBoundary } from "@/views/error-pages";
 import { locales } from "@/shared/i18n";
 import { getDictionary, getValidatedLocale } from "@/shared/i18n-server";
 
@@ -20,7 +21,9 @@ export default async function LocaleLayout({
 
   return (
     <SiteLayout dictionary={dictionary} locale={locale}>
-      {children}
+      <PageErrorBoundary locale={locale} texts={dictionary.errors.serverError}>
+        {children}
+      </PageErrorBoundary>
     </SiteLayout>
   );
 }

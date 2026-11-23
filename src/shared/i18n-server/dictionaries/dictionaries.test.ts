@@ -65,6 +65,24 @@ describe.each(locales)("%s case texts", (locale) => {
   });
 });
 
+describe.each(locales)("%s error page texts", (locale) => {
+  const { notFound, serverError } = dictionaries[locale].errors;
+
+  it("has the 404 page texts", () => {
+    expect(notFound.metaTitle).toBeTruthy();
+    expect(notFound.title).toBeTruthy();
+    expect(notFound.description).toBeTruthy();
+    expect(notFound.home).toBeTruthy();
+  });
+
+  it("has the error screen texts", () => {
+    expect(serverError.title).toBeTruthy();
+    expect(serverError.description).toBeTruthy();
+    expect(serverError.retry).toBeTruthy();
+    expect(serverError.home).toBeTruthy();
+  });
+});
+
 describe("dictionaries together", () => {
   it("have the same structure of keys", () => {
     // Plural forms differ per language; only the `other` fallback is shared.
