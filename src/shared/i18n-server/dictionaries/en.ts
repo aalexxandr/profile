@@ -42,7 +42,7 @@ export const en = {
   },
   home: {
     introText:
-      "Hi, I'm Alex. I've spent over six years exploring the world of software development.\n\nI love working on things that, not long ago, existed only in someone's imagination. Listening, asking questions, experimenting, making mistakes, creating. At some point, an idea stops being just a conversation and becomes part of someone's life.\n\nAnd every time, I find myself wanting to do it all over again.",
+      "Hi, I'm Alex. I've spent over six years exploring the world of software development.\n\nI take on ideas that are still taking shape and turn them into working products.\n\nI'm comfortable starting with uncertainty. I get up to speed in unfamiliar areas, find answers, make decisions, and take ownership of the outcome.",
     typewriterTexts: [
       "Never lost, always exploring.",
       "Open mind. Clean code.",
