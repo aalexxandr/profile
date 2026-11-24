@@ -219,31 +219,24 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
   },
   {
     shared: {
-      slug: "atgraphite",
+      slug: "graphite-wallet",
       stack: [
-        "React",
         "TypeScript",
-        "Next.js",
+        "JavaScript",
+        "Vue",
         "Node.js",
-        "NestJS",
-        "Docker",
-        "Doscker Compose",
-        "Kubernetes",
-        "CI/CD",
-        "WebSocket",
-        "PostgreSQL",
-        "Reown",
+        "JSON-RPC",
         "Wagmi",
-        "Solana",
-        "Web3.js",
         "Ethers",
-        "Viem",
+        "Reown AppKit",
+        "Browser Extension APIs",
       ],
-      projectLink: "https://atgraphite.com",
+      projectLink:
+        "https://chromewebstore.google.com/detail/graphite-wallet/fbgdgmhhhlimaanngeakidegojjbbbbm",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/atgraphite/c721302fe94589a2.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/graphite-wallet/0861e7e0863ccef9.webp",
       blurImage:
-        "data:image/webp;base64,UklGRh4BAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSLgAAAABgGNt2/EoXkA6q7ed1KmyCI4rYwlWa9dmadu2J9b3vv94thARE8DWNl6TH4GQ924bk8lkGHInwgD4HSDc7xHJJbzWmXuC1I+I4fHqwqri3NsYUr8ihlfGZg+2FglSf4nsbT1BJv6v7WfIJv619YzZRIogIv4S3tv+tvgAf4Cn1dUnzMaLBveuX8JJoCDx9jDbO/lN5i1vHdm8T2HmbnGwLNB2D8kXDlfiLh86jUPyqNunMNZcQeQcVlA4IEAAAABQAwCdASoUAAwAPu1kqk4ppaQiMAgBMB2JZwC/ODBR5oNkUAD+7law1SaqRRdVE97dg9MNz/dwxXLTstBT0AAA",
+        "data:image/webp;base64,UklGRigBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSJ4AAAANgFzb1rLmfoq7u7vU4mMWRdECFWgBNEABrIx85P5JPCkhIiZAdGbTDL61eNwt9ga277q5wS+Z2yOMnt9fqF9YX6Xotnpwb/GbcL3oICxm8GtX2AMq8K/E/okAihIA5DtLQCxwyIYofrRKcU6AZSblc3EuqXl9U9ev4SgBVnfKH0uG3VLfXl1e+6opbvTp8RTxfNzD7N3pickWfMK8AVZQOCBkAAAAEAQAnQEqFAAMAD7tZKlNqaWkIjAIATAdiWMAvzgi7f7B+Maoul96sgAA/uWvqJD/aEt+wSf06Mi6QwHZJEEr6FRGvbuQ8N0NuQwSywxeAz4gMeGim+gssdYQY1NRNIJAZmIAAA==",
       role: "FULLSTACK",
       company: "AIPeople",
       teamSize: 22,
@@ -254,66 +247,65 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ru: {
         achievements: [
           {
-            title:
-              "Проектирование и разработка автоматизированной платформы выполнения заданий",
+            title: "Стандартизация интеграции кошелька с Web3-экосистемой",
             description:
-              "Спроектировал backend-архитектуру и реализовал полноценную систему квестов для привлечения и удержания пользователей. Разработал набор Node.js-сервисов для автоматической верификации заданий различной сложности: от подписок и публикаций в социальных сетях до отслеживания долгосрочной блокчейн-активности. Реализовал интеграции с Telegram и Discord через ботов, OAuth и внешние API, систему фоновых проверок, учёта прогресса, начисления баллов и защиты от повторного выполнения",
-            metric:
-              "Полностью автоматизированная система вовлечения, ежедневно обслуживающая десятки пользователей",
+              "Преобразовал проприетарный API кошелька в стандартный EIP-1193-провайдер, позволяющий dApp взаимодействовать с Graphite Wallet так же, как с MetaMask или Trust Wallet. Реализовал RPC-методы для доступа к аккаунту, подписания сообщений и транзакций, переключения сетей и добавления токенов. Унифицировал форматы данных, события и обработку ошибок, добавил автоматическое обнаружение кошелька через EIP-6963. Обеспечил совместимость с wagmi, ethers и Reown AppKit без отдельных адаптеров",
+            metric: "Совместимость с dApp без отдельных адаптеров",
           },
           {
-            title: "Создание единой архитектуры интеграции криптокошельков",
+            title: "Глобальный рефакторинг архитектуры кошелька",
             description:
-              "Инициировал и реализовал переход от разрозненных интеграций к унифицированной архитектуре подключения криптокошельков. Проанализировал существующие решения, выбрал универсальную библиотеку и адаптировал её под инфраструктуру компании. Обеспечил единый API взаимодействия с десятками кошельков, сохранив совместимость существующих приложений и устранив необходимость разработки отдельных провайдеров для каждой интеграции",
+              "Провёл масштабный рефакторинг кодовой базы Graphite Wallet, переработав структуру приложения, ключевые модули и механизмы взаимодействия между компонентами. Устранил накопившиеся архитектурные ограничения и упорядочил внутреннюю реализацию существующей функциональности. Рефакторинг заложил основу для дальнейшего развития кошелька, упростил поддержку кодовой базы и внедрение новых возможностей",
             metric:
-              "Подключение новых кошельков сведено к конфигурации вместо разработки отдельных интеграций",
+              "Масштабная переработка архитектуры и ключевых модулей кошелька",
           },
           {
-            title: "Разработка комплексного сценария покупки цифровых активов",
+            title: "Разработка механизмов активации аккаунта и KYC-фильтрации",
             description:
-              "Разработал многоэтапный интерфейс покупки токена @G, объединив выбор блокчейн-сети и актива, расчёт суммы покупки, ввод данных получателя и оформление транзакции в единый пользовательский сценарий. Реализовал взаимодействие между этапами покупки и обработку пользовательских данных, обеспечив последовательный и понятный процесс приобретения цифровых активов",
+              "Расширил функциональность кошелька, добавив ранее отсутствовавшие сценарии активации блокчейн-аккаунта и управления KYC. Реализовал изменение уровня верификации пользователя и настройку фильтров входящих транзакций, позволяющих ограничивать приём переводов в зависимости от уровня проверки отправителя. Интегрировал эти возможности непосредственно в интерфейс кошелька, предоставив пользователям управление механизмами безопасности сети без сторонних инструментов",
             metric:
-              "Объединение сложного процесса покупки цифровых активов в единый интерфейс",
+              "Активация аккаунта и управление KYC фильтрами непосредственно в кошельке",
           },
         ],
-        category: "FinTech / Web3-приложение",
+        category: "FinTech / Browser Extension",
         description:
-          "Разработка и развитие веб-платформы Graphite Network, объединяющей информационные и интерактивные инструменты для пользователей блокчейн-экосистемы. Помимо презентации технологии и её возможностей, платформа предоставляет функциональность личного кабинета, управления аккаунтом, участия в Market Staking и получения вознаграждений за торговую активность. Также проект включал механики вовлечения пользователей через систему квестов и другие интерактивные сценарии. Платформа интегрирована с блокчейн-инфраструктурой и внешними Web3-сервисами, обеспечивая взаимодействие пользователей с финансовыми инструментами экосистемы",
-        name: "Atgraphite",
+          "Разрабатывал и развивал Graphite Wallet — браузерный Web3-кошелёк для работы с Graphite Network и децентрализованными приложениями. Основными направлениями работы стали стандартизация API для подключения сторонних dApp, масштабный рефакторинг кодовой базы и расширение функциональности под специфические механизмы сети. Реализовал совместимость с популярными Web3-инструментами, а также пользовательские сценарии активации аккаунта, управления уровнями KYC и фильтрации входящих транзакций",
+        name: "Graphite Wallet",
         shortDescription:
-          "Многофункциональная Web3-платформа для взаимодействия с Graphite Network, управления аккаунтом и участия в финансовых программах экосистемы",
+          "Браузерный Web3-кошелёк с поддержкой децентрализованных приложений, управления аккаунтами, блокчейн-транзакциями и встроенными механизмами KYC и фильтрации входящих переводов",
       },
       en: {
         achievements: [
           {
-            title: "Design and Development of an Automated Task Platform",
+            title:
+              "Standardization of Wallet Integration with the Web3 Ecosystem",
             description:
-              "Designed the backend architecture and developed a comprehensive quest system to attract and retain users. Built a suite of Node.js services to automatically verify tasks of varying complexity, from social media subscriptions and posts to long-term blockchain activity. Implemented Telegram and Discord integrations using bots, OAuth, and external APIs, along with background verification processes, progress tracking, point allocation, and duplicate-submission prevention.",
+              "Converted the wallet's proprietary API into a standard EIP-1193 provider, allowing dApps to connect just as they do with MetaMask or Trust Wallet. Implemented RPC methods for account access, message and transaction signing, network switching, and token management. Standardized data formats, events, and errors, and added EIP-6963 wallet discovery. Enabled out-of-the-box compatibility with wagmi, ethers, and Reown AppKit, without custom adapters",
             metric:
-              "Fully automated user engagement system serving dozens of users daily",
+              "Out-of-the-box compatibility with wagmi, ethers, and Reown AppKit",
+          },
+          {
+            title: "Comprehensive Refactoring of the Wallet Architecture",
+            description:
+              "Carried out a major refactoring of the Graphite Wallet codebase, restructuring the application architecture, core modules, and interactions between components. Addressed accumulated architectural limitations and streamlined the implementation of existing functionality. The refactoring established a foundation for further product development, making the codebase easier to maintain and extend with new capabilities",
+            metric:
+              "Comprehensive restructuring of the wallet architecture and core modules",
           },
           {
             title:
-              "Development of a Unified Crypto Wallet Integration Architecture",
+              "Implementation of Account Activation and KYC-based Transaction Filtering",
             description:
-              "Initiated and implemented the transition from fragmented wallet integrations to a unified architecture. Evaluated existing solutions, selected a universal library, and adapted it to the company's infrastructure. Established a single API for interacting with dozens of wallets while maintaining compatibility with existing applications and eliminating the need to develop separate providers for each integration.",
+              "Expanded the wallet's functionality by introducing previously unsupported account activation and KYC management workflows. Implemented KYC level management and configurable incoming transaction filters, allowing users to control which transfers their accounts accept based on the sender's verification level. Integrated these capabilities directly into the wallet interface, enabling users to manage network-specific security features without relying on external tools",
             metric:
-              "Reduced new wallet integrations to configuration rather than custom provider development",
-          },
-          {
-            title: "Development of an End-to-End Digital Asset Purchase Flow",
-            description:
-              "Developed a multi-step interface for purchasing the @G token, bringing blockchain network and asset selection, purchase amount calculation, recipient details, and transaction submission into a single user flow. Implemented step-to-step interactions and user data handling to provide a clear and consistent digital asset purchase experience",
-            metric:
-              "Unified a complex digital asset purchasing process into a single, streamlined interface",
+              "Account activation and KYC-based transaction filtering built directly into the wallet",
           },
         ],
-        category: "FinTech / Web3 App",
+        category: "FinTech / Browser Extension",
         description:
-          "Developed and maintained the Graphite Network web platform, combining informational content with interactive tools for blockchain ecosystem users. In addition to presenting the technology and its capabilities, the platform provides account management features, access to Market Staking, and rewards for trading activity. It also includes user engagement features such as a quest system and other interactive workflows. The platform integrates with blockchain infrastructure and external Web3 services, enabling users to interact with the ecosystem's financial tools.",
-        name: "Atgraphite",
+          "Contributed to the development of Graphite Wallet, a browser-based Web3 wallet built for the Graphite Network ecosystem and decentralized applications. Key areas of work included standardizing the API for third-party dApp integration, carrying out a major codebase refactoring, and expanding wallet functionality to support network-specific features. Implemented compatibility with major Web3 tools, along with user workflows for account activation, KYC management, and incoming transaction filtering",
+        name: "Graphite Wallet",
         shortDescription:
-          "A multifunctional Web3 platform for interacting with Graphite Network, managing user accounts, and participating in ecosystem financial programs.",
+          "A browser-based Web3 wallet for Graphite Network, featuring decentralized application connectivity, account management, blockchain transactions, and built-in KYC and incoming transaction filtering",
       },
     },
   },
@@ -420,29 +412,31 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
   },
   {
     shared: {
-      slug: "phonebook",
+      slug: "atgraphite",
       stack: [
         "React",
         "TypeScript",
+        "Next.js",
         "Node.js",
-        "Elysia",
+        "NestJS",
         "Docker",
         "Doscker Compose",
         "Kubernetes",
-        "Tailwindcss",
-        "Vite",
-        "Bun",
         "CI/CD",
+        "WebSocket",
+        "PostgreSQL",
+        "Reown",
         "Wagmi",
+        "Solana",
+        "Web3.js",
         "Ethers",
         "Viem",
-        "Tanstack",
       ],
-      projectLink: "https://phonebook.atgraphite.com",
+      projectLink: "https://atgraphite.com",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/phonebook/752e10c257c0448f.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/atgraphite/c721302fe94589a2.webp",
       blurImage:
-        "data:image/webp;base64,UklGRggBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKIAAAANgF3bdoLoxnB3d7datAC6ogQaoAg+KcB95s89CQ4tRMQEiFqvGwYBgAPeh/3RAYeG+fXtgNvMauVa9j6eFG4fXJmkWavmxwH3eEsJA2UBjbstbiuoOJD7QHAAIYcHAAJISgCQewCM425CcP3wL7kgwCAcdhgFN1L9+ydflMcHYPgu7cGgxyLU+/P+3ZkPcPW/m2xpIOk3s8PHdqFjCTv//wFWUDggQAAAAJADAJ0BKhQADAA+7WaqTimlo6IwCAEwHYlnAABb6Li4kSetAAAA/ujiwogbDUD9+enkP6JOepBccj6/NzoDwAA=",
+        "data:image/webp;base64,UklGRh4BAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSLgAAAABgGNt2/EoXkA6q7ed1KmyCI4rYwlWa9dmadu2J9b3vv94thARE8DWNl6TH4GQ924bk8lkGHInwgD4HSDc7xHJJbzWmXuC1I+I4fHqwqri3NsYUr8ihlfGZg+2FglSf4nsbT1BJv6v7WfIJv619YzZRIogIv4S3tv+tvgAf4Cn1dUnzMaLBveuX8JJoCDx9jDbO/lN5i1vHdm8T2HmbnGwLNB2D8kXDlfiLh86jUPyqNunMNZcQeQcVlA4IEAAAABQAwCdASoUAAwAPu1kqk4ppaQiMAgBMB2JZwC/ODBR5oNkUAD+7law1SaqRRdVE97dg9MNz/dwxXLTstBT0AAA",
       role: "FULLSTACK",
       company: "AIPeople",
       teamSize: 22,
@@ -453,66 +447,66 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ru: {
         achievements: [
           {
-            title: "Разработка алгоритма динамического расчёта репутации",
-            description:
-              "Спроектировал и реализовал алгоритм расчёта репутации телефонных номеров на основе взвешенной системы пользовательских оценок. Внедрил динамические коэффициенты, учитывающие историю голосований каждого пользователя и актуальность его оценок. Использовал сигмоидальные функции для расчёта весов, позволяющие усиливать вклад последовательных и сбалансированных участников и снижать влияние потенциально недобросовестных голосов",
-            metric:
-              "Динамическое взвешивание голосов с коэффициентами влияния до 10x",
-          },
-          {
-            title: "Разработка блокчейн-системы пользовательского голосования",
-            description:
-              "Реализовал механизм децентрализованного голосования с хранением данных в блокчейн-смарт-контрактах. Разработал логику назначения положительной и отрицательной репутации телефонным номерам, управления голосами и повторного голосования с автоматической заменой предыдущей оценки. Интегрировал систему с криптокошельками, обеспечив подтверждение пользовательских операций через блокчейн-транзакции",
-            metric:
-              "Децентрализованное управление репутацией без централизованного хранения голосов",
-          },
-          {
             title:
-              "Разработка fullstack-системы регистрации и верификации пользователей",
+              "Проектирование и разработка автоматизированной платформы выполнения заданий",
             description:
-              "Разработал пользовательский сценарий регистрации, объединив подключение криптокошелька, оплату сетевой комиссии и подтверждение номера телефона. Реализовал механизм выдачи стартовых токенов для голосования после успешной регистрации, а также интерфейс поиска телефонных номеров и управления пользовательскими оценками. Обеспечил согласованную работу frontend и backend логики с блокчейн-инфраструктурой",
+              "Спроектировал backend-архитектуру и реализовал полноценную систему квестов для привлечения и удержания пользователей. Разработал набор Node.js-сервисов для автоматической верификации заданий различной сложности: от подписок и публикаций в социальных сетях до отслеживания долгосрочной блокчейн-активности. Реализовал интеграции с Telegram и Discord через ботов, OAuth и внешние API, систему фоновых проверок, учёта прогресса, начисления баллов и защиты от повторного выполнения",
             metric:
-              "Автоматизированная регистрация, верификация и выдача токенов для голосования",
+              "Полностью автоматизированная система вовлечения, ежедневно обслуживающая десятки пользователей",
+          },
+          {
+            title: "Создание единой архитектуры интеграции криптокошельков",
+            description:
+              "Инициировал и реализовал переход от разрозненных интеграций к унифицированной архитектуре подключения криптокошельков. Проанализировал существующие решения, выбрал универсальную библиотеку и адаптировал её под инфраструктуру компании. Обеспечил единый API взаимодействия с десятками кошельков, сохранив совместимость существующих приложений и устранив необходимость разработки отдельных провайдеров для каждой интеграции",
+            metric:
+              "Подключение новых кошельков сведено к конфигурации вместо разработки отдельных интеграций",
+          },
+          {
+            title: "Разработка комплексного сценария покупки цифровых активов",
+            description:
+              "Разработал многоэтапный интерфейс покупки токена @G, объединив выбор блокчейн-сети и актива, расчёт суммы покупки, ввод данных получателя и оформление транзакции в единый пользовательский сценарий. Реализовал взаимодействие между этапами покупки и обработку пользовательских данных, обеспечив последовательный и понятный процесс приобретения цифровых активов",
+            metric:
+              "Объединение сложного процесса покупки цифровых активов в единый интерфейс",
           },
         ],
         category: "FinTech / Web3-приложение",
         description:
-          "Спроектировал и самостоятельно разработал fullstack-приложение Phonebook - децентрализованную систему репутации телефонных номеров. Платформа позволяет пользователям находить номера, оценивать их надёжность и формировать коллективную репутацию на основе положительных и отрицательных голосов. Реализовал взаимодействие с блокчейн-смарт-контрактами для хранения данных и управления репутацией, интеграцию с криптокошельками и подтверждение телефонных номеров. В основе системы лежит алгоритм динамического взвешивания пользовательских оценок, учитывающий историю голосований и актуальность отзывов",
-        name: "Phonebook",
+          "Разработка и развитие веб-платформы Graphite Network, объединяющей информационные и интерактивные инструменты для пользователей блокчейн-экосистемы. Помимо презентации технологии и её возможностей, платформа предоставляет функциональность личного кабинета, управления аккаунтом, участия в Market Staking и получения вознаграждений за торговую активность. Также проект включал механики вовлечения пользователей через систему квестов и другие интерактивные сценарии. Платформа интегрирована с блокчейн-инфраструктурой и внешними Web3-сервисами, обеспечивая взаимодействие пользователей с финансовыми инструментами экосистемы",
+        name: "Atgraphite",
         shortDescription:
-          "Децентрализованная платформа для проверки телефонных номеров и формирования репутации на основе пользовательских оценок",
+          "Многофункциональная Web3-платформа для взаимодействия с Graphite Network, управления аккаунтом и участия в финансовых программах экосистемы",
       },
       en: {
         achievements: [
           {
-            title: "Development of a Dynamic Reputation Scoring Algorithm",
+            title: "Design and Development of an Automated Task Platform",
             description:
-              "Designed and implemented a reputation algorithm based on a weighted system of user ratings. Introduced dynamic weighting factors that account for each user's voting history and the recency of their ratings. Used sigmoid functions to calculate vote weights, increasing the influence of consistent, balanced contributors while reducing the impact of potentially manipulative voting behavior",
+              "Designed the backend architecture and developed a comprehensive quest system to attract and retain users. Built a suite of Node.js services to automatically verify tasks of varying complexity, from social media subscriptions and posts to long-term blockchain activity. Implemented Telegram and Discord integrations using bots, OAuth, and external APIs, along with background verification processes, progress tracking, point allocation, and duplicate-submission prevention.",
             metric:
-              "Dynamic vote weighting with influence multipliers of up to 10x",
-          },
-          {
-            title: "Development of a Blockchain-Based Voting System",
-            description:
-              "Implemented a decentralized voting mechanism with data stored in blockchain smart contracts. Developed the logic for assigning positive and negative reputation scores to phone numbers, managing votes, and allowing users to change their ratings by automatically replacing previous votes. Integrated the system with crypto wallets, enabling users to authorize voting operations through blockchain transactions",
-            metric:
-              "Decentralized reputation management without centralized vote storage",
+              "Fully automated user engagement system serving dozens of users daily",
           },
           {
             title:
-              "Development of a Fullstack User Registration and Verification System",
+              "Development of a Unified Crypto Wallet Integration Architecture",
             description:
-              "Built an end-to-end registration flow combining crypto wallet connection, network fee payment, and phone number verification. Implemented the issuance of initial voting tokens upon successful registration, along with the interface for searching phone numbers and managing user ratings. Ensured seamless interaction between frontend and backend logic and the underlying blockchain infrastructure",
+              "Initiated and implemented the transition from fragmented wallet integrations to a unified architecture. Evaluated existing solutions, selected a universal library, and adapted it to the company's infrastructure. Established a single API for interacting with dozens of wallets while maintaining compatibility with existing applications and eliminating the need to develop separate providers for each integration.",
             metric:
-              "Automated user registration, phone verification, and voting token issuance",
+              "Reduced new wallet integrations to configuration rather than custom provider development",
+          },
+          {
+            title: "Development of an End-to-End Digital Asset Purchase Flow",
+            description:
+              "Developed a multi-step interface for purchasing the @G token, bringing blockchain network and asset selection, purchase amount calculation, recipient details, and transaction submission into a single user flow. Implemented step-to-step interactions and user data handling to provide a clear and consistent digital asset purchase experience",
+            metric:
+              "Unified a complex digital asset purchasing process into a single, streamlined interface",
           },
         ],
         category: "FinTech / Web3 App",
         description:
-          "Designed and independently developed Phonebook, a fullstack decentralized phone number reputation platform. The application allows users to look up phone numbers, assess their trustworthiness, and build collective reputations through positive and negative votes. Implemented blockchain smart contract integrations for data storage and reputation management, crypto wallet connectivity, and phone number verification. At the core of the platform is a dynamic reputation algorithm that adjusts the weight of user votes based on voting history and rating recency",
-        name: "Phonebook",
+          "Developed and maintained the Graphite Network web platform, combining informational content with interactive tools for blockchain ecosystem users. In addition to presenting the technology and its capabilities, the platform provides account management features, access to Market Staking, and rewards for trading activity. It also includes user engagement features such as a quest system and other interactive workflows. The platform integrates with blockchain infrastructure and external Web3 services, enabling users to interact with the ecosystem's financial tools.",
+        name: "Atgraphite",
         shortDescription:
-          "A decentralized platform for identifying phone numbers and building reputation through community-driven ratings",
+          "A multifunctional Web3 platform for interacting with Graphite Network, managing user accounts, and participating in ecosystem financial programs.",
       },
     },
   },
@@ -709,25 +703,25 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
   },
   {
     shared: {
-      slug: "universe",
+      slug: "enterprise-cms-commerce",
       stack: [
+        "JavaScript",
         "TypeScript",
         "Node.js",
         "PHP",
-        "1С-Битрикс",
-        "HTML",
-        "CSS",
-        "CMS",
         "jQuery",
         "Rest API",
+        "HTML",
+        "CSS",
+        "Component Architecture",
       ],
-      projectLink: "https://intecweb.ru/websites_bitrix/universe",
+      projectLink: null,
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/universe/158556a3a4a3a632.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/enterprise-cms-commerce/43fd8ffb8711951b.webp",
       blurImage:
-        "data:image/webp;base64,UklGRhQBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKAAAAANcF3btunsc1/MP9tqxvhKY6kjPaQH23aeYpQQERPAiG7RcslNhLfraqXmUiuF7Y7HZ43bipROde7WV7dPam/SkmOQxvU53T4wk8cREGTG7883fCaFBv8l3H6hG97eAAJwA0CSCIB4nlNyN8Lrbd+fvOwnolmjVhPPXy/76Wh7UDLsWlO1zWJi5+1svLqZNEu1Urou+rzToSPhMBjyJiUBVlA4IE4AAADQAwCdASoUAAwAPu1iqk4ppaQiMAgBMB2JZQAAUSzXfxLbHjEMKDAA8qOriLuo3F57r6ZkljQAOmfwanQQeJRqmI2ctMMDNGDoo7L4/AA=",
+        "data:image/webp;base64,UklGRhgBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSJ8AAAANcBvbtqqc83AN3SPrxiGiMtqgB2pwd3f4hksJETEBgrzFSsUgibfrSrkaMOvl7U7CZ3PQjZTFeOnU1rdPpkjSlRFCGdfnvH0QjpA/qmhC3p9v+Ey9CX8lcPuFN7xSAwjgBoCqciMoScKouxFvd/0xAO7HqtNiNFO6SpfddLw96nTYtScmt9spzrvpaAWnaWkyqNdFX/L5rFQOg9HVqScAVlA4IFIAAAAQBACdASoUAAwAPu1iqk4ppaQiMAgBMB2JZwC7ACLMJojplACcXJgLgADynT+vqduDlk+euQGIe3DRwyZtCpo9X6R4f2sEMw/X0JqhkmNXEAAA",
       role: "FULLSTACK",
-      company: "Intec",
+      company: "INTEC",
       teamSize: 10,
       startedAt: "2019-06-01",
       endedAt: "2021-05-01",
@@ -736,154 +730,176 @@ const cases: { shared: Shared; texts: Record<Locale, Texts> }[] = [
       ru: {
         achievements: [
           {
-            title: "Разработка универсальной библиотеки UI-модулей",
+            title: "Разработка визуального конструктора сайтов",
             description:
-              "Разрабатывал frontend и backend модули универсального CMS-шаблона на JavaScript и PHP. Создавал гибко настраиваемые и отказоустойчивые UI-блоки с поддержкой различных вариантов отображения, конфигураций и бизнес-сценариев. Проектировал компоненты с расчётом на повторное использование в интернет-магазинах и корпоративных сайтах, позволяя адаптировать функциональность под требования конкретных клиентских проектов без разработки отдельных реализаций",
-            metric: "50+ готовых UI-блоков в единой библиотеке CMS-платформы",
-          },
-          {
-            title: "Разработка технологии визуального конструктора сайтов",
-            description:
-              "Участвовал в разработке визуального конструктора дизайна, позволяющего создавать страницы сайта из готовых UI-модулей. Реализовывал механизмы комбинирования компонентов, управления их расположением и настройки отображения, обеспечивая корректную работу различных комбинаций элементов без нарушения структуры страницы",
+              "Участвовал в разработке визуального конструктора страниц, реализовывал механизмы сборки интерфейсов из настраиваемых UI-модулей, управления расположением элементов и настройки их отображения. Обеспечивал корректную работу различных комбинаций компонентов без нарушения структуры и визуальной целостности страниц. Решение позволяло создавать и настраивать страницы без написания кода",
             metric:
               "Создание и настройка страниц из готовых модулей без написания кода",
           },
           {
-            title: "Инициирование и разработка нового функционального модуля",
+            title:
+              "Разработка модульной архитектуры переиспользуемых UI-компонентов",
             description:
-              "Самостоятельно предложил идею и подготовил концепцию нового модуля сравнения товаров для интернет-магазинов. Продумал пользовательский сценарий и функциональность блока, позволяющего добавлять товары в список сравнения и наглядно сопоставлять их характеристики. Инициировал разработку решения, реализовал его и интегрировал в общую библиотеку компонентов INTEC.Universe, расширив стандартные возможности CMS-шаблона новым инструментом для покупателей",
+              "Разрабатывал настраиваемые UI модули для корпоративных сайтов и интернет магазинов, обеспечивая повторное использование компонентов и гибкость их конфигурации. Работал с frontend и backend логикой, позволяя адаптировать модули под разные бизнес требования без дублирования реализации. Общая библиотека платформы включала более 50 готовых UI блоков",
             metric:
-              "Новый функциональный модуль разработан и интегрирован в CMS-платформу",
+              "Более 50 готовых UI блоков в единой библиотеке компонентов",
+          },
+          {
+            title: "Разработка сложной логики B2B каталогов товаров",
+            description:
+              "Реализовывал функциональность каталогов для промышленной электронной коммерции, иерархию категорий, сложные товарные характеристики, варианты товаров и фильтрацию по атрибутам. Разрабатывал логику обработки структурированных товарных данных и их отображения, включая представление цен и складских остатков для различных конфигураций товаров",
+            metric:
+              "Единый каталог со сложными характеристиками, вариантами товаров и динамической фильтрацией",
+          },
+          {
+            title: "Разработка компонентов личного кабинета B2B клиентов",
+            description:
+              "Разрабатывал отдельные страницы и интерфейсные компоненты корпоративного личного кабинета для управления бизнес профилями и работы с заказами. Реализовывал пользовательские сценарии с несколькими юридическими лицами в рамках одной учётной записи, а также интерфейсы просмотра заказов, статусов оплаты и доставки и других данных корпоративных клиентов",
+            metric:
+              "Интерфейсы для работы с несколькими компаниями в рамках одного аккаунта",
           },
         ],
-        category: "CMS-платформа",
+        category: "Корпоративное ПО / B2B-коммерция",
         description:
-          "Разработка и развитие крупного универсального CMS-решения INTEC.Universe на базе 1С-Битрикс, предназначенного для быстрого создания интернет-магазинов и корпоративных сайтов под различные бизнес-задачи. Платформа объединяет модульную систему UI-компонентов, визуальный конструктор страниц, гибкие настройки дизайна и готовые функциональные блоки, позволяющие адаптировать сайт под специфику конкретного бизнеса без разработки с нуля. В рамках команды из 10 специалистов занимался разработкой и поддержкой frontend и backend модулей на JavaScript и PHP, создавая гибко настраиваемые и отказоустойчивые интерфейсные компоненты для повторного использования в различных клиентских проектах",
-        name: "INTEC.Universe",
+          "Участвовал в разработке корпоративных CMS-решений для создания сайтов компаний и B2B-платформ электронной коммерции. Работал над frontend- и backend-модулями на JavaScript/TypeScript и PHP, разрабатывал настраиваемые UI-компоненты, инструменты визуального конструирования страниц и сложную коммерческую функциональность. Решения объединяли переиспользуемую библиотеку компонентов, гибкие механизмы сборки страниц, расширенные товарные каталоги и интерфейсы личных кабинетов корпоративных клиентов.=",
+        name: "Enterprise Web Platform",
         shortDescription:
-          "Масштабируемый CMS-шаблон с модульной архитектурой, визуальным конструктором и библиотекой настраиваемых UI-компонентов",
+          "Комплекс корпоративных CMS-решений для создания бизнес сайтов и B2B магазинов с модульной архитектурой интерфейсов, визуальным конструктором страниц и расширенной коммерческой функциональностью",
       },
       en: {
         achievements: [
           {
-            title: "Development of a Reusable UI Component Library",
+            title: "Development of a Reusable Modular UI Architecture",
             description:
-              "Developed frontend and backend modules for a universal CMS template using JavaScript and PHP. Built flexible, fault-tolerant UI components with configurable layouts, display options, and support for different business scenarios. Designed components for reuse across e-commerce and corporate websites, allowing the platform to be adapted to individual client requirements without building separate implementations",
-            metric:
-              "50+ ready-to-use UI blocks in a unified CMS component library",
+              "Developed configurable UI modules for corporate websites and e-commerce platforms, focusing on component reusability and flexible configuration. Worked on both frontend and backend logic, enabling modules to adapt to different business requirements without duplicating implementations. The overall platform ecosystem included a library of more than 50 ready-made UI blocks",
+            metric: "50+ ready-made UI blocks in a shared component library",
           },
           {
-            title: "Development of a Visual Website Design Builder",
+            title: "Development of a Visual Website Builder",
             description:
-              "Contributed to the development of a visual design builder that allows users to create website pages from ready-made UI modules. Implemented mechanisms for combining components, managing their layout, and customizing their appearance, ensuring different combinations work correctly without breaking the page structure",
+              "Contributed to the development of a visual page builder, implementing mechanisms for composing interfaces from configurable UI modules, managing element layouts, and controlling component display settings. Ensured different component combinations worked without compromising page structure or visual consistency. The solution enabled users to create and customize website pages without writing code",
             metric:
-              "Build and customize website pages using ready-made modules without coding",
+              "Visual page creation and customization without writing code",
           },
           {
-            title: "Initiative and Development of a New Functional Module",
+            title: "Engineering of Advanced B2B Product Catalogs",
             description:
-              "Independently proposed and developed the concept for a product comparison module for e-commerce websites. Defined the user flow and functionality, allowing shoppers to add products to a comparison list and review their specifications side by side. Initiated the implementation, developed the module, and integrated it into the INTEC.Universe component library, extending the CMS template with a new shopping feature",
+              "Implemented complex catalog functionality for industrial e-commerce, including hierarchical categories, detailed product specifications, product variants, and attribute-based filtering. Developed logic for processing structured product data and displaying it, including pricing and stock availability across different product configurations",
             metric:
-              "1 new functional module independently proposed, developed, and integrated",
+              "Unified catalog supporting complex specifications, product variants, and dynamic filtering",
+          },
+          {
+            title: "Development of B2B Customer Portal Components",
+            description:
+              "Developed selected pages and interface components for a corporate customer portal, supporting business profile management and order-related workflows. Implemented user scenarios involving multiple legal entities within a single account, alongside interfaces for viewing orders, payment and delivery statuses, and other business customer data",
+            metric:
+              "Customer portal interfaces supporting multiple companies within one account",
           },
         ],
-        category: "CMS Platform",
+        category: "Enterprise Software / B2B Commerce",
         description:
-          "Developed and maintained INTEC.Universe, a comprehensive CMS solution built on 1C-Bitrix for creating e-commerce and corporate websites. The platform combines a modular UI component library, a visual website design builder, flexible design settings, and ready-made functional blocks, allowing websites to be customized for different business needs without building them from scratch. As part of a 10-person development team, worked on frontend and backend modules using JavaScript and PHP, building configurable and fault-tolerant components for reuse across multiple client projects",
-        name: "INTEC.Universe",
+          "Contributed to the development of enterprise CMS solutions for corporate websites and B2B e-commerce platforms. Worked across frontend and backend modules using JavaScript and PHP, building configurable UI components, visual page-building tools, and complex commerce functionality. The solutions combined a reusable component library, flexible page composition mechanisms, advanced product catalogs, and customer portal interfaces",
+        name: "Enterprise Web Platform",
         shortDescription:
-          "A scalable CMS template built on 1C-Bitrix, featuring a modular architecture, visual design builder, and library of configurable UI components",
+          "A suite of enterprise CMS solutions for corporate websites and B2B e-commerce, featuring modular UI architecture, visual page building, and advanced commerce functionality",
       },
     },
   },
   {
     shared: {
-      slug: "prom",
+      slug: "phonebook",
       stack: [
+        "React",
         "TypeScript",
         "Node.js",
-        "PHP",
-        "1С-Битрикс",
-        "HTML",
-        "CSS",
-        "CMS",
-        "jQuery",
-        "Rest API",
+        "Elysia",
+        "Docker",
+        "Doscker Compose",
+        "Kubernetes",
+        "Tailwindcss",
+        "Vite",
+        "Bun",
+        "CI/CD",
+        "Wagmi",
+        "Ethers",
+        "Viem",
+        "Tanstack",
       ],
-      projectLink: "https://intecweb.ru/websites_bitrix/intec.prom",
+      projectLink: "https://phonebook.atgraphite.com",
       image:
-        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/prom/2e18a38f6cc9c965.webp",
+        "https://437ae070-24d8-4b42-a1ae-ee5af56b340b.srvstatic.uz/cases/phonebook/752e10c257c0448f.webp",
       blurImage:
-        "data:image/webp;base64,UklGRiABAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKIAAAANgBzbtqroPMPd3V1D0QiIigiIAIJgyty9e+b+3schhYiYAFHpdkK4esDbsDcCDnXD6xvuZGYLV//dj2d1jyMdM2iy8XnAnQdPISYI82m42+Q0gevwMDmAkgcOBAQHSQkAcu1AcDmOuAhuHqRkguDQDwetRsF1VPv7+39RbjcOGHxIm8/vMgv19vz8Zs/4uPrbTTbUH/cZqfa5XahIzMb/vgFWUDggWAAAANADAJ0BKhQADAA+7WarTimlpCIwCAEwHYlnAABb7Lq0sEXDSWjywAD+6NMW3mLHW9O+WchQlNAbeAPlg8/v6nHW559TihRm1bfP1FRqEOWPkA8KPSIAAAA=",
+        "data:image/webp;base64,UklGRggBAABXRUJQVlA4WAoAAAAQAAAAEwAACwAAQUxQSKIAAAANgF3bdoLoxnB3d7datAC6ogQaoAg+KcB95s89CQ4tRMQEiFqvGwYBgAPeh/3RAYeG+fXtgNvMauVa9j6eFG4fXJmkWavmxwH3eEsJA2UBjbstbiuoOJD7QHAAIYcHAAJISgCQewCM425CcP3wL7kgwCAcdhgFN1L9+ydflMcHYPgu7cGgxyLU+/P+3ZkPcPW/m2xpIOk3s8PHdqFjCTv//wFWUDggQAAAAJADAJ0BKhQADAA+7WaqTimlo6IwCAEwHYlnAABb6Li4kSetAAAA/ujiwogbDUD9+enkP6JOepBccj6/NzoDwAA=",
       role: "FULLSTACK",
-      company: "Intec",
-      teamSize: 10,
-      startedAt: "2019-06-01",
-      endedAt: "2021-05-01",
+      company: "AIPeople",
+      teamSize: 22,
+      startedAt: "2023-04-01",
+      endedAt: "2026-09-01",
     },
     texts: {
       ru: {
         achievements: [
           {
-            title: "Разработка функциональных модулей B2B личного кабинета",
+            title: "Разработка алгоритма динамического расчёта репутации",
             description:
-              "Разрабатывал отдельные страницы и функциональные компоненты личного кабинета корпоративных клиентов. Реализовывал интерфейсы для работы с заказами и клиентскими данными, интегрируя их с бизнес-логикой платформы. Учитывал специфику B2B сценариев, включая работу с несколькими организациями и представление информации о заказах в рамках единого пользовательского аккаунта",
+              "Спроектировал и реализовал алгоритм расчёта репутации телефонных номеров на основе взвешенной системы пользовательских оценок. Внедрил динамические коэффициенты, учитывающие историю голосований каждого пользователя и актуальность его оценок. Использовал сигмоидальные функции для расчёта весов, позволяющие усиливать вклад последовательных и сбалансированных участников и снижать влияние потенциально недобросовестных голосов",
             metric:
-              "Поддержка B2B сценариев работы с несколькими организациями в одном аккаунте",
+              "Динамическое взвешивание голосов с коэффициентами влияния до 10x",
           },
           {
-            title: "Разработка сложной системы промышленного каталога",
+            title: "Разработка блокчейн-системы пользовательского голосования",
             description:
-              "Разрабатывал сложную логику каталога промышленной продукции с поддержкой многоуровневых категорий, торговых предложений и большого количества товарных характеристик. Реализовывал механизмы фильтрации и отображения структурированных данных, позволяющие пользователям находить нужную продукцию по техническим параметрам и сравнивать доступные варианты",
+              "Реализовал механизм децентрализованного голосования с хранением данных в блокчейн-смарт-контрактах. Разработал логику назначения положительной и отрицательной репутации телефонным номерам, управления голосами и повторного голосования с автоматической заменой предыдущей оценки. Интегрировал систему с криптокошельками, обеспечив подтверждение пользовательских операций через блокчейн-транзакции",
             metric:
-              "Единый каталог с поддержкой сложных характеристик и торговых предложений",
+              "Децентрализованное управление репутацией без централизованного хранения голосов",
           },
           {
-            title: "Frontend интеграция с учётной системой 1С",
+            title:
+              "Разработка fullstack-системы регистрации и верификации пользователей",
             description:
-              "Разрабатывал frontend механизмы взаимодействия сайта с данными, поступающими из 1С. Реализовывал отображение синхронизированных товарных данных, цен и складских остатков, обеспечивая корректную передачу информации из учётной системы в пользовательский интерфейс интернет-магазина",
+              "Разработал пользовательский сценарий регистрации, объединив подключение криптокошелька, оплату сетевой комиссии и подтверждение номера телефона. Реализовал механизм выдачи стартовых токенов для голосования после успешной регистрации, а также интерфейс поиска телефонных номеров и управления пользовательскими оценками. Обеспечил согласованную работу frontend и backend логики с блокчейн-инфраструктурой",
             metric:
-              "Единое отображение товаров, цен и складских остатков из 1С",
+              "Автоматизированная регистрация, верификация и выдача токенов для голосования",
           },
         ],
-        category: "CMS-платформа",
+        category: "FinTech / Web3-приложение",
         description:
-          "Разработка и развитие INTEC.Prom - специализированного CMS-решения на базе 1С-Битрикс для создания интернет-магазинов промышленной продукции и B2B-площадок. Платформа объединяет функциональный каталог товаров со сложной системой характеристик, личный кабинет корпоративных клиентов и инструменты взаимодействия с учётной системой 1С. В рамках команды разработки занимался созданием frontend и backend модулей, реализовывал сложную логику каталога, отдельные компоненты личного кабинета и интерфейсы для работы с синхронизированными товарными данными",
-        name: "INTEC.Prom",
+          "Спроектировал и самостоятельно разработал fullstack-приложение Phonebook - децентрализованную систему репутации телефонных номеров. Платформа позволяет пользователям находить номера, оценивать их надёжность и формировать коллективную репутацию на основе положительных и отрицательных голосов. Реализовал взаимодействие с блокчейн-смарт-контрактами для хранения данных и управления репутацией, интеграцию с криптокошельками и подтверждение телефонных номеров. В основе системы лежит алгоритм динамического взвешивания пользовательских оценок, учитывающий историю голосований и актуальность отзывов",
+        name: "Phonebook",
         shortDescription:
-          "Специализированный CMS-шаблон для промышленной и оптовой торговли с B2B-функциональностью, личным кабинетом и интеграцией с 1С",
+          "Децентрализованная платформа для проверки телефонных номеров и формирования репутации на основе пользовательских оценок",
       },
       en: {
         achievements: [
           {
+            title: "Development of a Dynamic Reputation Scoring Algorithm",
+            description:
+              "Designed and implemented a reputation algorithm based on a weighted system of user ratings. Introduced dynamic weighting factors that account for each user's voting history and the recency of their ratings. Used sigmoid functions to calculate vote weights, increasing the influence of consistent, balanced contributors while reducing the impact of potentially manipulative voting behavior",
+            metric:
+              "Dynamic vote weighting with influence multipliers of up to 10x",
+          },
+          {
+            title: "Development of a Blockchain-Based Voting System",
+            description:
+              "Implemented a decentralized voting mechanism with data stored in blockchain smart contracts. Developed the logic for assigning positive and negative reputation scores to phone numbers, managing votes, and allowing users to change their ratings by automatically replacing previous votes. Integrated the system with crypto wallets, enabling users to authorize voting operations through blockchain transactions",
+            metric:
+              "Decentralized reputation management without centralized vote storage",
+          },
+          {
             title:
-              "Development of Functional Modules for a B2B Customer Portal",
+              "Development of a Fullstack User Registration and Verification System",
             description:
-              "Developed individual pages and functional components for the corporate customer portal. Implemented interfaces for managing orders and customer data, integrating them with the platform's business logic. Addressed B2B-specific scenarios, including support for multiple organizations within a single user account",
+              "Built an end-to-end registration flow combining crypto wallet connection, network fee payment, and phone number verification. Implemented the issuance of initial voting tokens upon successful registration, along with the interface for searching phone numbers and managing user ratings. Ensured seamless interaction between frontend and backend logic and the underlying blockchain infrastructure",
             metric:
-              "B2B support for managing multiple organizations within a single account",
-          },
-          {
-            title: "Development of an Advanced Industrial Product Catalog",
-            description:
-              "Developed complex catalog functionality for industrial products, supporting hierarchical categories, product variants, and extensive product specifications. Implemented filtering and structured data presentation, allowing users to find products by technical parameters and explore available variants",
-            metric:
-              "Unified catalog supporting complex specifications and product variants",
-          },
-          {
-            title: "Frontend Integration with the 1C Enterprise System",
-            description:
-              "Developed frontend mechanisms for working with product data synchronized from 1C. Implemented interfaces for displaying product information, pricing, and warehouse stock levels, ensuring that data from the enterprise management system was accurately presented in the online store",
-            metric:
-              "Unified display of product information, pricing, and stock levels from 1C",
+              "Automated user registration, phone verification, and voting token issuance",
           },
         ],
-        category: "CMS Platform",
+        category: "FinTech / Web3 App",
         description:
-          "Developed and maintained INTEC.Prom, a specialized CMS solution built on 1C-Bitrix for industrial e-commerce and B2B platforms. The product combines an advanced product catalog with complex specification handling, a customer portal for business clients, and integration with the 1C enterprise management system. As part of the development team, worked on frontend and backend modules, implementing complex catalog logic, selected customer portal components, and interfaces for displaying synchronized product data",
-        name: "INTEC.Prom",
+          "Designed and independently developed Phonebook, a fullstack decentralized phone number reputation platform. The application allows users to look up phone numbers, assess their trustworthiness, and build collective reputations through positive and negative votes. Implemented blockchain smart contract integrations for data storage and reputation management, crypto wallet connectivity, and phone number verification. At the core of the platform is a dynamic reputation algorithm that adjusts the weight of user votes based on voting history and rating recency",
+        name: "Phonebook",
         shortDescription:
-          "A specialized CMS template for industrial and wholesale commerce, featuring B2B functionality, a customer portal, and 1C integration",
+          "A decentralized platform for identifying phone numbers and building reputation through community-driven ratings",
       },
     },
   },
