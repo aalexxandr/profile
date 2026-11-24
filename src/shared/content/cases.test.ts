@@ -15,6 +15,20 @@ describe("case content", () => {
     }
   });
 
+  it("lists the backend cases in the backend order", () => {
+    expect(getCaseList("ru").map(({ slug }) => slug)).toEqual([
+      "skygen",
+      "spectre",
+      "graphite-wallet",
+      "bridge-graphite",
+      "atgraphite",
+      "ube",
+      "silavetra",
+      "enterprise-cms-commerce",
+      "phonebook",
+    ]);
+  });
+
   it("has unique slugs", () => {
     const slugs = getCaseList("ru").map(({ slug }) => slug);
 
